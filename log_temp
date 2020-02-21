@@ -1,0 +1,1000 @@
+ 1011  grass74 -f
+ 1012  exit
+ 1013  ls
+ 1014  cd Downloads/
+ 1015  ls
+ 1016  sudo dpkg -i code_1.36.1-1562627527_amd64.deb
+ 1017  sudo apt-get install -f
+ 1018  cd ..
+ 1019  ls
+ 1020  cd AVAIL/code/projects/
+ 1021  ls
+ 1022  git pull
+ 1023  cd ..
+ 1024  ;s
+ 1025  ls
+ 1026  cd mitigate-api/
+ 1027  ls
+ 1028  ll
+ 1029  git pull
+ 1030  npm install
+ 1031  npm start
+ 1032  git add .
+ 1033  git commit -m 'update-buildingController.js'
+ 1034  git pull
+ 1035  git push
+ 1036  git status
+ 1037  git add .
+ 1038  git commit -m 'latest work'
+ 1039  git push
+ 1040  git pull
+ 1041  rm -rf npm-debug.log 
+ 1042  ls
+ 1043  git add ,
+ 1044  git add .
+ 1045  git commit -m 'fixing merge'
+ 1046  git status
+ 1047  git pull
+ 1048  git add .
+ 1049  git commit -m 'fixing merge'
+ 1050  git push
+ 1051  npm start
+ 1052  git commit -m 'fixing buildingController.js'
+ 1053  git push
+ 1054  npm start
+ 1055  git pull
+ 1056  npm start
+ 1057  ls
+ 1058  cd AVAIL/code/
+ 1059  ls
+ 1060  cd lhmp
+ 1061  ls
+ 1062  ll
+ 1063  git pull
+ 1064  npm install
+ 1065  npm start
+ 1066  npm install babel-cli
+ 1067  ls
+ 1068  ll
+ 1069  ls
+ 1070  find /user -name "learn-javascript-*" -type d
+ 1071  find / -name "learn-javascript-*" -type d
+ 1072  ls
+ 1073  cd ..
+ 1074  ls
+ 1075  cd home/
+ 1076  ls
+ 1077  cd jin/
+ 1078  ls
+ 1079  cd AVAIL/
+ 1080  ls
+ 1081  cd ..
+ 1082  ls
+ 1083  cd ..
+ 1084  ls
+ 1085  ll
+ 1086  cd jin/
+ 1087  ls
+ 1088  cd ll
+ 1089  cd ..
+ 1090  ls
+ 1091  cd home/
+ 1092  ls
+ 1093  cd jin/
+ 1094  ls
+ 1095  cd Public/
+ 1096  ls
+ 1097  ll
+ 1098  cd ..
+ 1099  cd node_modules/
+ 1100  ls
+ 1101  cd ..
+ 1102  ls
+ 1103  exit
+ 1104  node --version
+ 1105  npm install -g create-react-app
+ 1106  sudo npm install -g create-react-app
+ 1107  cd AVAIL/code/
+ 1108  ls
+ 1109  mkdir myapp
+ 1110  ls
+ 1111  cd myapp/
+ 1112  create-react-app myfirstreactapp
+ 1113  cd myfirstreactapp/
+ 1114  ls
+ 1115  ll
+ 1116  ls -la
+ 1117  less .gitignore 
+ 1118  cat .gitignore 
+ 1119  cat package.json 
+ 1120  cd node_modules/
+ 1121  ls
+ 1122  cd ..
+ 1123  ls
+ 1124  ls -la
+ 1125  ls -1 |wc -l
+ 1126  cd node_modules/
+ 1127  ls -1 |wc -l
+ 1128  cd ..
+ 1129  ls
+ 1130  cd public/
+ 1131  ls
+ 1132  ls -la
+ 1133  cat index.html 
+ 1134  cd ..
+ 1135  ls
+ 1136  cd src
+ 1137  ls
+ 1138  ll
+ 1139  cd ..
+ 1140  ;s
+ 1141  ls
+ 1142  npm start
+ 1143  cd myfirstreactapp/exit
+ 1144  exit
+ 1145  quit
+ 1146  cd ..
+ 1147  mkdir firstreactapp
+ 1148  ls
+ 1149  cd myfirstreactapp/
+ 1150  cd ..
+ 1151  ls
+ 1152  cd firstreactapp/
+ 1153  ls
+ 1154  sudo npm install -g create-react-app
+ 1155  ls
+ 1156  ll
+ 1157  cd ..
+ 1158  create-react-app secondreactapp
+ 1159  sudo create-react-app secondreactapp
+ 1160  ls -la
+ 1161  cd secondreactapp/
+ 1162  ls
+ 1163  ls -la
+ 1164  npm start
+ 1165  quit
+ 1166  exit
+ 1167  cd AVAIL/code/ls
+ 1168  cd AVAIL/code/
+ 1169  ls
+ 1170  cd myapp/
+ 1171  ls
+ 1172  cd ravenous
+ 1173  npm start
+ 1174  cd AVAIL/code/ls
+ 1175  cd AVAIL/code/
+ 1176  cd myapp/
+ 1177  cd ravenous
+ 1178  npm start
+ 1179  ls
+ 1180  cd src
+ 1181  ls
+ 1182  cd util
+ 1183  touch Yelp.js
+ 1184  ls
+ 1185  cd ..
+ 1186  npm install whatwg-fetch --save
+ 1187  sudo npm install whatwg-fetch --save
+ 1188  npm start
+ 1189  exit
+ 1190  exit
+ 1191  cd AVAIL/code/
+ 1192  ls
+ 1193  cd myapp/
+ 1194  rev
+ 1195  ls
+ 1196  cd ra
+ 1197  cd ravenous
+ 1198  ls
+ 1199  npm start
+ 1200  cd ..
+ 1201  ls
+ 1202  cd mitigate-api/
+ 1203  git pull
+ 1204  npm start
+ 1205  cd ..
+ 1206  cd myapp/
+ 1207  ls
+ 1208  cd ravenous
+ 1209  LS
+ 1210  ls
+ 1211  npm start
+ 1212  exit
+ 1213  ls
+ 1214  cd ..
+ 1215  ls
+ 1216  cd ravenous_p4
+ 1217  ls
+ 1218  npm start
+ 1219  ls
+ 1220  ll
+ 1221  cd ravenous-part-four-solution/
+ 1222  npm start
+ 1223  ls
+ 1224  ll
+ 1225  CD ..
+ 1226  cd 
+ 1227  sudo apt-get update
+ 1228  suso apt get upgrade
+ 1229  sudo apt-get upgrade
+ 1230  exit
+ 1231  cd ..
+ 1232  ls
+ 1233  mysql_config 
+ 1234  cd myapp/
+ 1235  ls
+ 1236  ra
+ 1237  cd ravenous
+ 1238  ls
+ 1239  npm install whatwg-fetch --save
+ 1240  sudo npm install whatwg-fetch --save
+ 1241  npm install -g npm
+ 1242  npm -v
+ 1243  npm start
+ 1244  exit
+ 1245  ls
+ 1246  cd ..
+ 1247  ls
+ 1248  cd lhmp/
+ 1249  git pull
+ 1250  ls
+ 1251  cd ..
+ 1252  ls
+ 1253  cd lhmp
+ 1254  ls
+ 1255  ll
+ 1256  ls
+ 1257  ll
+ 1258  git pull
+ 1259  ls
+ 1260  ll
+ 1261  cd ..
+ 1262  ..
+ 1263  cd ..
+ 1264  cd AVAIL/
+ 1265  cd code/
+ 1266  ls
+ 1267  git clone https://github.com/availabs/lhmp.git
+ 1268  git pull
+ 1269  ls
+ 1270  cd lhmp
+ 1271  ls
+ 1272  git pull
+ 1273  npm install
+ 1274  sudo npm install
+ 1275  sudo npm install 
+ 1276  clear
+ 1277  npm install
+ 1278  clear
+ 1279  sudo npm install
+ 1280  npm -v
+ 1281  npm install npm@latest -g
+ 1282  sudo npm install -g n
+ 1283  npm -v
+ 1284  sudo npm install -g n
+ 1285  npm -v
+ 1286  sudo npm install
+ 1287  npm
+ 1288  npm update node-sass
+ 1289  sudo npm install
+ 1290  sudo npm update node-sass
+ 1291  sudo npm install
+ 1292  clear
+ 1293  sudo npm install node-sass@4.12.0
+ 1294  clear
+ 1295  ls -l 
+ 1296  npm install
+ 1297  clear
+ 1298  sudo npm install
+ 1299  node-sass -v
+ 1300  yarn add node-sass
+ 1301  clear
+ 1302  npm install -f node-sass
+ 1303  sudo npm install -f node-sass
+ 1304  clear
+ 1305  ls -l
+ 1306  clear
+ 1307  sudo npm install node-sass@latest
+ 1308  vlear
+ 1309  clear
+ 1310  cd ..
+ 1311  cd
+ 1312  cd AvAIL
+ 1313  cd AVAIL
+ 1314  cd code
+ 1315  git clone https://github.com/availabs/lhmp.git
+ 1316  ls -l
+ 1317  cd lhmp
+ 1318  ls -l
+ 1319  sudo npm install
+ 1320  sudo npm install node-sass
+ 1321  ls node_modules/
+ 1322  rm -rf node_modules/
+ 1323  sudo rm -rf node_modules/
+ 1324  npm install
+ 1325  npm start
+ 1326  cd src/components/
+ 1327  git clone https://github.com/availabs/AvlMap.git
+ 1328  npm install gl-mat4/invert
+ 1329  npm install gl-mat4
+ 1330  sudo npm install gl-mat4
+ 1331  sudo npm install gl-vec2
+ 1332  sudo npm install gl-vec4
+ 1333  cd ../../../mitigate-api/
+ 1334  npm start
+ 1335  ls
+ 1336  ll
+ 1337  cd 
+ 1338  cd AVAIL/code/ls
+ 1339  cd AVAIL/code/
+ 1340  ls
+ 1341  cd tmp/
+ 1342  ll
+ 1343  mkdir redux
+ 1344  cd redux/
+ 1345  ls
+ 1346  ll
+ 1347  npm i redux --save-dev
+ 1348  sudo npm i redux --save-dev
+ 1349  ll
+ 1350  ls
+ 1351  mkdir -p src/js/store
+ 1352  ll
+ 1353  cd src/
+ 1354  ls
+ 1355  ll
+ 1356  cd js
+ 1357  ll
+ 1358  cd store/
+ 1359  ls
+ 1360  cat index.js 
+ 1361  ll
+ 1362  mkdir -p src/js/reducers
+ 1363  ll
+ 1364  cd ..
+ 1365  mkdir -p src/js/reducers
+ 1366  mkdir -p src/js/actions
+ 1367  mkdir -p src/js/constants
+ 1368  cd ..
+ 1369  ls
+ 1370  cd tmp/
+ 1371  ls
+ 1372  cd ..
+ 1373  cd myapp/
+ 1374  ls
+ 1375  ogr2ogr -f "PostgreSQL" PG:"host=mars.availabs.orguser=postgres dbname=hazard_mitigation password=Jedi21funk" parcel_2018_36.geojson -nln parcel.2018_parcel_36_test
+ 1376  ogr2ogr -f "PostgreSQL" PG:"host=mars.availabs.orguser=postgres dbname=hazard_mitigation password=Jedi21funk" parcel_2018_36.geojson -nln parcel.2018_parcel_36_final
+ 1377  ls
+ 1378  ls -ah
+ 1379  ll
+ 1380  ogr2ogr -f "PostgreSQL" PG:"host=mars.availabs.orguser=postgres dbname=hazard_mitigation password=Jedi21funk" parcel_2018_36.geojson -nln parcel.parcel_2018_36_final
+ 1381  man cut
+ 1382  cd ..
+ 1383  ls
+ 1384  cd tmp/
+ 1385  ll
+ 1386  cut -c-1000 NYS_2018_Tax_Parcels_Agencies.geojson 
+ 1387  cut -c -1000 NYS_2018_Tax_Parcels_Agencies.geojson 
+ 1388  cut -c-10 NYS_2018_Tax_Parcels_Agencies.geojson 
+ 1389  cut -c-100 NYS_2018_Tax_Parcels_Agencies.geojson | head 
+ 1390  cut -c-100 NYS_2018_Tax_Parcels_Agencies.geojson | head | grep '^{ "type": "Feature",'
+ 1391  head NYS_2018_Tax_Parcels_Agencies.geojson | grep '^{ "type": "Feature",'
+ 1392  head NYS_2018_Tax_Parcels_Agencies.geojson | grep '^{ "type": "Feature",' | sed 's/,$//'
+ 1393  head NYS_2018_Tax_Parcels_Agencies.geojson | grep '^{ "type": "Feature",' | wc -l
+ 1394  grep '^{ "type": "Feature",' NYS_2018_Tax_Parcels_Agencies.geojson | wc -l
+ 1395  head NYS_2018_Tax_Parcels_Agencies.geojson | grep '^{ "type": "Feature",' | sed '$/,$//'
+ 1396  head NYS_2018_Tax_Parcels_Agencies.geojson | grep '^{ "type": "Feature",' | sed '$,$//'
+ 1397  head NYS_2018_Tax_Parcels_Agencies.geojson | grep '^{ "type": "Feature",' | sed '$ s/,$//'
+ 1398  head NYS_2018_Tax_Parcels_Agencies.geojson
+ 1399  head -n5  NYS_2018_Tax_Parcels_Agencies.geojson
+ 1400  man split
+ 1401  history > log_081519
+ 1402  ls
+ 1403  ll
+ 1404  cat log_081519 
+ 1405  grep '^{ "type": "Feature",' NYS_2018_Tax_Parcels_Agencies.geojson | wc -l
+ 1406  npm -g install geojsplit
+ 1407  sudo npm -g install geojsplit
+ 1408  geojsplit -a 2 -l 489875 NYS_2018_Tax_Parcels_Agencies.geojson 
+ 1409  node --max-old-space-size=204080 geojsplit -a 2 -l 489875 NYS_2018_Tax_Parcels_Agencies.geojson
+ 1410  node --max-old-space-size=204080  geojsplit -a 2 -l 489875 NYS_2018_Tax_Parcels_Agencies.geojson
+ 1411  sudo npm -g install geojsplit
+ 1412  node --max-old-space-size=204080  geojsplit -a 2 -l 489875 NYS_2018_Tax_Parcels_Agencies.geojson
+ 1413  node --max-old-space-size=20480 /usr/lib/node_modules/geojsplit/bin/geojsplit -a 2 -l 489875 NYS_2018_Tax_Parcels_Agencies.geojson
+ 1414  geojsplit -a 2 -l 489875 NYS_2018_Tax_Parcels_Agencies.geojson
+ 1415  ogr2ogr -f "PostgreSQL" PG:"host=mars.availabs.orguser=postgres dbname=hazard_mitigation password=Jedi21funk" NYS_2018_Tax_parcels_agencies.geojson -nln parcel.parcel_2018_36_final
+ 1416  ogr2ogr -f "PostgreSQL" PG:"host=mars.availabs.orguser=postgres dbname=hazard_mitigation password=Jedi21funk" NYS_2018_Tax_Parcels_Agencies.geojson -nln parcel.parcel_2018_36_final
+ 1417  ls
+ 1418  cat NYS_2018_Tax_Parcels_Agencies.geojson | grep '"Feature"' |  sed 's/,*\r*$//'  > nys_2018_tax_parcels_agencies_1.ndjson
+ 1419  ll
+ 1420  less NYS_2018_Tax_Parcels_Agencies.geojson 
+ 1421  less nys_2018_tax_parcels_agencies_1.ndjson 
+ 1422  cd ..
+ 1423  ls
+ 1424  cd HazardMitigation/
+ 1425  cd data/
+ 1426  ls
+ 1427  cd nys_parcels_agencies/
+ 1428  ls
+ 1429  l
+ 1430  ll
+ 1431  split -l 250000 nys_2018_tax_parcels_agencies_1.ndjson Seg_
+ 1432  less Seg_aa
+ 1433  sudo npm install -g ndjson-to-json
+ 1434  cat Seg_aa | ndjson-to-json nys_2018_parcel_1.geojson
+ 1435  ndjson-to-json Seg_aa.geojson
+ 1436  ndjson-to-json Seg_aa.json
+ 1437  ndjson-to-json Seg_aa
+ 1438  ndjson-to-json Seg_aa.json
+ 1439  ndjson-to-json Seg_ab.json
+ 1440  less NYS_2018_Tax_Parcels_Agencies.geojson 
+ 1441  ndjson-reduce  < Seg_aa.ndjson | ndjson-map '{"type": "FeatureCollection", "name": "NYS_2018_Tax_Parcels_Agencies", "crs": { "type": "name", "properties": { "name": "urn:ogc:def:crs:OGC:1.3:CRS84" } }, features: d}' > nys_parcels_2018_aa.json
+ 1442  npm install -g ndjson-cli
+ 1443  sudo npm install -g ndjson-cli
+ 1444  ndjson-reduce  < Seg_aa.ndjson | ndjson-map '{"type": "FeatureCollection", "name": "NYS_2018_Tax_Parcels_Agencies", "crs": { "type": "name", "properties": { "name": "urn:ogc:def:crs:OGC:1.3:CRS84" } }, features: d}' > nys_parcels_2018_aa.json
+ 1445  node --max-old-space-size=16096 | ndjson-reduce  < Seg_aa.ndjson | ndjson-map '{"type": "FeatureCollection", "name": "NYS_2018_Tax_Parcels_Agencies", "crs": { "type": "name", "properties": { "name": "urn:ogc:def:crs:OGC:1.3:CRS84" } }, features: d}' > nys_parcels_2018_aa.json
+ 1446  node --max-old-space-size=16096 ndjson-reduce.sh
+ 1447  which ndjson-reduce
+ 1448  cat file/usr/local/bin/ndjson-reduce
+ 1449  file /usr/local/bin/ndjson-reduce
+ 1450  head ../lib/node_modules/ndjson-cli/ndjson-reduce
+ 1451  head /usr/local/lib/node_modules/ndjson-cli/ndjson-reduce
+ 1452  ll
+ 1453  ./ndjson-reduce.sh 
+ 1454  ls
+ 1455  cat ndjson-reduce.sh 
+ 1456  ll
+ 1457  ./ndjson-reduce.sh 
+ 1458  ls
+ 1459  ll
+ 1460  for f in nys_parcels_2018_a*.json; do ogr2ogr -append -f "PostgreSQL" PG:"host=mars.availabs.org user=postgres dbname=hazard_mitigation password=Jedi21funk" $f  -nln parcel.parcel_2018_final ; done
+ 1461  ls
+ 1462  less nys_parcels_2018_aa.geojson 
+ 1463  tail nys_parcels_2018_aa.geojson 
+ 1464  ls
+ 1465  for f in nys_parcels_2018_a*.geojson; do ogr2ogr -append -f "PostgreSQL" PG:"host=mars.availabs.org user=postgres dbname=hazard_mitigation password=Jedi21funk" $f  -nln parcel.parcel_2018_final ; done
+ 1466  ls
+ 1467  tail nys_parcels_2018_at.geojson 
+ 1468  clear
+ 1469  for f in nys_parcels_2018_a*.geojson; do ogr2ogr -append -f "PostgreSQL" PG:"host=mars.availabs.org user=postgres dbname=hazard_mitigation password=Jedi21funk" $f  -nln parcel.parcel_2018_final ; done
+ 1470  ls
+ 1471  less nys_parcels_2018_ab.geojson 
+ 1472  less nys_parcels_2018_aa.geojson 
+ 1473  ls -lah
+ 1474  ls
+ 1475  ll
+ 1476  ls
+ 1477  ll
+ 1478  ./ndjson-reduce.sh 
+ 1479  ll
+ 1480  less Seg_ab.ndjson 
+ 1481  ./ndjson-reduce.sh 
+ 1482  ll
+ 1483  ./ndjson-reduce.sh 
+ 1484  ls
+ 1485  ll
+ 1486  ./ndjson-reduce.sh 
+ 1487  ll
+ 1488  ndjson-split 'd.features' < NYS_2018_Tax_Parcels_Agencies.geojson > nys_2018_tax_parcels_agencies_2.ndjson 
+ 1489  ndjson-split 'd.features'   < ca-albers.json \
+ 1490  ll
+ 1491  rm nys_2018_tax_parcels_agencies_2.ndjson 
+ 1492  ls
+ 1493  ll
+ 1494  ndjson-split 'd.features' < NYS_2018_Tax_Parcels_Agencies.geojson > nys_2018_tax_parcels_agencies_2.ndjson
+ 1495  ./ndjson-reduce.sh 
+ 1496  ll
+ 1497  rm nys_parcels_2018_ab.g
+ 1498  rm nys_parcels_2018_ab.geojson 
+ 1499  rm nys_parcels_2018_ab.json 
+ 1500  ll
+ 1501  ./ndjson-reduce.sh 
+ 1502  ll
+ 1503  split -l 125000 Seg_ab.ndjson Seg_ab_
+ 1504  ll
+ 1505  less Seg_ab_aa
+ 1506  ll
+ 1507  ./ndjson-reduce.sh 
+ 1508  ll
+ 1509  ./ndjson-reduce.sh 
+ 1510  ll
+ 1511  rm nys_parcels_2018_ab.geojson 
+ 1512  ll
+ 1513  for f in nys_parcels_2018_a*.geojson; do ogr2ogr -append -f "PostgreSQL" PG:"host=mars.availabs.org user=postgres dbname=hazard_mitigation password=Jedi21funk" $f  -nln parcel.parcel_2018_final ; done
+ 1514  ll
+ 1515  less Seg_ab.ndjson 
+ 1516  ll
+ 1517  rm nys_2018_tax_parcels_agencies_2.ndjson 
+ 1518  ls
+ 1519  ll
+ 1520  cd AVAIL/code/
+ 1521  ls
+ 1522  cd mitigate-api/
+ 1523  npm start
+ 1524  cd ..
+ 1525  ls
+ 1526  git clone https://github.com/city41/server-side-react-and-falcor.git
+ 1527  ls
+ 1528  cd server-side-react-and-falcor/
+ 1529  npm install
+ 1530  sudo npm install
+ 1531  npm start
+ 1532  cd ..
+ 1533  rm server-side-react-and-falcor/
+ 1534  rmdir server-side-react-and-falcor/
+ 1535  rmdir -f server-side-react-and-falcor/
+ 1536  rm-R server-side-react-and-falcor/
+ 1537  rm -R server-side-react-and-falcor/
+ 1538  ls
+ 1539  rm -rf server-side-react-and-falcor/
+ 1540  sudo rm -rf server-side-react-and-falcor/
+ 1541  ls
+ 1542  ll
+ 1543  cd ..
+ 1544  ll
+ 1545  cd myapp/
+ 1546  ls
+ 1547  ll
+ 1548  git clone https://github.com/przeor/falcor-netflix-shopping-cart-example.git
+ 1549  ll
+ 1550  cd falcor-netflix-shopping-cart-example/
+ 1551  ll
+ 1552  npm install
+ 1553  sudo npm install
+ 1554  npm start
+ 1555  cd ..
+ 1556  ls
+ 1557  git clone https://github.com/availabs/avail-falcor.git
+ 1558  ls
+ 1559  ll
+ 1560  cd avail-falcor/
+ 1561  ll
+ 1562  npm install
+ 1563  sudo npm install
+ 1564  npm start
+ 1565  sudo npm install
+ 1566  npm audit fix
+ 1567  sudo npm audit fix
+ 1568  npm start
+ 1569  jest participation
+ 1570  npm start
+ 1571  jest participation
+ 1572  npm start
+ 1573  jest participation
+ 1574  npm start
+ 1575  jest participation
+ 1576  npm start
+ 1577  jest participation
+ 1578  npm start
+ 1579  jest participation
+ 1580  sudo apt-add-repository ppa:audio-recorder/ppa
+ 1581  sudo apt-get update
+ 1582  sudo apt-get install audio-recorder
+ 1583  est participation
+ 1584  jest participation
+ 1585  est participation
+ 1586  jest participation
+ 1587  git add ,
+ 1588  git  add .
+ 1589  git commit -m 'test participation'
+ 1590  git push
+ 1591  git pull
+ 1592  [ { type: 'seminar ',
+ 1593  cd ..
+ 1594  cd lhmp
+ 1595  npm start
+ 1596  git pull
+ 1597  cd src/components/AvlMap/
+ 1598  git pull
+ 1599  cd ../
+ 1600  git pull
+ 1601  git add .
+ 1602  git commit -m 'test participation'
+ 1603  git push
+ 1604  git pull
+ 1605  git pull src/pages/auth/actions/
+ 1606  git pull src/pages/auth/actions/index.js
+ 1607  git diff 
+ 1608  git diff src/pages/auth/actions/
+ 1609  cd src/pages/auth/actions/
+ 1610  git pull
+ 1611  git checkout FETCH_HEAD -- index.js
+ 1612  git add .
+ 1613  git commit -m "participation test"
+ 1614  cd ./../../
+ 1615  cd ../../
+ 1616  git add .
+ 1617  git pull
+ 1618  git merge --abort
+ 1619  git reset --merge
+ 1620  git pull
+ 1621  git merge --abort
+ 1622  git reset --merge
+ 1623  git diff src
+ 1624  git fetch origin
+ 1625  git diff
+ 1626  git diff src
+ 1627  git pull origin master
+ 1628  git revert
+ 1629  git log
+ 1630  git reset --hard HEAD~1
+ 1631  git pull
+ 1632  git diff
+ 1633  git log
+ 1634  clear
+ 1635  cd src/components/
+ 1636  ls
+ 1637  cd AvlMap/
+ 1638  git pull
+ 1639  ls 
+ 1640  cd layers/
+ 1641  ls
+ 1642  ls -l
+ 1643  cd ../../
+ 1644  rm -rf AvlMap/
+ 1645  git clone https://github.com/availabs/AvlMap.git
+ 1646  ls
+ 1647  ls AvlMap/
+ 1648  cd AvlMap/
+ 1649  git checkout f50300fde2a36375406f32b94f837970b0ef85c9
+ 1650  npm install
+ 1651  cd ../../
+ 1652  cd ../
+ 1653  npm install
+ 1654  sudo npm install
+ 1655  npm start
+ 1656  cd ..
+ 1657  curl --V
+ 1658  curl --v
+ 1659  curl --version
+ 1660  curl https://api.github.com
+ 1661  curl https://api.github.com/users/jwlee/repos
+ 1662  curl https://api.github.com/users/jwlee/repos\?sort\=pushed
+ 1663  curl https://api.github.com/users/jwlee38/repos\?sort\=pushed
+ 1664  curl -X POST https://api.github.com/user/repos
+ 1665  curl -H "Content-Type: application/json" https://api.github.com -v
+ 1666  ll
+ 1667  cd avail-falcor/
+ 1668  npm start
+ 1669  npm start
+ 1670  jest participation
+ 1671  est participation
+ 1672  jest participation
+ 1673  cd ..
+ 1674  cd lhmp/
+ 1675  npm start
+ 1676  cd ..
+ 1677  ll
+ 1678  cd avail-falcor/
+ 1679  npm start
+ 1680  cd ..
+ 1681  cd lhmp/
+ 1682  npm start
+ 1683  cd AVAIL/
+ 1684  ll
+ 1685  cd code/
+ 1686  ls
+ 1687  cd avail-falcor/
+ 1688  npm start
+ 1689  cd ..
+ 1690  cd avail-falcor/
+ 1691  npm start
+ 1692  cd ..
+ 1693  cd avail-falcor/
+ 1694  npm start
+ 1695  cd ..
+ 1696  cd lhmp/
+ 1697  ls
+ 1698  ll
+ 1699  git add .
+ 1700  git commit -m 'participation page update'
+ 1701  git pull
+ 1702  git push
+ 1703  git add .
+ 1704  rm package-lock.json 
+ 1705  git add .
+ 1706  git commit -m 'merge changes'
+ 1707  git status
+ 1708  git pull
+ 1709  git push
+ 1710  npm start
+ 1711  cd ..
+ 1712  cd lhmp/
+ 1713  npm start
+ 1714  git add .
+ 1715  git commit -m 'participation view new edit added'
+ 1716  git pull
+ 1717  rm -rf package-lock.json 
+ 1718  git add .
+ 1719  npm start
+ 1720  git status
+ 1721  git pull
+ 1722  git commit -m 'merge 1'
+ 1723  git pull
+ 1724  cd src/components/AvlMap/
+ 1725  git pul
+ 1726  git pull
+ 1727  cd ../
+ 1728  ls
+ 1729  git status
+ 1730  cd src/components/AvlMap/
+ 1731  git pull origin master
+ 1732  git status
+ 1733  cd ../
+ 1734  npm install
+ 1735  sudo npm install
+ 1736  git status
+ 1737  git push
+ 1738  git add .
+ 1739  git commit -m 'update participation view page'
+ 1740  git status
+ 1741  git pull
+ 1742  git push
+ 1743  ls
+ 1744  rm package-lock.json 
+ 1745  ls
+ 1746  git pull
+ 1747  ll
+ 1748  ls
+ 1749  git diff
+ 1750  git commit -m "tmp"
+ 1751  git add .
+ 1752  git commit -m "tmp"
+ 1753  git pull
+ 1754  ls
+ 1755  git pull package-lock.json
+ 1756  npm install
+ 1757  sudo npm install
+ 1758  ls
+ 1759  ll
+ 1760  cd src
+ 1761  ls
+ 1762  cd components/
+ 1763  ll
+ 1764  cd AvlMap/
+ 1765  ls
+ 1766  git pull
+ 1767  git pull origin master
+ 1768  cd ..
+ 1769  rm -rf AvlMap/
+ 1770  git clone https://github.com/availabs/AvlMap.git
+ 1771  cd ..
+ 1772  git add .
+ 1773  git commit -m 'latest participation'
+ 1774  git add .
+ 1775  git commit -m 'latest participation'
+ 1776  git add .
+ 1777  git commit -m 'lastest changes in participation'
+ 1778  git commit -m 'latest participation'
+ 1779  git pull
+ 1780  git status
+ 1781  rm rf package.lock.json
+ 1782  rm -rf package.lock.json
+ 1783  cd src
+ 1784  cd components/
+ 1785  cd AvlMap/
+ 1786  git pull origin master
+ 1787  cd ..
+ 1788  git push
+ 1789  git pull
+ 1790  git add .
+ 1791  git commit -m "tmp"
+ 1792  git pull
+ 1793  git push
+ 1794  smbclient -L //casbox.univ.albany.edu/
+ 1795  globalprotect connect --portal uavpn.albany.edu
+ 1796  globalprotect disconnect
+ 1797  cd ..
+ 1798  globalprotect disconnect
+ 1799  globalprotect connect --portal uavpn.albany.edu
+ 1800  globalprotect disconnect
+ 1801  sudo service postgresql status
+ 1802  sudo su postgres 
+ 1803  ll
+ 1804  cd AVAIL
+ 1805  cd code
+ 1806  ll
+ 1807  cd avail-falcor/
+ 1808  npm start
+ 1809  clear
+ 1810  npm start
+ 1811  clear
+ 1812  npm start
+ 1813  clear
+ 1814  npm start
+ 1815  git add .
+ 1816  git commit -m 'participation latest'
+ 1817  git pull
+ 1818  git status
+ 1819  git diff
+ 1820  jest participation
+ 1821  clear
+ 1822  jest participation
+ 1823  cd ..
+ 1824  npm start
+ 1825  cd ..
+ 1826  cd lhmp
+ 1827  npm start
+ 1828  [A
+ 1829  npm start
+ 1830  git add .
+ 1831  git commit -m 'participation lastest work'
+ 1832  git pull
+ 1833  git push
+ 1834  cd ..
+ 1835  ls
+ 1836  cd Downloads/
+ 1837  ls
+ 1838  tar xvf PanGPLinux-5.0.3-c10.tgz
+ 1839  ls
+ 1840  sudo dpkg -i GlobalProtect_deb-5
+ 1841  sudo dpkg -i GlobalProtect_deb-5.0.3.0-10.deb 
+ 1842  globalprotect connect --portal uavpn.albany.edu
+ 1843  globalprotect disconnect
+ 1844  globalprotect connect --portal uavpn.albany.edu
+ 1845  globalprotect disconnect
+ 1846  globalprotect connect --portal uavpn.albany.edu
+ 1847  sudo mount -t cifs -o username=jwlee //casbox.univ.albany.edu/CASTC /media/casit
+ 1848  globalprotect disconnect
+ 1849  globalprotect connect --portal uavpn.albany.edu
+ 1850  globalprotect disconnect
+ 1851  globalprotect connect --portal uavpn.albany.edu
+ 1852  globalprotect disconnect
+ 1853  globalprotect connect --portal uavpn.albany.edu
+ 1854  sudo mount -t cifs -o username=jwlee //casbox.univ.albany.edu/CASTC /media/casit
+ 1855  cd ..
+ 1856  ls
+ 1857  ll
+ 1858  cd ..
+ 1859  ll
+ 1860  cd media
+ 1861  cd casit
+ 1862  ls
+ 1863  ll
+ 1864  sudo mount -t cifs -o username=jwlee //casbox.albany.edu/CASTC /media/casit
+ 1865  sudo mount -t cifs -o username=jwlee //casbox.albany.edu/CASTC /media/
+ 1866  smbclient -L //casbox.univ.albany.edu/
+ 1867  sudo mount -t cifs -o username=jwlee //casbox.univ.albany.edu/CASTC /media/casit 
+ 1868  sudo mount -t cifs -o username=jwlee //casbox.univ.albany.edu/CASTC
+ 1869  ls
+ 1870  ll
+ 1871  cd ..
+ 1872  ls
+ 1873  cd etc/
+ 1874  ls
+ 1875  cs fstab 
+ 1876  lcd fstab 
+ 1877  cd fstab
+ 1878  cat fstab 
+ 1879  smbclient -L //casbox.univ.albany.edu/
+ 1880  sudo mount -t cifs -o username=jwlee //casbox.univ.albany.edu/CASTC /media/casit 
+ 1881  cd ..
+ 1882  ls
+ 1883  cd u
+ 1884  cd usr/
+ 1885  ls
+ 1886  cd .
+ 1887  ls
+ 1888  cd ..
+ 1889  ls
+ 1890  cd home
+ 1891  ls
+ 1892  cd jin
+ 1893  ls
+ 1894  cd AVAIL
+ 1895  cd code/
+ 1896  ls
+ 1897  cd lhmp
+ 1898  globalprotect connect --portal uavpn.albany.edu
+ 1899  ls
+ 1900  ll
+ 1901  cd src
+ 1902  ll
+ 1903  cd components/
+ 1904  ll
+ 1905  cd AvlMap/
+ 1906  ll
+ 1907  cd ..
+ 1908  ll
+ 1909  git clone https://github.com/availabs/AvlStuff.git
+ 1910  ll
+ 1911  rm rf AvlMap/
+ 1912  rm -rf AvlMap/
+ 1913  ll
+ 1914  git clone https://github.com/availabs/AvlMap.git
+ 1915  globalprotect connect --portal uavpn.albany.edu
+ 1916  npm install
+ 1917  sudo npm install
+ 1918  cd src/components/AvlMap/
+ 1919  git pull
+ 1920  git pull origin master
+ 1921  git pull
+ 1922  git pull origin master
+ 1923  cd ..
+ 1924  cd code
+ 1925  ls
+ 1926  cd avail-falcor/
+ 1927  npm start
+ 1928  git add.
+ 1929  git add .
+ 1930  git commit -m 'participation lastest work'
+ 1931  git pull
+ 1932  git push
+ 1933  cd ..
+ 1934  ls
+ 1935  cd ..
+ 1936  node 
+ 1937  sudo apt -get update
+ 1938  sudo apt-get update
+ 1939  sudo apt-get upgrade
+ 1940  cd ..
+ 1941  ll
+ 1942  cd avail-falcor/
+ 1943  npm start
+ 1944  cd avail-falcor/
+ 1945  npm start
+ 1946  cd AVAIL/code/
+ 1947  ls
+ 1948  ll
+ 1949  cd lhmp/
+ 1950  ls
+ 1951  npm start
+ 1952  cd AVAIL/code/
+ 1953  ls
+ 1954  cd avail-falcor/
+ 1955  ll
+ 1956  npm start
+ 1957  ls
+ 1958  git pull
+ 1959  npm start
+ 1960  cd ..
+ 1961  cd lhmp/
+ 1962  npm start
+ 1963  npm install
+ 1964  npm install react-bootstrap-typeahead
+ 1965  sudo npm install react-bootstrap-typeahead
+ 1966  npm start
+ 1967  cd AVAIL/code
+ 1968  ll
+ 1969  cd avail-falcor/
+ 1970  npm start
+ 1971  cd ..
+ 1972  cd lhmp/
+ 1973  ll
+ 1974  npm start
+ 1975  git add.
+ 1976  git add .
+ 1977  git commit -m 'participation latest'
+ 1978  git pull
+ 1979  git push
+ 1980  npm start
+ 1981  git add .
+ 1982  git commit -m 'participation error fix'
+ 1983  git pull
+ 1984  git push
+ 1985  npm start
+ 1986  git add .
+ 1987  git commit -m 'participation lastest'
+ 1988  git pull
+ 1989  git push
+ 1990  npm start
+ 1991  git add .
+ 1992  git commit - m 'participation error fix'
+ 1993  git commit -m 'participation error fix'
+ 1994  git pull
+ 1995  git push
+ 1996  npm start
+ 1997  ls
+ 1998  ls -lah
+ 1999  rm -rg .git
+ 2000  rm -rf .git
+ 2001  git status
+ 2002  git init
+ 2003  git status
+ 2004  less .gitmodules 
+ 2005  git remote add origin https://github.com/availabs/PAMap.git
+ 2006  git add .
+ 2007  git commit -m 'initial commit'
+ 2008  git push
+ 2009  git push -u origin master
+ 2010  history > log_temp

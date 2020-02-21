@@ -1,0 +1,200 @@
+county,site_number,applicant,damage_location,local_estimate,fema_validated
+CHENANGO, 43,Town of Smithville,"Stone Quarry Road     ",15000,15000
+CHENANGO, 45,Chenango County DPW,"Countywide",0,70000
+CHENANGO, 46,Chenango County DPW,"Graham Road",0,40000
+CLINTON, 1,Clinton County Highway,"County Wide Debris",34911,34931
+CLINTON, 5,Town of Ellenburg,"Town Wide debris",3260,3260
+CLINTON, ,Town of Plattsburgh,"Town Wide Debris",5762,5762
+CLINTON, ,Town of Plattsburgh,"Street lights damaged by blowing debris and falling limbs",836,1142
+CLINTON, ,Clinton County Emergency Manager Cost,"",1453,1216
+CLINTON, ,Town of Black Brook ,"town Wide debris",3104,3104
+CLINTON, ,Town of Champlain,"Town Wide debris",790,790
+CLINTON, ,Town of Chazy,"Town Wide debris",2000,2000
+CLINTON, ,Town of Clinton,"Town Wide debris",3500,3500
+CLINTON, ,Town of Dannemora,"town Wide debris",660,660
+CLINTON, ,Town of Mooers,"town Wide debris",1000,1000
+CLINTON, ,Town of Peru,"Town Wide debris",800,800
+CLINTON, ,City of Plattsburgh,"City Wide Debris",1792,1792
+CLINTON, ,Town of Saranac,"town Wide debris",6344,6344
+CLINTON, ,Town of Schuyler Falls,"Town Wide debris",500,500
+CLINTON, ,Village of Dannemora,"Village Wide Debris",600,0
+CLINTON, ,City of Plattsburgh,"",1354,0
+CORTLAND, 6,Town of Willet,"Melody Lake Road",140000,140000
+ERIE, 3,City of Buffalo,"Various locations throughout the City",200000,200000
+ERIE, 13,Town of Hamburg,"Hoover Beach Association",25000,25000
+ESSEX, 6,Essex County DPW,"CRX Ensign Pond Rd
+Entire length of road",10000,0
+ESSEX, 11,Essex County DPW,"CR6 Tracy Rd
+entire length of road",10000,0
+ESSEX, 14,Essex County DPW,"CR78 Johnson Pond Rd
+Entire length of road",30000,0
+ESSEX, ,Town of Westport,"Mtn Spring Rd, entire length of road affected",57500,57500
+ESSEX, ,Essex County DPW,"CR 44, Stevenson Rd, 5 sites identified; intermittent damage sites for the length of the road.",30000,0
+ESSEX, ,Town of Moriah,"Port Henry Campground and Beach, at the end of Dock Lane on Lake Champlain; ",250000,165000
+ESSEX, ,,"",0,404000
+ESSEX, ,,"",0,190000
+ESSEX, ,Town of Schroon,"Emerson Road, approx. 800' north of CR 24, the Hoffman Road.",15000,0
+ESSEX, ,Town of Schroon,"Emerson Road, approx. 800' north of CR 24, the Hoffman Road.",100000,0
+ESSEX, ,Town of Schroon,"Beech Hill Road, beginning at CR 24, the Hoffman Road heading south for about .3 of a mile.",10000,0
+ESSEX, ,Town of Schroon,"Adirondack Road, beginning at about .5 miles south of the Crane Pond Road intersection for approx. 300'.",50000,0
+ESSEX, ,Town of Schroon,"River Rd (north end); 500' east of NYS Route 9",20000,0
+ESSEX, ,Town of North Hudson,"Pepper Hollow Road, west end of the road, adjacent to the Schroon River. About .75 miles west of Route 9.",10000,0
+ESSEX, ,Town of Moriah,"Chipmunk Lane, beginning about .5 miles west of CR 70 and continuing for .6 miles.",40000,0
+ESSEX, ,Town of Moriah,"Crowfoot Lane, 1.5 miles of the road was damaged intermittently beginning at the east end.",75000,0
+FULTON, 2,Town of Caroga,"Townwide",3000,3000
+FULTON, 8,Town of Stratford,"Hawes Road
+(2 sites) ",95000,95000
+FULTON, 9,Town of Stratford,"850 Piseco Road",2000,2000
+FULTON, 10,Town of Stratford,"1228 Piseco Road",3000,0
+FULTON, ,Town of Ephratah,"Townwide",0,7500
+FULTON, ,Fulton County,"County Wide",0,32461
+FULTON, ,Town of Mayfield,"",0,0
+FULTON, ,Town of Northampton,"Giffords Collins Road ",0,7500
+FULTON, ,Town of Northampton,"Houseman St",0,7500
+FULTON, ,Town of Stratford,"EddickRoad",0,5000
+HAMILTON, 1,Hamilton County,"CR16 Gilmantown Road
+43-23-59, 74-17-17
+(degree-min-sec)",700000,100000
+HAMILTON, 2,Hamilton County,"CR 5 Algunquon Road
+X Abrams road",25000,0
+HAMILTON, 7,Hamilton County,"CR 2X43.201115 Old Pisceo Road",25000,0
+HAMILTON, 9,Hamilton County,"CR 17 French Raod",5000,0
+HAMILTON, 11,Town of Hope,"River Road
+see map",113849,0
+HAMILTON, 12,Town of Hope,"Hope Falls (or Mason road)",44806,0
+HAMILTON, 13,Town of Hope,"Bear Creek Road",28295,0
+HAMILTON, 14,Town of Hope,"Moan and Groan Road",18024,0
+HAMILTON, 15,,"",0,0
+HAMILTON, 16,Town of Hope,"Creek Road",5790,0
+HAMILTON, 17,Town of Hope,"Edwardsen Rd",2285,0
+HAMILTON, 18,Town of Hope,"Frasier Rd",9810,0
+HAMILTON, 19,Town of Hope,"Tannery Road",1862,0
+HAMILTON, 20,Town of Wells ,"West River Road over Dugway Creek",100000,0
+HAMILTON, 21,Town of Wells ,"West River  ",125000,0
+HAMILTON, 22,Town of Wells ,"West Road over White House creek ",25000,0
+HAMILTON, 23,Town of Wells ,"Black Bridge Raod",25000,0
+HAMILTON, 24,Town of Wells ,"Hernandez Road",75000,0
+HAMILTON, 25,Town of Wells ,"Kruth Road ",25000,0
+HAMILTON, 26,Town of Wells ,"Teachout Raod",2500,0
+HAMILTON, 27,Town of Wells ,"Hydroelectric Plant",500000,0
+HAMILTON, 28,Town of Wells ,"Town of Wells Water District",125000,100000
+HAMILTON, 35,Town of Lake Pleasant,"Fish Mountain Road",250000,0
+HAMILTON, 36,Town of Lake Pleasant,"Longview Dr",3250,0
+HAMILTON, 37,Town of Lake Pleasant,"Tamack Rd",13000,0
+HAMILTON, 38,Town of Lake Pleasant,"Fawn lake Road",5000,0
+HAMILTON, 39,Town of Lake Pleasant,"Oxbow RD. ",1250,0
+HAMILTON, 40,Town of Lake Pleasant,"Jims Hill Raod",2000,0
+HAMILTON, 41,Town of Lake Pleasant,"Old Indian Rd",2000,0
+HAMILTON, 42,Town of Lake Pleasant,"Old page Hill  ",20000,0
+HAMILTON, 43,Town of Lake Pleasant,"Gilmantown Rd",30000,0
+HAMILTON, 44,Town of Lake Pleasant,"Perkins Clearing ",29000,0
+HAMILTON, 45,Town of Lake Pleasant,"Kinler",2000,0
+HAMILTON, 47,Town of Arietta ,"Haskells Road",50000,0
+HAMILTON, 48,Town of Arietta ,"South Shore Road",5000,0
+HAMILTON, 49,Town of Arietta ,"Wayne Smith Road",6000,0
+HAMILTON, 50,Town of Arietta ,"Powley Road",750000,0
+HAMILTON, ,Hamilton County,"Elbow Creeek Bridge",0,30000
+HAMILTON, ,,"",0,1895000
+HERKIMER, 8,Town of Frankfort (+ Village),"Various",0,0
+HERKIMER, 11,Town of Newport,"Woodchuck Hill Road",10000,0
+HERKIMER, 12,Town of Newport,"Newport Road",135000,0
+HERKIMER, 20,Town of Ohio,"Uncle Miere Road",18000,18000
+HERKIMER, 35,Herkimer County Highway,"Bush Road.  CR 180",263045,263045
+HERKIMER, 36,Herkimer County Highway,"Newport Road CR 34",209540,209540
+HERKIMER, 37,Herkimer County Highway,"White Creek Road CR 60",1171600,1171600
+JEFFERSON, 1,Jefferson County Highway,"County wide road signs",13000,13000
+JEFFERSON, 2,Jefferson County Highway,"County wide roads",60000,60000
+JEFFERSON, 5,Town of Lyme,"ALL Town of Lyme sites",45658.96,0
+JEFFERSON, 11,Village of Cape Vincent,"ALL Village of Cape Vincent sites",1000000,0
+JEFFERSON, 19,Village of Clayton,"Riverside Drive at E. Union St. Pump Station",8850,8850
+LEWIS, ,Town of West Turin,"",0,20847
+LEWIS, ,Town of West Turin,"Town Wide Debris",1920,0
+MADISON, ,Town of Georgetown,"Bronder Hollow Rd",0,0
+MADISON, ,Town of Nelson,"Multiple Roads with Varying issues",122449,122449
+MADISON, ,Town of DeRuyter,"Multiple Roads with Varying issues",14034,18000
+MADISON, 1,Madison County Highway Dept,"Multiple Roads",19975,19975
+MADISON, 2,Town of Brookfield,"Unknown",10000,0
+MADISON, 3,Town of Hamilton,"Multiple Roads with Varying issues",39929.3,39929
+MONTGOMERY, 3,Town of Mohawk,"Debris & Culvert
+(GPS Data pending)",13153,13153
+ONEIDA, 3,Oneida County,"Mohawk Street at Elm Street",0,0
+ONEIDA, 4,Oneida County,"Mohawk Street at Roberts Street",0,340000
+ONEIDA, 13,Oneida County,"Sanitary Intercepter Inspection
+Town of Paris to Whitesboro Pump Station.",1000000,0
+ONEIDA, 32,Town of New Hartford,"Ray Hill Park Trail
+South of Clinton Street
+Public Park/Walking Trail",1500000,1500000
+ONEIDA, 32,Town of New Hartford,"Washington Mills Athletic Park
+3695 Oneida Street, New Hartford.",15000,15000
+ONEIDA, ,Oneida County DPW,"Porter Road",0,18000
+ONEIDA, ,Oneida County DPW,"Commercial Street",0,0
+ONEIDA, ,Oneida County DPW,"",0,7500
+ONEIDA, ,Oneida County DPW,"North Road
+",0,500000
+ONEIDA, ,Oneida County,"Oneida County Main Sewer Interceptor Pipeline",0,1093200
+OTSEGO, ,Otsego County,"County Route 1
+Unadilla, NY",25000,25000
+OTSEGO, ,Otsego County,"County Route 1
+Unadilla, NY",10000,10000
+OTSEGO, ,Otsego County,"County Route 3A
+Unadilla, NY",5000,5000
+OTSEGO, ,Hartwick,"Bunn Hill Rd., Pleasant Valley & Mil Road, Lippitt Seasonal Rd., Stevens Rd., Goey Pond Rd., Sam Markle Rd., Henley Rd., Willeytown Rd.",21114,21114
+OTSEGO, ,Otsego County Electrical Coop,"",10000,10000
+OTSEGO, ,Otsego County,"County Route 22
+Exeter, NY",5000,0
+OTSEGO, ,Otsego County,"County Route 22
+Exeter, NY",3000,0
+OTSEGO, ,Otsego County,"County Route 17
+New Lisbon, NY",2000,0
+OTSEGO, ,Otsego County,"County Route 31
+Middlefield, NY",2000,0
+OTSEGO, ,Otsego County,"County Route 59 Pittsfield, NY",500,0
+SARATOGA, 9,Town of Edinburg,"Tennantville Road House 395 to Morris Rd.",23953,23952
+SARATOGA, 10,Town of Ballston,"Debris Removal townwide",4402,0
+SARATOGA, 11,Town of Greenfield,"Listed Town Roads ",15222,0
+SARATOGA, 12,Town of Greenfield,"Multiple Town Roads ",20096,0
+SARATOGA, 13,Town of Malta,"Townwide",23000,0
+SARATOGA, 14,Town of Northumberland,"Townwide",7188,0
+SARATOGA, 15,Town of Wilton,"Townwide",10638,0
+TIOGA, 8,Town of Newark Valley,"Davis Hollow Rd",13000,13000
+TIOGA, 10,Town of Newark Valley,"Wilson Creek",2000,2000
+TIOGA, 23,Town of Owego,"Gaylord Road",5569,5569
+TIOGA, 27,Town of Owego,"Long Creek Rd Bridge Detour",5206,5206
+TIOGA, 28,Town of Owego,"Long Creek Rd Culverts",25000,25000
+TIOGA, 29,Town of Owego,"Sanford Rd",12312,12312
+TIOGA, 36,Berkshire (T),""S"  Hill Rd",3500,3500
+WARREN, 1,Possibly State DOT,"unnamed culvert",0,0
+WARREN, 2,Town of Bolton,"East Schroon River Road",10000,0
+WARREN, 3,Town of Bolton,"Hendricks Road",10000,0
+WARREN, 4,Town of Bolton,"New Vermont Rd",11000,0
+WARREN, 5,Town of Bolton,"Padanurman Rd",500000,0
+WARREN, 6,Town of Bolton,"Padanurman Rd",500000,0
+WARREN, 7,Town of Bolton,"Padanurman Rd",750000,0
+WARREN, 8,Town of Bolton,"Trout Falls Rd",50000,0
+WARREN, 9,Town of Bolton,"Wardboro Rd",500000,1350000
+WARREN, 31,Town of Hague,"Coldwater Canyon Rd",5000,0
+WARREN, 32,Town of Hague,"Dodd Hill Rd",20000,0
+WARREN, 33,Town of Hague,"McCoy Road at West Hague Rd",9000,0
+WARREN, 34,Town of Hague,"Old Mill Rd",3500,0
+WARREN, 35,Town of Hague,"Silver Bay Rd",7000,0
+WARREN, 36,Town of Hague,"Yaw Road at New Hague Rd",90000,90000
+WARREN, 37,Town of Horican,"Alder Brook Road",60000,0
+WARREN, 38,Town of Horican,"Grassville Rd",45000,0
+WARREN, 39,Town of Horican,"Harris Rd",22000,0
+WARREN, 40,Town of Horican,"Ira Frasier Rd",10000,0
+WARREN, 41,Town of Horican,"Padurnurman Rd",25000,0
+WARREN, 42,Town of Horican,"Shaw Hill Rd",50000,0
+WARREN, 43,Town of Johnsburg,"7 Sites",156000,0
+WARREN, 44,Town of Lake George ,"Big Hollow Rd  Culvert that probably belongss to state.",22000,0
+WARREN, 46,Town of Stony Creek,"Fodder Rd. - viewed photos",30000,0
+WARREN, 48,Town of Stony Creek,"Lanfear Rd. - viewed photos",7000,0
+WARREN, 51,Town of Stony Creek,"States Rd. - viewed photos",5000,0
+WARREN, 52,Town of Stony Creek,"Tucker Rd. - viewed photos",3000,0
+WARREN, 53,Town of Thurman,"11 sites",600000,0
+WARREN, 54,Town of Warrensburgh,"Green Mansions Rd. - not seen",20000,0
+WARREN, 55,Town of Warrensburgh,"Pucker Street - not seen",50000,0
+WARREN, 56,Town of Warrensburgh,"Rob Moffitt Rd. - not seen",25000,0
+WARREN, 58,Warren County,"13th Lake Rd 13th Brook Crossing",813700,250000
+WARREN, 60,Warren County,"Padanurman Rd",0,0
+Non-Declared, ,Oswego,"SUNY Oswego",0,0
+Non-Declared, ,Various,"DOT",0,0
