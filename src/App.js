@@ -3,7 +3,7 @@ import { connect } from 'react-redux';
 import { BrowserRouter,Switch } from 'react-router-dom';
 import { createBrowserHistory } from 'history';
 import { ThemeProvider } from 'styled-components';
-import theme from 'components/common/themes/light_new';
+import theme from 'components/common/themes/dark';
 
 import { auth } from 'store/modules/user';
 

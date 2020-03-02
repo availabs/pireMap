@@ -1,0 +1,1000 @@
+ 1011  ls
+ 1012  ll
+ 1013  ./ndjson-reduce.sh 
+ 1014  ll
+ 1015  less Seg_ab.ndjson 
+ 1016  ./ndjson-reduce.sh 
+ 1017  ll
+ 1018  ./ndjson-reduce.sh 
+ 1019  ls
+ 1020  ll
+ 1021  ./ndjson-reduce.sh 
+ 1022  ll
+ 1023  ndjson-split 'd.features' < NYS_2018_Tax_Parcels_Agencies.geojson > nys_2018_tax_parcels_agencies_2.ndjson 
+ 1024  ndjson-split 'd.features'   < ca-albers.json \
+ 1025  ll
+ 1026  rm nys_2018_tax_parcels_agencies_2.ndjson 
+ 1027  ls
+ 1028  ll
+ 1029  ndjson-split 'd.features' < NYS_2018_Tax_Parcels_Agencies.geojson > nys_2018_tax_parcels_agencies_2.ndjson
+ 1030  ./ndjson-reduce.sh 
+ 1031  ll
+ 1032  rm nys_parcels_2018_ab.g
+ 1033  rm nys_parcels_2018_ab.geojson 
+ 1034  rm nys_parcels_2018_ab.json 
+ 1035  ll
+ 1036  ./ndjson-reduce.sh 
+ 1037  ll
+ 1038  split -l 125000 Seg_ab.ndjson Seg_ab_
+ 1039  ll
+ 1040  less Seg_ab_aa
+ 1041  ll
+ 1042  ./ndjson-reduce.sh 
+ 1043  ll
+ 1044  ./ndjson-reduce.sh 
+ 1045  ll
+ 1046  rm nys_parcels_2018_ab.geojson 
+ 1047  ll
+ 1048  for f in nys_parcels_2018_a*.geojson; do ogr2ogr -append -f "PostgreSQL" PG:"host=mars.availabs.org user=postgres dbname=hazard_mitigation password=Jedi21funk" $f  -nln parcel.parcel_2018_final ; done
+ 1049  ll
+ 1050  less Seg_ab.ndjson 
+ 1051  ll
+ 1052  rm nys_2018_tax_parcels_agencies_2.ndjson 
+ 1053  ls
+ 1054  ll
+ 1055  cd AVAIL/code/
+ 1056  ls
+ 1057  cd mitigate-api/
+ 1058  npm start
+ 1059  cd ..
+ 1060  ls
+ 1061  git clone https://github.com/city41/server-side-react-and-falcor.git
+ 1062  ls
+ 1063  cd server-side-react-and-falcor/
+ 1064  npm install
+ 1065  sudo npm install
+ 1066  npm start
+ 1067  cd ..
+ 1068  rm server-side-react-and-falcor/
+ 1069  rmdir server-side-react-and-falcor/
+ 1070  rmdir -f server-side-react-and-falcor/
+ 1071  rm-R server-side-react-and-falcor/
+ 1072  rm -R server-side-react-and-falcor/
+ 1073  ls
+ 1074  rm -rf server-side-react-and-falcor/
+ 1075  sudo rm -rf server-side-react-and-falcor/
+ 1076  ls
+ 1077  ll
+ 1078  cd ..
+ 1079  ll
+ 1080  cd myapp/
+ 1081  ls
+ 1082  ll
+ 1083  git clone https://github.com/przeor/falcor-netflix-shopping-cart-example.git
+ 1084  ll
+ 1085  cd falcor-netflix-shopping-cart-example/
+ 1086  ll
+ 1087  npm install
+ 1088  sudo npm install
+ 1089  npm start
+ 1090  cd ..
+ 1091  ls
+ 1092  git clone https://github.com/availabs/avail-falcor.git
+ 1093  ls
+ 1094  ll
+ 1095  cd avail-falcor/
+ 1096  ll
+ 1097  npm install
+ 1098  sudo npm install
+ 1099  npm start
+ 1100  sudo npm install
+ 1101  npm audit fix
+ 1102  sudo npm audit fix
+ 1103  npm start
+ 1104  jest participation
+ 1105  npm start
+ 1106  jest participation
+ 1107  npm start
+ 1108  jest participation
+ 1109  npm start
+ 1110  jest participation
+ 1111  npm start
+ 1112  jest participation
+ 1113  npm start
+ 1114  jest participation
+ 1115  sudo apt-add-repository ppa:audio-recorder/ppa
+ 1116  sudo apt-get update
+ 1117  sudo apt-get install audio-recorder
+ 1118  est participation
+ 1119  jest participation
+ 1120  est participation
+ 1121  jest participation
+ 1122  git add ,
+ 1123  git  add .
+ 1124  git commit -m 'test participation'
+ 1125  git push
+ 1126  git pull
+ 1127  [ { type: 'seminar ',
+ 1128  cd ..
+ 1129  cd lhmp
+ 1130  npm start
+ 1131  git pull
+ 1132  cd src/components/AvlMap/
+ 1133  git pull
+ 1134  cd ../
+ 1135  git pull
+ 1136  git add .
+ 1137  git commit -m 'test participation'
+ 1138  git push
+ 1139  git pull
+ 1140  git pull src/pages/auth/actions/
+ 1141  git pull src/pages/auth/actions/index.js
+ 1142  git diff 
+ 1143  git diff src/pages/auth/actions/
+ 1144  cd src/pages/auth/actions/
+ 1145  git pull
+ 1146  git checkout FETCH_HEAD -- index.js
+ 1147  git add .
+ 1148  git commit -m "participation test"
+ 1149  cd ./../../
+ 1150  cd ../../
+ 1151  git add .
+ 1152  git pull
+ 1153  git merge --abort
+ 1154  git reset --merge
+ 1155  git pull
+ 1156  git merge --abort
+ 1157  git reset --merge
+ 1158  git diff src
+ 1159  git fetch origin
+ 1160  git diff
+ 1161  git diff src
+ 1162  git pull origin master
+ 1163  git revert
+ 1164  git log
+ 1165  git reset --hard HEAD~1
+ 1166  git pull
+ 1167  git diff
+ 1168  git log
+ 1169  clear
+ 1170  cd src/components/
+ 1171  ls
+ 1172  cd AvlMap/
+ 1173  git pull
+ 1174  ls 
+ 1175  cd layers/
+ 1176  ls
+ 1177  ls -l
+ 1178  cd ../../
+ 1179  rm -rf AvlMap/
+ 1180  git clone https://github.com/availabs/AvlMap.git
+ 1181  ls
+ 1182  ls AvlMap/
+ 1183  cd AvlMap/
+ 1184  git checkout f50300fde2a36375406f32b94f837970b0ef85c9
+ 1185  npm install
+ 1186  cd ../../
+ 1187  cd ../
+ 1188  npm install
+ 1189  sudo npm install
+ 1190  npm start
+ 1191  cd ..
+ 1192  curl --V
+ 1193  curl --v
+ 1194  curl --version
+ 1195  curl https://api.github.com
+ 1196  curl https://api.github.com/users/jwlee/repos
+ 1197  curl https://api.github.com/users/jwlee/repos\?sort\=pushed
+ 1198  curl https://api.github.com/users/jwlee38/repos\?sort\=pushed
+ 1199  curl -X POST https://api.github.com/user/repos
+ 1200  curl -H "Content-Type: application/json" https://api.github.com -v
+ 1201  ll
+ 1202  cd avail-falcor/
+ 1203  npm start
+ 1204  npm start
+ 1205  jest participation
+ 1206  est participation
+ 1207  jest participation
+ 1208  cd ..
+ 1209  cd lhmp/
+ 1210  npm start
+ 1211  cd ..
+ 1212  ll
+ 1213  cd avail-falcor/
+ 1214  npm start
+ 1215  cd ..
+ 1216  cd lhmp/
+ 1217  npm start
+ 1218  cd AVAIL/
+ 1219  ll
+ 1220  cd code/
+ 1221  ls
+ 1222  cd avail-falcor/
+ 1223  npm start
+ 1224  cd ..
+ 1225  cd avail-falcor/
+ 1226  npm start
+ 1227  cd ..
+ 1228  cd avail-falcor/
+ 1229  npm start
+ 1230  cd ..
+ 1231  cd lhmp/
+ 1232  ls
+ 1233  ll
+ 1234  git add .
+ 1235  git commit -m 'participation page update'
+ 1236  git pull
+ 1237  git push
+ 1238  git add .
+ 1239  rm package-lock.json 
+ 1240  git add .
+ 1241  git commit -m 'merge changes'
+ 1242  git status
+ 1243  git pull
+ 1244  git push
+ 1245  npm start
+ 1246  cd ..
+ 1247  cd lhmp/
+ 1248  npm start
+ 1249  git add .
+ 1250  git commit -m 'participation view new edit added'
+ 1251  git pull
+ 1252  rm -rf package-lock.json 
+ 1253  git add .
+ 1254  npm start
+ 1255  git status
+ 1256  git pull
+ 1257  git commit -m 'merge 1'
+ 1258  git pull
+ 1259  cd src/components/AvlMap/
+ 1260  git pul
+ 1261  git pull
+ 1262  cd ../
+ 1263  ls
+ 1264  git status
+ 1265  cd src/components/AvlMap/
+ 1266  git pull origin master
+ 1267  git status
+ 1268  cd ../
+ 1269  npm install
+ 1270  sudo npm install
+ 1271  git status
+ 1272  git push
+ 1273  git add .
+ 1274  git commit -m 'update participation view page'
+ 1275  git status
+ 1276  git pull
+ 1277  git push
+ 1278  ls
+ 1279  rm package-lock.json 
+ 1280  ls
+ 1281  git pull
+ 1282  ll
+ 1283  ls
+ 1284  git diff
+ 1285  git commit -m "tmp"
+ 1286  git add .
+ 1287  git commit -m "tmp"
+ 1288  git pull
+ 1289  ls
+ 1290  git pull package-lock.json
+ 1291  npm install
+ 1292  sudo npm install
+ 1293  ls
+ 1294  ll
+ 1295  cd src
+ 1296  ls
+ 1297  cd components/
+ 1298  ll
+ 1299  cd AvlMap/
+ 1300  ls
+ 1301  git pull
+ 1302  git pull origin master
+ 1303  cd ..
+ 1304  rm -rf AvlMap/
+ 1305  git clone https://github.com/availabs/AvlMap.git
+ 1306  cd ..
+ 1307  git add .
+ 1308  git commit -m 'latest participation'
+ 1309  git add .
+ 1310  git commit -m 'latest participation'
+ 1311  git add .
+ 1312  git commit -m 'lastest changes in participation'
+ 1313  git commit -m 'latest participation'
+ 1314  git pull
+ 1315  git status
+ 1316  rm rf package.lock.json
+ 1317  rm -rf package.lock.json
+ 1318  cd src
+ 1319  cd components/
+ 1320  cd AvlMap/
+ 1321  git pull origin master
+ 1322  cd ..
+ 1323  git push
+ 1324  git pull
+ 1325  git add .
+ 1326  git commit -m "tmp"
+ 1327  git pull
+ 1328  git push
+ 1329  smbclient -L //casbox.univ.albany.edu/
+ 1330  globalprotect connect --portal uavpn.albany.edu
+ 1331  globalprotect disconnect
+ 1332  cd ..
+ 1333  globalprotect disconnect
+ 1334  globalprotect connect --portal uavpn.albany.edu
+ 1335  globalprotect disconnect
+ 1336  sudo service postgresql status
+ 1337  sudo su postgres 
+ 1338  ll
+ 1339  cd AVAIL
+ 1340  cd code
+ 1341  ll
+ 1342  cd avail-falcor/
+ 1343  npm start
+ 1344  clear
+ 1345  npm start
+ 1346  clear
+ 1347  npm start
+ 1348  clear
+ 1349  npm start
+ 1350  git add .
+ 1351  git commit -m 'participation latest'
+ 1352  git pull
+ 1353  git status
+ 1354  git diff
+ 1355  jest participation
+ 1356  clear
+ 1357  jest participation
+ 1358  cd ..
+ 1359  npm start
+ 1360  cd ..
+ 1361  cd lhmp
+ 1362  npm start
+ 1363  [A
+ 1364  npm start
+ 1365  git add .
+ 1366  git commit -m 'participation lastest work'
+ 1367  git pull
+ 1368  git push
+ 1369  cd ..
+ 1370  ls
+ 1371  cd Downloads/
+ 1372  ls
+ 1373  tar xvf PanGPLinux-5.0.3-c10.tgz
+ 1374  ls
+ 1375  sudo dpkg -i GlobalProtect_deb-5
+ 1376  sudo dpkg -i GlobalProtect_deb-5.0.3.0-10.deb 
+ 1377  globalprotect connect --portal uavpn.albany.edu
+ 1378  globalprotect disconnect
+ 1379  globalprotect connect --portal uavpn.albany.edu
+ 1380  globalprotect disconnect
+ 1381  globalprotect connect --portal uavpn.albany.edu
+ 1382  sudo mount -t cifs -o username=jwlee //casbox.univ.albany.edu/CASTC /media/casit
+ 1383  globalprotect disconnect
+ 1384  globalprotect connect --portal uavpn.albany.edu
+ 1385  globalprotect disconnect
+ 1386  globalprotect connect --portal uavpn.albany.edu
+ 1387  globalprotect disconnect
+ 1388  globalprotect connect --portal uavpn.albany.edu
+ 1389  sudo mount -t cifs -o username=jwlee //casbox.univ.albany.edu/CASTC /media/casit
+ 1390  cd ..
+ 1391  ls
+ 1392  ll
+ 1393  cd ..
+ 1394  ll
+ 1395  cd media
+ 1396  cd casit
+ 1397  ls
+ 1398  ll
+ 1399  sudo mount -t cifs -o username=jwlee //casbox.albany.edu/CASTC /media/casit
+ 1400  sudo mount -t cifs -o username=jwlee //casbox.albany.edu/CASTC /media/
+ 1401  smbclient -L //casbox.univ.albany.edu/
+ 1402  sudo mount -t cifs -o username=jwlee //casbox.univ.albany.edu/CASTC /media/casit 
+ 1403  sudo mount -t cifs -o username=jwlee //casbox.univ.albany.edu/CASTC
+ 1404  ls
+ 1405  ll
+ 1406  cd ..
+ 1407  ls
+ 1408  cd etc/
+ 1409  ls
+ 1410  cs fstab 
+ 1411  lcd fstab 
+ 1412  cd fstab
+ 1413  cat fstab 
+ 1414  smbclient -L //casbox.univ.albany.edu/
+ 1415  sudo mount -t cifs -o username=jwlee //casbox.univ.albany.edu/CASTC /media/casit 
+ 1416  cd ..
+ 1417  ls
+ 1418  cd u
+ 1419  cd usr/
+ 1420  ls
+ 1421  cd .
+ 1422  ls
+ 1423  cd ..
+ 1424  ls
+ 1425  cd home
+ 1426  ls
+ 1427  cd jin
+ 1428  ls
+ 1429  cd AVAIL
+ 1430  cd code/
+ 1431  ls
+ 1432  cd lhmp
+ 1433  globalprotect connect --portal uavpn.albany.edu
+ 1434  ls
+ 1435  ll
+ 1436  cd src
+ 1437  ll
+ 1438  cd components/
+ 1439  ll
+ 1440  cd AvlMap/
+ 1441  ll
+ 1442  cd ..
+ 1443  ll
+ 1444  git clone https://github.com/availabs/AvlStuff.git
+ 1445  ll
+ 1446  rm rf AvlMap/
+ 1447  rm -rf AvlMap/
+ 1448  ll
+ 1449  git clone https://github.com/availabs/AvlMap.git
+ 1450  globalprotect connect --portal uavpn.albany.edu
+ 1451  npm install
+ 1452  sudo npm install
+ 1453  cd src/components/AvlMap/
+ 1454  git pull
+ 1455  git pull origin master
+ 1456  git pull
+ 1457  git pull origin master
+ 1458  cd ..
+ 1459  cd code
+ 1460  ls
+ 1461  cd avail-falcor/
+ 1462  npm start
+ 1463  git add.
+ 1464  git add .
+ 1465  git commit -m 'participation lastest work'
+ 1466  git pull
+ 1467  git push
+ 1468  cd ..
+ 1469  ls
+ 1470  cd ..
+ 1471  node 
+ 1472  sudo apt -get update
+ 1473  sudo apt-get update
+ 1474  sudo apt-get upgrade
+ 1475  cd ..
+ 1476  ll
+ 1477  cd avail-falcor/
+ 1478  npm start
+ 1479  cd avail-falcor/
+ 1480  npm start
+ 1481  cd AVAIL/code/
+ 1482  ls
+ 1483  ll
+ 1484  cd lhmp/
+ 1485  ls
+ 1486  npm start
+ 1487  cd AVAIL/code/
+ 1488  ls
+ 1489  cd avail-falcor/
+ 1490  ll
+ 1491  npm start
+ 1492  ls
+ 1493  git pull
+ 1494  npm start
+ 1495  cd ..
+ 1496  cd lhmp/
+ 1497  npm start
+ 1498  npm install
+ 1499  npm install react-bootstrap-typeahead
+ 1500  sudo npm install react-bootstrap-typeahead
+ 1501  npm start
+ 1502  cd AVAIL/code
+ 1503  ll
+ 1504  cd avail-falcor/
+ 1505  npm start
+ 1506  cd ..
+ 1507  cd lhmp/
+ 1508  ll
+ 1509  npm start
+ 1510  git add.
+ 1511  git add .
+ 1512  git commit -m 'participation latest'
+ 1513  git pull
+ 1514  git push
+ 1515  npm start
+ 1516  git add .
+ 1517  git commit -m 'participation error fix'
+ 1518  git pull
+ 1519  git push
+ 1520  npm start
+ 1521  git add .
+ 1522  git commit -m 'participation lastest'
+ 1523  git pull
+ 1524  git push
+ 1525  npm start
+ 1526  git add .
+ 1527  git commit - m 'participation error fix'
+ 1528  git commit -m 'participation error fix'
+ 1529  git pull
+ 1530  git push
+ 1531  npm start
+ 1532  ll
+ 1533  which tree
+ 1534  ll
+ 1535  ll node_modules/
+ 1536  ll node_modules | less
+ 1537  python3 -V
+ 1538  py
+ 1539  py
+ 1540  python
+ 1541  python -V
+ 1542  python -v
+ 1543  ll
+ 1544  cd myapp/
+ 1545  ll
+ 1546  mkdir python
+ 1547  ll
+ 1548  cd python/
+ 1549  ll
+ 1550  python3
+ 1551  ll
+ 1552  test.py
+ 1553  python test.py
+ 1554  python3 test.py
+ 1555  mkdir intro_python
+ 1556  ll
+ 1557  cd intro_python/
+ 1558  ll
+ 1559  python3 test.py
+ 1560  python3
+ 1561  python3 test.py
+ 1562  ython3 test.py
+ 1563  python3 test.py
+ 1564  ython3 test.py
+ 1565  python3 test.py
+ 1566  python3
+ 1567  ll
+ 1568  git clone https://github.com/shaunaksangdod/scrap_names.git
+ 1569  ll
+ 1570  cd scrap_names/
+ 1571  ll
+ 1572  cd ..
+ 1573  cd myapp/
+ 1574  gatsby new tutorial-part-two https://github.com/gatsbyjs/gatsby-starter-hello-world
+ 1575  cd tutorial-part-two
+ 1576  cd ..
+ 1577  ll
+ 1578  cd tutorial-part-two/
+ 1579  ll
+ 1580  cd src
+ 1581  ll
+ 1582  cd pages/
+ 1583  ll
+ 1584  cd ..
+ 1585  mkdir styles
+ 1586  cd styles/
+ 1587  touch global.css
+ 1588  l
+ 1589  ll
+ 1590  cd ../..
+ 1591  touch gatsby-browser.js
+ 1592  gatsby develop
+ 1593  sudo apt update
+ 1594  sudo apt -y upgrade
+ 1595  npm --version
+ 1596  node --version
+ 1597  nvm 
+ 1598  nvm use 10
+ 1599  curl -o- https://raw.githubusercontent.com/nvm-sh/nvm/v0.35.1/install.sh | bash
+ 1600  nvm --version
+ 1601  export NVM_DIR="$HOME/.nvm"
+ 1602  [ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh"  # This loads nvm
+ 1603  [ -s "$NVM_DIR/bash_completion" ] && \. "$NVM_DIR/bash_completion"  # This loads nvm bash_completion
+ 1604  nvm --version
+ 1605  nvm use 10
+ 1606  node --V
+ 1607  node --version
+ 1608  npm install -g gatsby-cli
+ 1609  node --version
+ 1610  sudo npm install -g n
+ 1611  sudo n lts
+ 1612  node --version
+ 1613  npm --version
+ 1614  sudo npm install -g gatsby-cli
+ 1615  gatsby new hello-world https://github.com/gatsbyjs/gatsby-starter-hello-world
+ 1616  sudo chown -R 1000:1000 "/home/jin/.npm
+ 1617  sudo chown -R 1000:1000 "/home/jin/.npm
+ 1618  gatsby new hello-world https://github.com/gatsbyjs/gatsby-starter-hello-world
+ 1619  cd hello-world/
+ 1620  gatsby develop
+ 1621  ll
+ 1622  ks
+ 1623  cd ../
+ 1624  ls
+ 1625  cd hello-world/
+ 1626  ls -lah
+ 1627  sudo chown -R 1000:1000 ~/.npm
+ 1628  gatsby develop
+ 1629  npm install
+ 1630  gatsby develop
+ 1631  cd ..
+ 1632  ll
+ 1633  cd AVAIL
+ 1634  ll
+ 1635  cd code
+ 1636  gatsby new hello-world https://github.com/gatsbyjs/gatsby-starter-hello-world
+ 1637  ll
+ 1638  cd hello-world/
+ 1639  gatsby develop
+ 1640  npm install -g prettier
+ 1641  sudo npm install -g prettier
+ 1642  sudo npm install --global surge
+ 1643  surge login
+ 1644  gatsby build
+ 1645  sudo chown -R $USER:$(id -gn $USER) /home/jin/.config
+ 1646  gatsby build
+ 1647  ls 
+ 1648  ll
+ 1649  ls public/
+ 1650  surge public/
+ 1651  sudo surge public/
+ 1652  cd public/
+ 1653  surge
+ 1654  cd ..
+ 1655  surge logout
+ 1656  surge login
+ 1657  surge public/
+ 1658  cd AVAIL/code
+ 1659  ll
+ 1660  cd myapp/
+ 1661  gatsby new tutorial-part-three https://github.com/gatsbyjs/gatsby-starter-hello-world
+ 1662  cd tutorial-part-three
+ 1663  npm install --save gatsby-plugin-typography react-typography typography typography-theme-fairy-gates
+ 1664  gatsby develop
+ 1665  ping 192.168.1.103
+ 1666  cd ../../..
+ 1667  cd ..
+ 1668  ssh pi@192.168.1.103
+ 1669  ping 192.168.1.103
+ 1670  ping 192.168.1.255
+ 1671  ping 192.168.1.103
+ 1672  ssh pi@192.168.1.103
+ 1673  cd ../..
+ 1674  ifconfig
+ 1675  ping 192.168.1.103
+ 1676  cd /etc/wpa_supplicant/
+ 1677  ls
+ 1678  ll
+ 1679  cd ..
+ 1680  ag UAlbanyWiFi
+ 1681  sudo apt install silversearcher-ag
+ 1682  ag UAlbanyWiFi
+ 1683  sudo ag UAlbanyWiFi
+ 1684  cd NetworkManager/system-connections/
+ 1685  ll
+ 1686  cat UAlbanyWiFi 
+ 1687  sudo cat UAlbanyWiFi 
+ 1688  ping 192.168.1.103
+ 1689  globalprotect connect --portal uavpn.albany.edu
+ 1690  cd ..
+ 1691  ll
+ 1692  cd myapp/
+ 1693  ll
+ 1694  cd gatsby-advanced-starter/
+ 1695  ll
+ 1696  gatsby develop
+ 1697  ll
+ 1698  npm start
+ 1699  npm run develop
+ 1700  cd ..
+ 1701  gatsby new gatsby-starter-netlify-cms https://github.com/netlify-templates/gatsby-starter-netlify-cms
+ 1702  cd gatsby-starter-netlify-cms/
+ 1703  gatsby develop
+ 1704  cd ..
+ 1705  ll
+ 1706  cd test/
+ 1707  gatsby new gatsby-starter-netlify-cms https://github.com/netlify-templates/gatsby-starter-netlify-cms
+ 1708  cd gatsby-starter-netlify-cms/
+ 1709  gatsby develop
+ 1710  cd ..
+ 1711  ll
+ 1712  git clone https://github.com/jwlee38/gatsby-starter-netlify-cms.git
+ 1713  ll
+ 1714  cd gatsby-starter-netlify-cms/
+ 1715  yarn
+ 1716  ll
+ 1717  yarn
+ 1718  ntl dev
+ 1719  netlify dev #
+ 1720  yarn ntl dev
+ 1721  npm run build
+ 1722  ll
+ 1723  cat package.json 
+ 1724  ll
+ 1725  npm install
+ 1726  npm run build
+ 1727  ntl dev
+ 1728  netlify dev
+ 1729  yarn 
+ 1730  sudo npm install netlify-cli -g
+ 1731  cd ..
+ 1732  cd gatsby-starter-netlify-cms/
+ 1733  yarn
+ 1734  ntl dev
+ 1735  netlify dev #
+ 1736  ll
+ 1737  npm run build
+ 1738  cd ..
+ 1739  gatsby new gatsby-csda-cms https://github.com/netlify-templates/gatsby-starter-netlify-cms
+ 1740  ll
+ 1741  rm -r gatsby-csda-cms/
+ 1742  ll
+ 1743  rm -rf gatsby-csda-cms/
+ 1744  ll
+ 1745  rm -rf gatsby-starter-netlify-cms/
+ 1746  ll
+ 1747  git clone https://github.com/jwlee38/gatsby-starter-netlify-cms.git
+ 1748  cd gatsby-starter-netlify-cms/
+ 1749  yarn install
+ 1750  ll
+ 1751  cat package.json 
+ 1752  yarn install
+ 1753  yarn
+ 1754  cat package.json 
+ 1755  yarn
+ 1756  sudo npm install -g yarn 
+ 1757  yarn
+ 1758  yarn --version
+ 1759  yarn install
+ 1760  npm install yarn
+ 1761  yarn 
+ 1762  yarn
+ 1763  node --version
+ 1764  sudo n 10
+ 1765  sudo n lts
+ 1766  sudo n 10
+ 1767  yarn
+ 1768  npm install
+ 1769  ntl dev
+ 1770  npm run build
+ 1771  ntl dev
+ 1772  npm install --save gatsby-source-filesystem
+ 1773  npm install --save gatsby-transformer-remark
+ 1774  npm install --save gatsby-plugin-manifest
+ 1775  npm install --save gatsby-plugin-offline
+ 1776  npm install --save gatsby-plugin-react-helmet react-helmet
+ 1777  surge public
+ 1778  gatsby develop
+ 1779  cd ..
+ 1780  cd myapp/
+ 1781  ll
+ 1782  git clone https://github.com/jwlee38/gatsby-csda-cms.git
+ 1783  cd gatsby-csda-cms/
+ 1784  ll
+ 1785  yarn
+ 1786  ntl dev
+ 1787  cd AVAIL/
+ 1788  cd code/
+ 1789  cd myapp/
+ 1790  ll
+ 1791  git clone https://github.com/Vagr9K/gatsby-advanced-starter.git
+ 1792  cd gatsby-advanced-starter/
+ 1793  ;;
+ 1794  ll
+ 1795  cd ..
+ 1796  ll
+ 1797  mkdir test
+ 1798  cd test/
+ 1799  cd ..
+ 1800  ll
+ 1801  cd gatsby-starter-netlify-cms/
+ 1802  ntl dev
+ 1803  8888
+ 1804  ntl dev
+ 1805  npm run clean
+ 1806  ll
+ 1807  ntl dev
+ 1808  cd ll
+ 1809  cd ..
+ 1810  git clone https://github.com/jwlee38/gatsby-csda-cms.git
+ 1811  cd gatsby-csda-cms/
+ 1812  ll
+ 1813  yarn
+ 1814  ntl dev
+ 1815  npm run build
+ 1816  ntl dev
+ 1817  npm run build
+ 1818  cd ..
+ 1819  rf -rm gatsby-csda-cms
+ 1820  rm -rf gatsby-csda-cms/
+ 1821  ll
+ 1822  git clone https://github.com/jwlee38/gatsby-csda-cms.git
+ 1823  ll
+ 1824  cd gatsby-csda-cms/
+ 1825  yarn
+ 1826  ntl dev
+ 1827  cd ..
+ 1828  git clone https://github.com/jwlee38/csda-gatsby-bootstrap.git
+ 1829  cd csda-gatsby-bootstrap/
+ 1830  ll
+ 1831  yarn
+ 1832  ntl dev
+ 1833  cd ..
+ 1834  gatsby gatsby new gatsby-dark-mode
+ 1835  gatsby new gatsby-dark-mode
+ 1836  cd gatsby-dark-mode/
+ 1837  ll
+ 1838  npm start
+ 1839  globalprotect connect --portal uavpn.albany.edu
+ 1840  cd ..
+ 1841  cd myapp/
+ 1842  ll
+ 1843  cd gatsby-csda-cms/
+ 1844  ll
+ 1845  ntl dev
+ 1846  cd ..
+ 1847  ll
+ 1848  cd pire/
+ 1849  ll
+ 1850  cd tasks/
+ 1851  cd dataScraper/
+ 1852  npm install
+ 1853  npm install node-fetch
+ 1854  node index.js
+ 1855  node index
+ 1856  node index.js
+ 1857  node index
+ 1858  node index.js
+ 1859  npm install bluebird
+ 1860  node index.js 
+ 1861  ode index.js 
+ 1862  node index.js
+ 1863  node index.js > test.geojson
+ 1864  c..
+ 1865  cd ..
+ 1866  git clone https://github.com/availabs/PAMap.git
+ 1867  ll
+ 1868  cd PAMap/
+ 1869  ll
+ 1870  cd ..
+ 1871  ll
+ 1872  cd pireMap/
+ 1873  npm install
+ 1874  npm start
+ 1875  ll
+ 1876  cd src/components/
+ 1877  git submodule add https://github.com/availabs/AvlMap.git
+ 1878  history > log_pire_data_scraping_0120
+ 1879  cd ..
+ 1880  ll
+ 1881  cd pa-map/
+ 1882  ll
+ 1883  npm start
+ 1884  cd ..
+ 1885  git clone https://github.com/availabs/npmrds4.git
+ 1886  ll
+ 1887  cd npmrds4/
+ 1888  npm start
+ 1889  ll
+ 1890  cd src
+ 1891  ;;
+ 1892  ll
+ 1893  cd components/
+ 1894  cd ..
+ 1895  npx create-react-app pirecomponents
+ 1896  ll
+ 1897  cd pirecomponents/
+ 1898  ll
+ 1899  cd ..
+ 1900  rm -rf pirecomponents/
+ 1901  ll
+ 1902  cd pages/
+ 1903  ll
+ 1904  cd auth/
+ 1905  ll
+ 1906  cd ..
+ 1907  ll
+ 1908  cd PAMap/
+ 1909  ll
+ 1910  npm install d3 --save
+ 1911  d ..
+ 1912  cd ..
+ 1913  cd data/
+ 1914  ll
+ 1915  cd temperature/
+ 1916  less da_hydro_AprMar_r.1-2000_d.05-Jan-2018.nc 
+ 1917  less +F out
+ 1918  tail -f out
+ 1919  history >log
+ 1920  cat log
+ 1921  cd ..
+ 1922  ll
+ 1923  cd dataScraper/
+ 1924  ll
+ 1925  node treeringscraper.js 
+ 1926  wc -l out
+ 1927  watch wc -l out
+ 1928  cd ..
+ 1929  ll
+ 1930  cd tasks/
+ 1931  ll
+ 1932  cd ..
+ 1933  ll
+ 1934  cd dataScraper/
+ 1935  ll
+ 1936  node index.js
+ 1937  node index.js > data.geojson
+ 1938  node index.js
+ 1939  node index.js >test1.geojson
+ 1940  node index.js >test2.geojson
+ 1941  node index.js >test_sm.geojson
+ 1942  node index.js >test_sm_1.geojson
+ 1943  node index.js >data_final.geojson
+ 1944  node index.js >data_final_1.geojson
+ 1945  npm install d3
+ 1946  ll
+ 1947  chmod +x treeringscraper.js 
+ 1948  ll
+ 1949  chmod +x rawDataDownloader.sh 
+ 1950  chmod +x rawDataDownloader.js
+ 1951  ./rawDataDownloader.js
+ 1952  ll
+ 1953  ./rawDataDownloader.js
+ 1954  ll
+ 1955  tree raw_data/
+ 1956  ./rawDataDownloader.js
+ 1957  tree raw_data/
+ 1958  ./rawDataDownloader.js
+ 1959  tree raw_data_2/
+ 1960  ./rawDataDownloader.js
+ 1961  history > log_treering_data_scraping_020120
+ 1962  ll
+ 1963  git clone https://github.com/jwlee38/csda-gatsby-bootstrap.git
+ 1964  yarn
+ 1965  ntl dev
+ 1966  ll
+ 1967  rm -rf csda-gatsby-bootstrap/
+ 1968  ntl dev
+ 1969  globalprotect connect --portal uavpn.albany.edu
+ 1970  cd ..
+ 1971  ll
+ 1972  cd pireMap/
+ 1973  npm start
+ 1974  cd ..
+ 1975  gatsby new tutoria-part-four httpgatsby new tutorial-part-four https://github.com/gatsbyjs/gatsby-starter-hello-world
+ 1976  gatsby new tutorial-part-four https://github.com/gatsbyjs/gatsby-starter-hello-world
+ 1977  cd tutorial-part-four
+ 1978  npm install --save gatsby-plugin-typography typography react-typography typography-theme-kirkham gatsby-plugin-emotion @emotion/core
+ 1979  gatsby develop
+ 1980  gatsby build
+ 1981  gatsby serve
+ 1982  gatsby build
+ 1983  gatsby serve
+ 1984  gatsby build
+ 1985  npm start
+ 1986  gatsby develop
+ 1987  npm install
+ 1988  gatsby develop
+ 1989  cd //
+ 1990  ll
+ 1991  cd .git/
+ 1992  ll
+ 1993  cd ..
+ 1994  ll
+ 1995  rm -rf .git
+ 1996  git status
+ 1997  git init
+ 1998  git status
+ 1999  less .gitmodules 
+ 2000  q
+ 2001  git remote add origin https://github.com/availabs/pireMap.git
+ 2002  git add .
+ 2003  git commit m 'initial commit'
+ 2004  git commit -m 'initial commit'
+ 2005  git push
+ 2006  git push -u orgin master
+ 2007  git push -u origin master
+ 2008  jwlee38
+ 2009  git push -u origin master
+ 2010  history > log_022520

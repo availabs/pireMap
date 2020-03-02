@@ -17,7 +17,6 @@ Gray- 5d5c5c
 darker gray --2e2e2e ( land color) 
 More darker gray-- 242424 (ocean color) 
 Darker -131313
-
 Dark Blue- 293145 ( header color)*/}
 
 
@@ -61,8 +60,8 @@ class MapModal extends React.Component {
 							props: layer.modals[key].props || {},
 							layer,
 							startSize: layer.modals[key].startSize || [
-								1600,
-								1000
+								window.screen.availWidth * 0.95,
+								window.screen.availHeight * 0.95
 							],
 							startPos: layer.modals[key].position || "bottom"
 						};
@@ -74,6 +73,7 @@ class MapModal extends React.Component {
 
 		Boolean(modal.comp) && (this.MODAL_ID = modal.id);
 
+		console.log('modal start size', modal.startSize, window.screen)
 		return (
 			<DraggableModal
 				show={Boolean(modal.comp)}

@@ -184,9 +184,12 @@ class Circles extends Component {
 
 	render() {
 		return (
-			<div style={{ display: "flex", flexWrap: "wrap" }}>
-				<h4>{this.props.site}</h4>
-				{this.renderTrees()}
+			<div style={{display: 'flex'}}>
+				<div style={{ display: "flex", flexWrap: "wrap" }}>
+					<h4>{this.props.site}</h4>
+					{this.renderTrees()}
+				</div>
+				<div>INFO GOES HERE</div>
 			</div>
 		);
 	}

@@ -1,5 +1,7 @@
 import React, { Component } from "react";
 import Tree from "./Tree";
+import InfoBox from "./InfoBox";
+
 /*import Line from "./Line";*/
 
 
@@ -73,9 +75,10 @@ class Charts extends Component {
 		/*	const sample = "/data/ak132x-noaa.tsv";*/
 		siteDataLoader(this.props.site, data => {
 			this.setState({ data: this.processTreeData(data) });
-			/*console.log("data---", data);*/
+			console.log("data---", data);
 		});
 		console.log("chart did mount");
+		console.log("studyData-----", this.props.authors, this.props.species)
 	}
 
 	processTreeData(data) {
@@ -105,7 +108,9 @@ class Charts extends Component {
 					+values[i] !== 9999 &&
 					+values[i] !== 999 &&
 					+values[i] !== 8888 &&
-					+values[i] !== -999
+					+values[i] !== -999 &&
+					+values[i] !== -9999
+
 				) {
 					if (!years[rowYears[i]]) {
 						years[rowYears[i]] = [];
@@ -191,11 +196,43 @@ class Charts extends Component {
 		});
 	}
 
+
+	renderInfoBox() {
+		if (!this.state.data) {
+			return <div>Loading</div>;
+		}
+
+			return (
+			
+				<InfoBox
+		
+					authors={this.props.authors}
+						species={this.props.species}
+						xmlId={this.props.site}
+						studyNotes={this.props.studyNotes}
+				/>
+	
+			
+			);
+	
+	}
+
+
+
+
 	render() {
 		return (
-			<div style={{ display: "flex", flexWrap: "wrap", padding: 10}}>
-				
-				{this.renderTrees()}
+			<div style={{display: 'flex'}}>
+
+					<div style={{ display: "flex", flexWrap: "wrap",   padding: 5, justifyContent: 'center'}}> 
+						{this.renderTrees()}
+					</div>
+
+					<div style={{ display: "flex", flexWrap: "wrap",  flexBasis:"400px",  padding: 10}}>  {/*border: '1px solid white',*/} 
+						<div style={{width: 300}}>
+						{this.renderInfoBox()}
+						</div>
+				    </div>
 			</div>
 		);
 	}
