@@ -15,7 +15,7 @@ class Lines extends Component {
 
 		let meta = this.props.meta;
 		
-/*		console.log("meta---", meta);*/
+		console.log("meta---", meta);
 
 	    let TotalTreeWidths = meta.TotalTreeWidths;
 

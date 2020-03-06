@@ -17,6 +17,7 @@ import Charts from "../components/Charts";
 /*import Charts from "../components/svg";*/
 /*import Charts from "../components/test";*/
 
+import { iPromise } from "components/AvlStuff/iPromise"
 
 
 class PAEventsLayer extends MapLayer {
@@ -84,24 +85,31 @@ const PaLayer = (options = {}) =>
           
               },
       activeSite: "Not Defined Yet",
-      studyNotes: "Not Defined Yet",
+ 
       authors:"Not Defined Yet",
       species:"Not Defined Yet",
+      meta:"Not Defined Yet",
+      onClick: {
+        layers: ['events_layer'],
+        dataFunc: function(features) {
+          if (features && features.length) {
+            this.activeSite = features[0].properties.xmlId;
+            this.doAction(["toggleModal", "RingModal"]);          }
+        }
+      },  
      
       popover: {
         layers: ["events_layer"],
+        noSticky: true,
         dataFunc: function(topFeature, features) {
           //const { id } = topFeature.properties;
          // console.log("mouseover", topFeature.properties, topFeature.properties.authors,  topFeature.properties.species);
            //console.log('test----',[this.studyData[topFeature.properties.xmlId].authors] ) 
+               this.authors=  topFeature.properties.authors
+               this.species = topFeature.properties.species
 
-
-                   this.authors=  topFeature.properties.authors
-                      this.species = topFeature.properties.species
-                      //this.studyNotes = topFeature.properties.studyNotes
-
-                       console.log("mouseover", topFeature.properties, topFeature.properties.authors,  topFeature.properties.species );
-
+           console.log("mouseover", topFeature.properties, topFeature.properties.xmlId, topFeature.properties.authors,  topFeature.properties.species );
+/*
           if (this.studyData[topFeature.properties.xmlId]) {
             return [
                       [this.studyData[topFeature.properties.xmlId].studyName],
@@ -121,13 +129,13 @@ const PaLayer = (options = {}) =>
                       [topFeature.properties.authors],
                       [topFeature.properties.species],
                       [topFeature.properties.firstYear],
-                     // [this.studyData[topFeature.properties.xmlId].mostRecentYearCE]
+             
 
                    ];
            
 
 
-          } else {
+          } else {*/
             let studyUrl = `https://www.ncdc.noaa.gov/paleo-search/study/search.json?xmlId=${topFeature.properties.xmlId}`;  // to get json metadata
             const promise = fetch(studyUrl)
               .then(res => res.json())
@@ -135,35 +143,45 @@ const PaLayer = (options = {}) =>
                 console.log("setting study data", studyData);
 
                 this.studyData[topFeature.properties.xmlId] = studyData.study[0];
-                this.studyNotes = studyData.study[0].studyNotes;
+               
+                this.meta = {
+                  'studyName':studyData.study[0].studyName,
+                  'studyId':studyData.study[0].NOAAStudyId,
+                  'studyCode':studyData.study[0].studyCode,
+                  'doi':studyData.study[0].doi,
+                  'onlineResourceLink':studyData.study[0].onlineResourceLink,
+                  'studyNotes':studyData.study[0].studyNotes
+              
+                 }
+
+
+   /*             console.log('this.studyData---', this.studyData)*/
+                      console.log('this.meta---', this.meta)
               });
             return [
-              "Loading...",
-              [
-                promise.then(() => [this.studyData[topFeature.properties.xmlId].studyName]),
-                "xmlId",
-                <div
-                  onClick={() => {
-                    this.activeSite = topFeature.properties.xmlId;
-                    this.doAction(["toggleModal", "RingModal"]);
-                  }}
-                >
-                  {topFeature.properties.xmlId}
-                </div>
-              ],
-              promise.then(() => [this.studyData[topFeature.properties.xmlId].studyNotes])
-              [topFeature.properties.authors],
-              [topFeature.properties.species],
-              [topFeature.properties.firstYear]
-            ];
-          }
+                      
+                      [iPromise(promise.then(() => this.studyData[topFeature.properties.xmlId].studyName))],
+
+                      [ "XMLId",
+                        <div>
+                          {topFeature.properties.xmlId}
+                        </div>
+                      ],
+
+                      [iPromise(promise.then(() => this.studyData[topFeature.properties.xmlId].studyNotes))],
+                      [topFeature.properties.authors],
+                      [topFeature.properties.species],
+                      [topFeature.properties.firstYear]
+                  ];
+      /*    }*/
         }
       },
+
 
       modals: {
         RingModal: {
           title: "Tree Ring Widths",
-          comp: ({ layer }) => <Charts site={layer.activeSite} authors={layer.authors} species={layer.species} studyNotes={layer.studyNotes} />,
+          comp: ({ layer }) => <Charts site={layer.activeSite} authors={layer.authors} species={layer.species} meta={layer.meta} />,
           show: false
         }
       }

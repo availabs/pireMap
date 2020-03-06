@@ -21,7 +21,7 @@ const titleStyle = {
    /* boxShadow: "-4px 4px 8px #c77310, \n             4px -4px 8px #fd9314",*/
  /*   background:'#fd8d3c',*/
     /*  background: "#f89f34",*/
-      border: '0.5px solid #fd8d3c', 
+      border: '0.5px solid #fa851a',  //orange--fd8d3c  blue--2296f3
       borderBottomStyle: "solid",//fd8d3c
       borderTopStyle:'none',
       borderRightStyle:'none',
