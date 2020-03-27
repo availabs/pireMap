@@ -40,7 +40,7 @@ function siteDataLoader(xmlid, cb) {
 
 
 			let studyDataUrl = studyDataFileSelected.fileUrl;
-			console.log("studyDataURL---------", studyDataUrl);
+			console.log("studyDataURL---------", studyDataUrl, studyDataFile);
 
 			fetch(studyDataUrl)
 				.then(res => res.text())

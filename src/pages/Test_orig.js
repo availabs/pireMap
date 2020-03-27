@@ -3,24 +3,15 @@ import React, { Component } from "react";
 /*import StudySite from "pages/PAMap/components/StudySite.js";
 */
 import Charts from "pages/PAMap/components/Charts.js";
-import Globe from 'pages/PAMap/components/globe/globe.react'
-
-const tempData = require('pages/PAMap/components/globe/data.json')
 
 
 class Home extends Component {
   render() {
     return (
-
       <div style={{ width: "100vw", minHeight: "100vh", backgroundColor: '#2e2e2e' }}>
-          
-
-
-           <Globe
-            canvasData={tempData}
-          
-           height={'100vh'}
-          leftOffset={1}
+        <Charts
+          site="13320
+        "
         />
       </div>
     );

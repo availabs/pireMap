@@ -1,5 +1,5 @@
 import React, { Component } from "react";
-import * as d3 from "d3";
+import * as d3 from "d3v5";
 
 class Lines extends Component {
 	componentDidMount() {
@@ -43,7 +43,7 @@ class Lines extends Component {
 			// AvgData[year] =yearAvg[i]
 			lineData.push({ year: year, value: dataValue[i] });
 		});
-/*       console.log("lineData-----", lineData);*/
+       console.log("lineData-----", lineData);
 
 
 		//line chart start here ----
@@ -51,6 +51,8 @@ class Lines extends Component {
 		var margin = { top: 0, right: 40, bottom: 30, left: 40 },
 			width = 300,
 			height = 100;
+
+		var bisectDate = d3.bisector(function(d) { return d.lineData; }).left
 
 		let LineContainer = d3
 			.select(`.line-${this.props.name}`)
@@ -129,6 +131,59 @@ class Lines extends Component {
 								return y(d.value);
 							})
 					);
+
+     
+// adding tooltip
+
+		        var focus = svg.append("g")
+		            .style("display", "none");
+
+
+             // hover line 
+		       /*   focus.append("line")
+	                .attr("class", "x-hover-line")
+
+		            .attr("stroke", "#fff")
+			        .attr("stroke-width", 0.5)
+			        .attr("stroke-dasharray", 3,3)
+			        .attr("y1", 0)
+			        .attr("y2", height);*/
+
+		        focus.append("circle")
+		            .attr("fill", "#fff")
+		            .attr("stroke", "#fff")
+			        .attr("stroke-width", 0.5)
+		            .attr("r", 1.5);
+
+			    focus.append("text")
+			        .attr("stroke", "#fff")
+			        .attr("x", 15)
+			      	.attr("dy", ".31em");
+
+			    svg.append("rect")
+			        .attr("transform", "translate(" + margin.left + "," + margin.top + ")")
+		            .attr("fill", "none")
+			        .attr("pointer-events", "all")
+			        .attr("width", width)
+			        .attr("height", height)
+			        .on("mouseover", function() { focus.style("display", null); })
+			        .on("mouseout", function() { focus.style("display", "none"); })
+			        .on("mousemove", mousemove);
+
+			    function mousemove() {
+			      var x0 = x.invert(d3.mouse(this)[0]),
+			          i = bisectDate(lineData, x0, 1),
+			          d0 = lineData[i - 1],
+			          d1 = lineData[i],
+			          d = x0 - d0.year > d1.year - x0 ? d1 : d0;
+			      focus.attr("transform", "translate(" + x(d.year) + "," + y(d.value) + ")");
+			      focus.select("text").text(function() { return d.value; });
+			     // focus.select(".x-hover-line").attr("y2", height - y(d.value));
+
+			    }
+
+
+//coerce to number
 
 				function type(d) {
 					d.value = +d.value; // coerce to number
