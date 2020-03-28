@@ -52,7 +52,7 @@ class Lines extends Component {
 			width = 300,
 			height = 100;
 
-		var bisectDate = d3.bisector(function(d) { return d.lineData; }).left
+		var bisectDate = d3.bisector(function(d) { return d.year; }).left
 
 		let LineContainer = d3
 			.select(`.line-${this.props.name}`)
@@ -114,7 +114,7 @@ class Lines extends Component {
 					.range([height, 0]);
 				/*	svg.append("g").call(d3.axisLeft(y));*/
 
-				// Add the line
+	           // Add the line
 				svg.append("path")
 					.datum(lineData)
 					.attr("fill", "none")
@@ -140,14 +140,14 @@ class Lines extends Component {
 
 
              // hover line 
-		       /*   focus.append("line")
+		        focus.append("line")
 	                .attr("class", "x-hover-line")
-
 		            .attr("stroke", "#fff")
 			        .attr("stroke-width", 0.5)
 			        .attr("stroke-dasharray", 3,3)
 			        .attr("y1", 0)
-			        .attr("y2", height);*/
+			        .attr("y2", height);
+           
 
 		        focus.append("circle")
 		            .attr("fill", "#fff")
@@ -178,7 +178,7 @@ class Lines extends Component {
 			          d = x0 - d0.year > d1.year - x0 ? d1 : d0;
 			      focus.attr("transform", "translate(" + x(d.year) + "," + y(d.value) + ")");
 			      focus.select("text").text(function() { return d.value; });
-			     // focus.select(".x-hover-line").attr("y2", height - y(d.value));
+			      focus.select(".x-hover-line").attr("y2", height - y(d.value));
 
 			    }
 
