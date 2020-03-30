@@ -161,7 +161,7 @@ class Lines extends Component {
 			      	.attr("dy", ".31em");
 
 			    svg.append("rect")
-			        .attr("transform", "translate(" + margin.left + "," + margin.top + ")")
+			        .attr("transform", "translate(" + 0 + "," + margin.top + ")")
 		            .attr("fill", "none")
 			        .attr("pointer-events", "all")
 			        .attr("width", width)
@@ -176,6 +176,9 @@ class Lines extends Component {
 			          d0 = lineData[i - 1],
 			          d1 = lineData[i],
 			          d = x0 - d0.year > d1.year - x0 ? d1 : d0;
+
+			          //console.log('mousemove-------', x0,i,d)
+
 			      focus.attr("transform", "translate(" + x(d.year) + "," + y(d.value) + ")");
 			      focus.select("text").text(function() { return d.value; });
 			      focus.select(".x-hover-line").attr("y2", height - y(d.value));
