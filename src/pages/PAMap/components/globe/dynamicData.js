@@ -10,6 +10,7 @@ let data = {
       "data": []
 }
 let sizeOfArray = 13824
+/*for(let i = sizeOfArray-1; i >= 0; i--)*/
 for(let i = 0; i < sizeOfArray; i++) {
 	data.data.push(i)
 }

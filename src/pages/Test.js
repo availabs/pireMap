@@ -6,7 +6,7 @@ import Charts from "pages/PAMap/components/Charts.js";
 import Globe from 'pages/PAMap/components/globe/globe.react'
 import dynamicData from 'pages/PAMap/components/globe/dynamicData'
 
-//const tempData = require('pages/PAMap/components/globe/data.json')
+const tempData = require('pages/PAMap/components/globe/data.json')
 
 
 class Home extends Component {
