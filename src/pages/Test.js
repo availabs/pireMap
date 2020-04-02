@@ -5,6 +5,7 @@ import React, { Component, useState, useEffect } from "react";
 */
 import Charts from "pages/PAMap/components/Charts.js";
 import Globe from 'pages/PAMap/components/globe/globe.react'
+import dynamicData from 'pages/PAMap/components/globe/dynamicData'
 
 //const tempData = require('pages/PAMap/components/globe/data.json')
 const tempData = require('pages/PAMap/components/globe/dynamic_data.js')
@@ -55,10 +56,10 @@ class Home extends React.Component {
       })
       .catch(err => console.log('error', err));
        
+
   }
 
 
-    
   render() {
     console.log('tempdata', this.state.tempData)
 

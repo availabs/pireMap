@@ -6,6 +6,8 @@ import Globe from 'pages/PAMap/components/globe/globe.react'
 //import DataReadout from './DataReadout'
 import { connect } from 'react-redux'
 import './HomeView.scss'
+
+
 const tempData = require('./data.json')
 
 
