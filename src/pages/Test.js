@@ -6,11 +6,13 @@ import React, { Component, useState, useEffect } from "react";
 import Charts from "pages/PAMap/components/Charts.js";
 import Globe from 'pages/PAMap/components/globe/globe.react'
 import dynamicData from 'pages/PAMap/components/globe/dynamicData'
+//const tempDataYear = require('pages/PAMap/components/globe/temp_2.json')
 
-//const tempData = require('pages/PAMap/components/globe/data.json')
+//const AllTempData = require('pages/PAMap/components/globe/YearsAll_1')
 const tempData = require('pages/PAMap/components/globe/dynamic_data.js')
 
-console.log('array length', tempData.data.length)
+  console.log('array length', tempData.data.length)
+
 
 function sortFlat(ob1,ob2) {
   if (ob1.properties.lat < ob2.properties.lat) {
@@ -28,6 +30,7 @@ function sortFlat(ob1,ob2) {
   }
 }
 
+
 class Home extends React.Component {
 
   constructor (props) {
@@ -44,14 +47,21 @@ class Home extends React.Component {
   getData () {
       
     fetch("/data/tempData.json")
+  //  fetch("/data/year_2_test.json")
+
+    //fetch("/data/YearsAll.json")
       .then((response) => {
         return response.json();
       })
       .then((res) => {
         this.setState({
+
+        //  tempData:res[100] // YearsAll.json test 
+
           tempData:res.features
             .sort(sortFlat)
             .map(d => d.properties.tas_mn)
+
         })
       })
       .catch(err => console.log('error', err));
@@ -78,6 +88,7 @@ class Home extends React.Component {
                         "ny": 96
                  },
                  data: this.state.tempData
+                 
               }}
             
               height={'100vh'}
@@ -105,3 +116,4 @@ export default {
   auth: false,
   component: Home
 };
+

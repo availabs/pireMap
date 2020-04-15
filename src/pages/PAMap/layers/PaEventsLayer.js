@@ -22,15 +22,22 @@ import { iPromise } from "components/AvlStuff/iPromise"
 
 class PAEventsLayer extends MapLayer {
 
+
+ /* constructor (props) {
+    super(props)
+    this.state = {
+      species: 
+    }
+  }
+*/
+
   onAdd(map) {
    
     let firstYear =[];
     let xmlIds =[];
 
-
     map.addSource("events_source", EventSource.source);
    // console.log('events_source-----------', EventSource.source.data.features/*.forEach(d =>  d.properties['xmlId'])*/)
-
 
     map.addLayer({
       id: "events_layer",
@@ -55,11 +62,14 @@ class PAEventsLayer extends MapLayer {
           1800,
           "#990000"
         ]
-      }
+      },
+
+    // filter: ['==', ['get', 'species'], 'white oak'] 
 
     });
   }
 }
+
 
 
 
@@ -89,6 +99,7 @@ const PaLayer = (options = {}) =>
       authors:"Not Defined Yet",
       species:"Not Defined Yet",
       meta:"Not Defined Yet",
+
       onClick: {
         layers: ['events_layer'],
         dataFunc: function(features) {
@@ -109,33 +120,7 @@ const PaLayer = (options = {}) =>
                this.species = topFeature.properties.species
 
            console.log("mouseover", topFeature.properties, topFeature.properties.xmlId, topFeature.properties.authors,  topFeature.properties.species );
-/*
-          if (this.studyData[topFeature.properties.xmlId]) {
-            return [
-                      [this.studyData[topFeature.properties.xmlId].studyName],
-                      [
-                        "xmlId",
-                        <div
-                          onClick={() => {
-                            this.activeSite = topFeature.properties.xmlId;
-                            this.doAction(["toggleModal", "RingModal"]);
-                          }}
-                        >
-                          {topFeature.properties.xmlId}
-                        </div>
-                      ],
 
-                      [this.studyData[topFeature.properties.xmlId].studyNotes],
-                      [topFeature.properties.authors],
-                      [topFeature.properties.species],
-                      [topFeature.properties.firstYear],
-             
-
-                   ];
-           
-
-
-          } else {*/
             let studyUrl = `https://www.ncdc.noaa.gov/paleo-search/study/search.json?xmlId=${topFeature.properties.xmlId}`;  // to get json metadata
             const promise = fetch(studyUrl)
               .then(res => res.json())
@@ -184,7 +169,45 @@ const PaLayer = (options = {}) =>
           comp: ({ layer }) => <Charts site={layer.activeSite} authors={layer.authors} species={layer.species} meta={layer.meta} />,
           show: false
         }
-      }
+      },
+
+      
+      infoBoxes:{
+
+          Overview: {
+            title: "",
+            comp: (test) =>{
+              console.log("test---", test)
+          
+              return (
+              <div>
+                <table className='table table-sm table-hover'>
+                  <thead><tr><th>Filter by species </th><th></th></tr></thead>
+                  <tbody>
+
+
+                      <tr>
+                        <td>Species Name </td>
+                        <td onClick={() => {
+
+                         console.log("test onClick")
+
+                          }}>
+                          {test.layer.species}
+
+                       </td>
+                
+                      </tr>
+               
+
+                </tbody>
+                
+                </table>
+              </div>
+            )},
+            show: true
+          }
+    }
 
 
   });
