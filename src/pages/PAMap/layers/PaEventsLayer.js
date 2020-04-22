@@ -19,6 +19,9 @@ import Charts from "../components/Charts";
 
 import { iPromise } from "components/AvlStuff/iPromise"
 
+import Dropdown from "../components/dropdown/Dropdown";
+
+
 
 class PAEventsLayer extends MapLayer {
 
@@ -31,13 +34,16 @@ class PAEventsLayer extends MapLayer {
   }
 */
 
+
+
+
   onAdd(map) {
    
     let firstYear =[];
     let xmlIds =[];
 
     map.addSource("events_source", EventSource.source);
-   // console.log('events_source-----------', EventSource.source.data.features/*.forEach(d =>  d.properties['xmlId'])*/)
+    console.log('events_source-----------', EventSource.source.data.features)
 
     map.addLayer({
       id: "events_layer",
@@ -69,7 +75,6 @@ class PAEventsLayer extends MapLayer {
     });
   }
 }
-
 
 
 
@@ -177,32 +182,11 @@ const PaLayer = (options = {}) =>
           Overview: {
             title: "",
             comp: (test) =>{
-              console.log("test---", test)
+            //  console.log("Dropdown---", Dropdown)
           
               return (
               <div>
-                <table className='table table-sm table-hover'>
-                  <thead><tr><th>Filter by species </th><th></th></tr></thead>
-                  <tbody>
-
-
-                      <tr>
-                        <td>Species Name </td>
-                        <td onClick={() => {
-
-                         console.log("test onClick")
-
-                          }}>
-                          {test.layer.species}
-
-                       </td>
-                
-                      </tr>
-               
-
-                </tbody>
-                
-                </table>
+                 <Dropdown/>
               </div>
             )},
             show: true
