@@ -32,7 +32,7 @@ fs.readFile(sample, "utf8", function(error, rawData) {
           }
         })
         .sort(sortFlat)
-        .map(d => d.d)
+        .map(d => +(d.d.toFixed(2)))
 
         try {
           fs.writeFileSync(`./climate/${year}.json`, JSON.stringify(thisYear))
