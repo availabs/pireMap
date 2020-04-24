@@ -14,7 +14,7 @@ class Dropdown extends React.Component {
     };
 
     this.handleChange = this.handleChange.bind(this);
-    this.handleSubmit = this.handleSubmit.bind(this);
+   // this.handleSubmit = this.handleSubmit.bind(this);
   }
 
   //const species = this.state.value;
@@ -24,12 +24,7 @@ class Dropdown extends React.Component {
     this.props.layer.updateData('species', event.target.value)
   }
 
-  handleSubmit(event) {
-    //  alert('Filter by Species: ' + this.state.value);
-    this.props.change(this.state.value);
 
-    event.preventDefault();
-  }
 
   componentDidMount() {
     const speciesJson = require("./speciesArray.json");
@@ -40,9 +35,7 @@ class Dropdown extends React.Component {
 
     
     return (
-
-      
-      <form onSubmit={this.handleSubmit.bind(this)}>
+    
         <label>
           Filter by Species:
           <select value={this.state.value} onChange={this.handleChange}>
@@ -52,8 +45,7 @@ class Dropdown extends React.Component {
             ))}
           </select>
         </label>
-        <input type="submit" value="Submit" />
-      </form>
+
     );
   }
 }
