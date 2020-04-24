@@ -12,28 +12,14 @@ const tempData = require('pages/PAMap/components/globe/dynamic_data.js')
 
 console.log('array length', tempData.data.length)
 
-function sortFlat(ob1,ob2) {
-  if (ob1.properties.lat < ob2.properties.lat) {
-    return 1;
-  } else if (ob1.properties.lat > ob2.properties.lat) {
-    return -1;
-  }
-// Else go to the 2nd item
-  if (ob1.properties.lon < ob2.properties.lon) {
-    return -1;
-  } else if (ob1.properties.lon > ob2.properties.lon) {
-    return 1
-  } else { // nothing to split them
-    return 0;
-  }
-}
 
 class Home extends React.Component {
 
   constructor (props) {
     super(props)
     this.state = {
-      tempData: []
+      tempData: [],
+      allData: {}
     }
     this.getData = this.getData.bind(this)
 
@@ -44,19 +30,16 @@ class Home extends React.Component {
   getData () {
       
     console.time('loadAllYears')
-    fetch("/data/allYears.json")
+    fetch("/data/climate/1.json")
       .then((response) => {
         return response.json();
       })
       .then((res) => {
-        console.timeEnd('loadAllYears')
         this.setState({
-          tempData: res[0],
-          allData: res
+          tempData: res,
         })
       })
       .catch(err => console.log('error', err));
-       
 
   }
 
@@ -106,3 +89,4 @@ export default {
   auth: false,
   component: Home
 };
+
