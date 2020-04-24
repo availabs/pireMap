@@ -37,11 +37,10 @@ class PAMap extends Component {
 
 export default {
   path: "/",
-  name: "Event Map",
-  icon: "os-icon os-icon-map",
+  name: "Tree Ring Viewer",
   exact: true,
   auth: false,
-  mainNav: false,
+  mainNav: true,
   menuSettings: {
     image: "none",
     display: "none",

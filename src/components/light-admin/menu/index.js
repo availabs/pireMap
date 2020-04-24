@@ -106,37 +106,7 @@ class Menu extends Component {
                             <div className="logo-label"><Logo/></div>
                         </a>
                     </div>
-                    {!(this.props.user && !!this.props.user.authed) ?
-                        <div className="menu-actions">
-                            <a href="/login">
-                                <div className="top-icon top-settings os-dropdown-trigger os-dropdown-position-right">
-                                    <span className="loginMenu">LOGIN </span>
-                                    <i className="pre-icon os-icon os-icon-user-male-circle"></i>
-                                </div>
-                            </a>
-                        </div> :
-                        <div className='logged-user-w avatar-inline'>
-                            <div className='logged-user-i'>
-                                <AvatarUser user={this.props.user}/>
-
-                                <div className='logged-user-menu'>
-                                    <ul>
-                                        <li>
-                                            <Link to="/logout">
-                                                <i className="os-icon os-icon-signs-11"></i>
-                                                <span>Logout</span>
-                                            </Link>
-                                        </li>
-                                    </ul>
-                                    <div className='logged-user-avatar-info'>
-                                        <AvatarUser user={this.props.user}/>
-                                    </div>
-
-                                </div>
-                            </div>
-
-                        </div>
-                    }
+                    
 
                     <ul className="main-menu">
                         <h1 className="menu-page-header">{this.props.title}</h1>

@@ -43,15 +43,16 @@ class Home extends React.Component {
     
   getData () {
       
-    fetch("/data/tempData.json")
+    console.time('loadAllYears')
+    fetch("/data/allYears.json")
       .then((response) => {
         return response.json();
       })
       .then((res) => {
+        console.timeEnd('loadAllYears')
         this.setState({
-          tempData:res.features
-            .sort(sortFlat)
-            .map(d => d.properties.tas_mn)
+          tempData: res[0],
+          allData: res
         })
       })
       .catch(err => console.log('error', err));
@@ -61,7 +62,7 @@ class Home extends React.Component {
 
 
   render() {
-    console.log('tempdata', this.state.tempData)
+    console.log('tempdata', this.state.tempData, this.state.tempData.length)
 
       
     return (
@@ -70,12 +71,12 @@ class Home extends React.Component {
           <Globe
               canvasData={{
                 "header": {
-                        "lo1": 0,
-                        "la1": 90,
-                        "dx": 2.5,
-                        "dy": 1.9,
-                        "nx": 144,
-                        "ny": 96
+                  "lo1": 0,
+                  "la1": 90,
+                  "dx": 2.5,
+                  "dy": 1.9,
+                  "nx": 144,
+                  "ny": 96
                  },
                  data: this.state.tempData
               }}
@@ -92,13 +93,13 @@ class Home extends React.Component {
 export default {
   path: "/test",
   exact: true,
-  mainNav: true,
+  mainNav: false,
   menuSettings: {
     image: "none",
     display: "none",
     scheme: "color-scheme-dark",
-    position: "menu-position-left",
-    layout: "menu-layout-mini",
+    position: "menu-position-top",
+    layout: "menu-layout-compact",
     style: "color-style-default"
   },
   name: "Test",

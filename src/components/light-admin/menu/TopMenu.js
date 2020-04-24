@@ -67,7 +67,7 @@ class TopNav extends Component {
                 <Logo />
                 <TopSearch />
                 <AvatarUser />
-                <LoginMenu />
+                
             </span>
         );
     }

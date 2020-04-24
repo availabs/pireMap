@@ -27,3 +27,5 @@ user.json
 
 #data tasks
 /tasks/atlas/build
+
+tasks/*.json

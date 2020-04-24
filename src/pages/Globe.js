@@ -1,69 +1,106 @@
 
-import React from 'react'
+import React, { Component, useState, useEffect } from "react";
+/*import Chart from "pages/PAMap/components/svg.js";*/
+/*import StudySite from "pages/PAMap/components/StudySite.js";
+*/
+import Charts from "pages/PAMap/components/Charts.js";
 import Globe from 'pages/PAMap/components/globe/globe.react'
+import dynamicData from 'pages/PAMap/components/globe/dynamicData'
 
+//const tempData = require('pages/PAMap/components/globe/data.json')
+const tempData = require('pages/PAMap/components/globe/dynamic_data.js')
 
-//import DataReadout from './DataReadout'
-import { connect } from 'react-redux'
-import './HomeView.scss'
+console.log('array length', tempData.data.length)
 
+function sortFlat(ob1,ob2) {
+  if (ob1.properties.lat < ob2.properties.lat) {
+    return 1;
+  } else if (ob1.properties.lat > ob2.properties.lat) {
+    return -1;
+  }
+// Else go to the 2nd item
+  if (ob1.properties.lon < ob2.properties.lon) {
+    return -1;
+  } else if (ob1.properties.lon > ob2.properties.lon) {
+    return 1
+  } else { // nothing to split them
+    return 0;
+  }
+}
 
-const tempData = require('./data.json')
-
-
-class MapPage extends React.Component {
+class Home extends React.Component {
 
   constructor (props) {
     super(props)
     this.state = {
-      elemWidth: 800,
-      screenHeight: 600
+      tempData: [],
+      allData: {}
     }
+    this.getData = this.getData.bind(this)
+
+    this.getData()
   }
 
-  componentWillMount () {
-    this.setState({ screenHeight: window.innerHeight })
+    
+  getData () {
+      
+    console.time('loadAllYears')
+    fetch("/data/climate/1.json")
+      .then((response) => {
+        return response.json();
+      })
+      .then((res) => {
+        this.setState({
+          tempData: res,
+        })
+      })
+      .catch(err => console.log('error', err));
+
   }
 
-  componentDidMount () {
-    let newDate = this.state.date
-    this.props.initialLoad()
-  }
 
-  render () {
-    const { date, format, mode, inputFormat } = this.state
-    console.log('temp data??', tempData.data.length)
+  render() {
+    console.log('tempdata', this.state.tempData, this.state.tempData.length)
 
+      
     return (
 
-      <div className='map-content'>
-      
-  
-    /*    <DataReadout />*/
-        <Globe
-          canvasData={tempData}
-          projection={this.props.projection}
-          bounds={false}
-          colors={this.props.currentScale}
-          height={this.state.screenHeight}
-          leftOffset={20}
-        />
-      </div>
-
-    )
-  }
-
+        <div style={{ width: "100vw", minHeight: "100vh", backgroundColor: '#2e2e2e' }}>
+          <Globe
+              canvasData={{
+                "header": {
+                  "lo1": 0,
+                  "la1": 90,
+                  "dx": 2.5,
+                  "dy": 1.9,
+                  "nx": 144,
+                  "ny": 96
+                 },
+                 data: this.state.tempData
+              }}
+            
+              height={'100vh'}
+              leftOffset={1}
+          />
+        </div>
+      );
+    }
+    
 }
 
-const mapStateToProps = (state) => {
-  return {
-    loading: state.gridData.loading,
-    canvasData: state.gridData.canvasData,
-    projection: state.gridData.projection,
-    bounds: state.gridData.bounds,
-    colors: state.gridData.colors,
-    scales: state.gridData.scales,
-    currentScale: state.gridData.currentScale
-  }
-}
-export default connect(mapStateToProps, { initialLoad })(MapPage)
+export default {
+  path: "/globe",
+  exact: true,
+  mainNav: true,
+  menuSettings: {
+    image: "none",
+    display: "none",
+    scheme: "color-scheme-dark",
+    position: "menu-position-top",
+    layout: "menu-layout-compact",
+    style: "color-style-default"
+  },
+  name: "Global Climate",
+  auth: false,
+  component: Home
+};
