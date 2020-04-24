@@ -60,6 +60,7 @@ class PAEventsLayer extends MapLayer {
     });
   }
   render(map) {
+    
     if(this.species === 'All species'){
       map.setFilter('events_layer',['has', 'species']);
     } else { 
@@ -97,7 +98,7 @@ const PaLayer = (options = {}) =>
       activeSite: "Not Defined Yet",
  
       authors:"Not Defined Yet",
-      species:"Not Defined Yet",
+      species:"All species",
       meta:"Not Defined Yet",
 
       onClick: {
