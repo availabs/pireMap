@@ -25,26 +25,13 @@ import Dropdown from "../components/dropdown/Dropdown";
 
 class PAEventsLayer extends MapLayer {
 
-
- /* constructor (props) {
-    super(props)
-    this.state = {
-      species: 
-    }
-  }
-*/
-
-
-
-
   onAdd(map) {
    
     let firstYear =[];
     let xmlIds =[];
 
     map.addSource("events_source", EventSource.source);
-    console.log('events_source-----------', EventSource.source.data.features)
-
+    
     map.addLayer({
       id: "events_layer",
       type: "circle",
@@ -70,13 +57,17 @@ class PAEventsLayer extends MapLayer {
         ]
       },
 
-    // filter: ['==', ['get', 'species'], 'white oak'] 
-
     });
   }
+  render(map) {
+    if(this.species === 'All species'){
+      map.setFilter('events_layer',['has', 'species']);
+    } else { 
+      map.setFilter('events_layer',['==', ['get', 'species'], this.species]);
+    }
+  }
+
 }
-
-
 
 
 const PaLayer = (options = {}) =>
@@ -98,7 +89,11 @@ const PaLayer = (options = {}) =>
             active: true,
             domain: [500, 1000, 1200, 1400, 1600, 1800, 2000]
           
-              },
+      },
+      updateData: function (k,v) { 
+        this[k] = v
+        this.render(this.map)
+      },
       activeSite: "Not Defined Yet",
  
       authors:"Not Defined Yet",
@@ -124,13 +119,13 @@ const PaLayer = (options = {}) =>
                this.authors=  topFeature.properties.authors
                this.species = topFeature.properties.species
 
-           console.log("mouseover", topFeature.properties, topFeature.properties.xmlId, topFeature.properties.authors,  topFeature.properties.species );
+           //console.log("mouseover", topFeature.properties, topFeature.properties.xmlId, topFeature.properties.authors,  topFeature.properties.species );
 
             let studyUrl = `https://www.ncdc.noaa.gov/paleo-search/study/search.json?xmlId=${topFeature.properties.xmlId}`;  // to get json metadata
             const promise = fetch(studyUrl)
               .then(res => res.json())
               .then(studyData => {
-                console.log("setting study data", studyData);
+                //console.log("setting study data", studyData);
 
                 this.studyData[topFeature.properties.xmlId] = studyData.study[0];
                
@@ -146,7 +141,7 @@ const PaLayer = (options = {}) =>
 
 
    /*             console.log('this.studyData---', this.studyData)*/
-                      console.log('this.meta---', this.meta)
+                  //console.log('this.meta---', this.meta)
               });
             return [
                       
@@ -181,12 +176,10 @@ const PaLayer = (options = {}) =>
 
           Overview: {
             title: "",
-            comp: (test) =>{
-            //  console.log("Dropdown---", Dropdown)
-          
+            comp: ({layer}) =>{
               return (
               <div>
-                 <Dropdown/>
+                 <Dropdown layer={layer}/>
               </div>
             )},
             show: true

@@ -73,7 +73,7 @@ class MapModal extends React.Component {
 
 		Boolean(modal.comp) && (this.MODAL_ID = modal.id);
 
-		console.log('modal start size', modal.startSize, window.screen)
+		//console.log('modal start size', modal.startSize, window.screen)
 		return (
 			<DraggableModal
 				show={Boolean(modal.comp)}

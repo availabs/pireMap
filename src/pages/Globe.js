@@ -12,21 +12,6 @@ const tempData = require('pages/PAMap/components/globe/dynamic_data.js')
 
 console.log('array length', tempData.data.length)
 
-function sortFlat(ob1,ob2) {
-  if (ob1.properties.lat < ob2.properties.lat) {
-    return 1;
-  } else if (ob1.properties.lat > ob2.properties.lat) {
-    return -1;
-  }
-// Else go to the 2nd item
-  if (ob1.properties.lon < ob2.properties.lon) {
-    return -1;
-  } else if (ob1.properties.lon > ob2.properties.lon) {
-    return 1
-  } else { // nothing to split them
-    return 0;
-  }
-}
 
 class Home extends React.Component {
 

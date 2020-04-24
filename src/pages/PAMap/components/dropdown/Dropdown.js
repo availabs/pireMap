@@ -21,6 +21,7 @@ class Dropdown extends React.Component {
 
   handleChange(event) {
     this.setState({value: event.target.value});
+    this.props.layer.updateData('species', event.target.value)
   }
 
   handleSubmit(event) {
@@ -37,7 +38,7 @@ class Dropdown extends React.Component {
 
   render() {
 
-  
+    
     return (
 
       
@@ -49,7 +50,6 @@ class Dropdown extends React.Component {
             {this.state.values.map(item => (
               <option  value={item}> {item} </option>
             ))}
-           {console.log("this.state.value---", this.state.value)}
           </select>
         </label>
         <input type="submit" value="Submit" />
