@@ -52,7 +52,7 @@ class Home extends React.Component {
         this.getData(c)
           .then(d => {
             allData[c] = d;
-            
+
             const mean = d3array.mean(d);
             data.push({ x: c, y: mean });
             min = Math.min(min, mean);
@@ -116,8 +116,8 @@ class Home extends React.Component {
           } }>
             <div style={ {
               position: "relative",
-              width: "100%",
-              height: "100%"
+              height: "100%",
+              width: "100%"
             } }>
               <NivoLine
                 animate={ false }
