@@ -219,7 +219,10 @@ globe.zoom = d3.behavior.zoom()
       var mark = d3.select(".location-mark");
       // Show coordinates and overlay grid value
       var scalar = scalarize(overlay.bilinear(coords));
-      globe.onGlobeClick(formatCoordinates(coords[0], coords[1]), (+formatScalar(scalar, overlay)).toLocaleString())
+
+console.log("?????", globe.onGlobeClick)
+      globe.onGlobeClick && globe.onGlobeClick(formatCoordinates(coords[0], coords[1]), (+formatScalar(scalar, overlay)).toLocaleString())
+
       // Draw location mark
       if (!mark.node()) {
         mark = d3.select("#foreground").append("path").attr("class", "location-mark");
