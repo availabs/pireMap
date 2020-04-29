@@ -10,6 +10,7 @@ import dynamicData from 'pages/PAMap/components/globe/dynamicData'
 import { ResponsiveLine as NivoLine } from "@nivo/line"
 
 import * as d3array from "d3-array"
+import { format as d3format } from "d3-format"
 
 //const tempData = require('pages/PAMap/components/globe/data.json')
 const tempData = require('pages/PAMap/components/globe/dynamic_data.js')
@@ -51,10 +52,12 @@ class Home extends React.Component {
         this.getData(c)
           .then(d => {
             allData[c] = d;
+            
             const mean = d3array.mean(d);
             data.push({ x: c, y: mean });
             min = Math.min(min, mean);
             max = Math.max(max, mean);
+
             if (!(i % 50)) {
               this.setState({ allData, data, min, max });
             }
@@ -76,7 +79,9 @@ class Home extends React.Component {
   render() {
     const { year, allData, data, min, max } = this.state,
       tickValues = [250, 500, 750, 1000, 1250, 1500, 1750]
-        .filter(y => data.length >= y);
+        .filter(y => data.length >= y),
+      _format = d3format(",d"),
+      format = v => `${ _format(v) } AD`;
 
     return (
         <div style={ {
@@ -101,13 +106,13 @@ class Home extends React.Component {
             leftOffset={ 1 }/>
 
           <div style={ {
+            backgroundColor: "rgba(255, 255, 255, 0.75)",
+            width: "calc(100% - 25px)",
+            borderRadius: "4px",
             position: "fixed",
+            height: "150px",
             bottom: "10px",
             left: "10px",
-            width: "calc(100% - 40px)",
-            height: "150px",
-            backgroundColor: "rgba(255, 255, 255, 0.75)",
-            borderRadius: "4px"
           } }>
             <div style={ {
               position: "relative",
@@ -118,13 +123,13 @@ class Home extends React.Component {
                 animate={ false }
                 colors="#000"
                 margin={ {
-                  left: 50,
                   bottom: 30,
-                  top: 20,
-                  right: 20
+                  right: 20,
+                  left: 50,
+                  top: 20
                 } }
                 enableDots={ false }
-                lineWidth={ 2 }
+                lineWidth={ 1 }
                 enableGridX={ false }
                 tooltipFormat=".2f"
                 axisLeft={ {
@@ -132,7 +137,7 @@ class Home extends React.Component {
                 } }
                 axisBottom={ {
                   tickValues,
-                  format: ",d"
+                  format
                 } }
                 yScale={ {
                   type: "linear",
