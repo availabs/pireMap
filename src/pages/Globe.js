@@ -16,6 +16,10 @@ const tempData = require('pages/PAMap/components/globe/dynamic_data.js')
 
 console.log('array length', tempData.data.length)
 
+let startData = []
+for(let i=0; i < 1787; i++) {
+  startData[i] = ({x:i, y: null})
+}
 
 class Home extends React.Component {
 
@@ -25,7 +29,7 @@ class Home extends React.Component {
     year: 1,
     allData: {},
 
-    data: [],
+    data: startData,
     min: Infinity,
     max: -Infinity
   }
@@ -41,7 +45,7 @@ class Home extends React.Component {
       years = d3array.range(1, MAX_YEAR + 1);
 
     const allData = {},
-      data = [];
+      data = startData;
 
     let min = Infinity,
       max = -Infinity;
@@ -98,7 +102,8 @@ class Home extends React.Component {
                data: allData[year] || []
             } }
             height={ '100%' }
-            leftOffset={ 1 }/>
+            leftOffset={ 1 }
+          />
 
           <div style={ {
             position: "fixed",
