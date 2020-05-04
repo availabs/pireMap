@@ -204,12 +204,11 @@ class Home extends React.Component {
                 options={ [
                   { name: "Global Temperatures", value: "global-temps" },
                   { name: "Global Anomalies", value: "global-anomalies" }
-                ] }>
-              </Dropdown>
+                ] }/>
               { get(this.state, ["displayMode"]) === "global-temps" ? null :
                 <>
                   <div style={ { marginTop: "5px" } }>
-                    Base Anaomly Range
+                    Base Anamoly Range
                   </div>
                   <InputContainer>
                     <Input
