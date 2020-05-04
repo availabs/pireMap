@@ -29,12 +29,12 @@ class GlobeDemo extends React.Component {
     if (props.leftOffset) {
       globe.leftOffset = props.leftOffset;
     }
-    globe.init('#' + props.container, { projection: props.projection }) // onGlobeClick: this.props.globeClick
+    globe.init('#' + props.container, { projection: props.projection, onGlobeClick: props.onGlobeClick }) // onGlobeClick: this.props.globeClick
     if (this.props.scale) {
       globe.setScale(this.props.scale);
     }
     if (props.canvasData) {
-console.log("INIT GLOBE:", this.props.bounds, this.props.colors);
+// console.log("INIT GLOBE:", this.props.bounds, this.props.colors);
        globe.drawCanvas(props.canvasData, { bounds: this.props.bounds, colors: this.props.colors });
     }
   }

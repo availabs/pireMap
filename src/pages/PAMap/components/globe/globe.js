@@ -220,8 +220,8 @@ globe.zoom = d3.behavior.zoom()
       // Show coordinates and overlay grid value
       var scalar = scalarize(overlay.bilinear(coords));
 
-console.log("?????", globe.onGlobeClick)
-      globe.onGlobeClick && globe.onGlobeClick(formatCoordinates(coords[0], coords[1]), (+formatScalar(scalar, overlay)).toLocaleString())
+console.log("globe.onGlobeClick", globe.onGlobeClick, overlay, scalar, overlay.bilinear(coords))
+      globe.onGlobeClick && globe.onGlobeClick(formatCoordinates(coords[0], coords[1]), scalar);//(+formatScalar(scalar, overlay)).toLocaleString())
 
       // Draw location mark
       if (!mark.node()) {
