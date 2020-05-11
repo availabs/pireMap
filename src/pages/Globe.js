@@ -14,13 +14,14 @@ import get from "lodash.get"
 import styled from "styled-components"
 import * as d3array from "d3-array"
 import { format as d3format } from "d3-format"
+import d3 from "d3v3"
 
 //const tempData = require('pages/PAMap/components/globe/data.json')
 // const tempData = require('pages/PAMap/components/globe/dynamic_data.js')
 //
 // console.log('array length', tempData.data.length)
 
-const MAX_YEAR = 1785,
+const MAX_YEAR = 500,//1785,
   START_DATA = []
 for (let i = 0; i < MAX_YEAR; ++i) {
   START_DATA.push({ x: i + 1, y: null });
@@ -141,13 +142,36 @@ class Home extends React.Component {
     })
   }
 
+  onPointRemove() {
+    this.setState({ mapClick: null })
+  }
+  setDisplayMode(dm) {
+    this.setState({ displayMode: dm, mapClick: null })
+    d3.select("#foreground .location-mark").remove();
+  }
+
   render() {
-    const { year, allData, data, min, max, anomalyRange, arUpdate } = this.state,
+    const {
+        year, allData, data, min,
+        max, anomalyRange, arUpdate,
+        mapClick, loading, displayMode
+      } = this.state,
       tickValues = [250, 500, 750, 1000, 1250, 1500, 1750]
         .filter(y => data.length >= y),
       _format = d3format(",d"),
       format = v => `${ _format(v) } AD`,
       float = d3format(".2f");
+    let tMin = min, tMax = max;
+    const indexData = Object.values(allData).reduce((a, c, i) => {
+        if (mapClick) {
+          const y = c[mapClick.index];
+          tMin = Math.min(tMin, y);
+          tMax = Math.max(tMax, y);
+          a.push({ x: i + 1, y });
+        }
+        return a;
+      }, [])
+console.log("MAP CLICK:", mapClick, indexData);
 
     return (
         <div style={ {
@@ -159,8 +183,9 @@ class Home extends React.Component {
         } }>
           <Globe
             onGlobeClick={
-              (coords, temp) => this.setState({ mapClick: { coords, temp } })
+              (coords, temp, index) => this.setState({ mapClick: { coords, temp, index } })
             }
+            onPointRemove={ () => this.onPointRemove() }
             canvasData={ {
               header: {
                 lo1: 0,
@@ -190,22 +215,22 @@ class Home extends React.Component {
               { !get(this.state, ["mapClick"], null) ? null :
                 <>
                   <div style={ { borderBottom: "2px solid currentColor", margin: "5px 0px" } }/>
-                  <div>Coords: { this.state.mapClick.coords }</div>
+                  <div>Coords: { mapClick.coords }</div>
                   <div>
                     Temperature{ this.state.displayMode === "global-anomalies" ? " Difference" : "" }:
-                    {" "}{ float(this.state.mapClick.temp) }{ '°' }C
+                    {" "}{ float(mapClick.temp) }{ '°' }C
                   </div>
                 </>
               }
               <div style={ { borderBottom: "2px solid currentColor", margin: "5px 0px" } }/>
-              <Dropdown disabled={ this.state.loading }
-                onSelect={ v => this.setState({ displayMode: v, mapClick: null }) }
-                value={ this.state.displayMode }
+              <Dropdown disabled={ loading }
+                onSelect={ v => this.setDisplayMode(v) }
+                value={ displayMode }
                 options={ [
                   { name: "Global Temperatures", value: "global-temps" },
                   { name: "Global Anomalies", value: "global-anomalies" }
                 ] }/>
-              { get(this.state, ["displayMode"]) === "global-temps" ? null :
+              { displayMode === "global-temps" ? null :
                 <>
                   <div style={ { marginTop: "5px" } }>
                     Base Anamoly Range
@@ -257,7 +282,7 @@ class Home extends React.Component {
             } }>
 
               <NivoLine
-                colors="#000"
+                colors={ ["#000", "#a00"] }
                 margin={ {
                   bottom: 30,
                   right: 20,
@@ -266,7 +291,7 @@ class Home extends React.Component {
                 } }
                 onClick={ data => this.setState({ year: data.index }) }
                 enablePoints={ false }
-                lineWidth={ 1 }
+                lineWidth={ 2 }
                 enableGridX={ false }
                 tooltip={
                   p => (
@@ -285,12 +310,16 @@ class Home extends React.Component {
                 } }
                 yScale={ {
                   type: "linear",
-                  min: min * 0.9,
-                  max: max * 1.1
+                  min: tMin * 0.9,
+                  max: tMax * 1.1
                 } }
                 data={ [
                   { id: "Mean Temperature",
-                    data }
+                    title: "Mean Tempuature",
+                    data },
+                  { id: "Index",
+                    title: "",
+                    data: indexData }
                 ] }/>
 
               </div>
@@ -343,7 +372,7 @@ const ToolTip = ({ point, xFormat, yFormat }) =>
     padding: "10px",
     borderRadius: "3px"
   } }>
-    { xFormat(point.data.x) }: { yFormat(point.data.y) }{ '°' }C
+    { xFormat(point.data.x) } { point.serieId }: { yFormat(point.data.y) }{ '°' }C
   </div>
 
 const Button = styled.button`

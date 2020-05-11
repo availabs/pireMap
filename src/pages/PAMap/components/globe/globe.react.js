@@ -9,7 +9,9 @@ var React = require('react'),
 class GlobeDemo extends React.Component {
 
   static defaultProps = {
-    container: "globeDiv"
+    container: "globeDiv",
+    onGlobeClick: () => {},
+    onPointRemove: () => {}
   }
 
   constructor (props )  {
@@ -29,7 +31,11 @@ class GlobeDemo extends React.Component {
     if (props.leftOffset) {
       globe.leftOffset = props.leftOffset;
     }
-    globe.init('#' + props.container, { projection: props.projection, onGlobeClick: props.onGlobeClick }) // onGlobeClick: this.props.globeClick
+    globe.init('#' + props.container, {
+      projection: props.projection,
+      onGlobeClick: props.onGlobeClick,
+      onPointRemove: props.onPointRemove
+    })
     if (this.props.scale) {
       globe.setScale(this.props.scale);
     }

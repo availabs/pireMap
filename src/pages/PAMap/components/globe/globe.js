@@ -1,3 +1,6 @@
+const colorbrewer = require("colorbrewer")
+console.log("COLORS:", colorbrewer)
+
 var d3 = require('d3v3')
 var topojson = require('topojson')
 var _ = require('underscore')
@@ -19,10 +22,12 @@ var globe = {
   path: null,
   leftOffset: 0,
   fastOverlay: null,
-  onGlobeClick: null,
+  onGlobeClick: () => {},
+  onPointRemove: () => {},
   scale: d3.scale.quantile()
           .domain([-100, -80, -60, -40, -20, 20, 40, 60, 80, 100])
           .range(['#67001f', '#b2182b', '#d6604d', '#f4a582', '#fddbc7', '#f7f7f7', '#d1e5f0', '#92c5de', '#4393c3', '#2166ac', '#053061'])
+          // .range(colorbrewer["RdBu"][11])
 }
 
 globe.init = function (container, options) {
@@ -104,6 +109,7 @@ globe.init = function (container, options) {
   if (options.onGlobeClick) {
     globe.onGlobeClick = options.onGlobeClick
   }
+  options.onPointRemove && (globe.onPointRemove = options.onPointRemove);
 
   window.onresize = function () {
     globe.view = globe.getView()
@@ -213,21 +219,31 @@ globe.zoom = d3.behavior.zoom()
     console.log('zoomend', globe.op.type)
     if (globe.op.type === 'click') {
       // dispatch.trigger("click", op.startMouse, globe.projection.invert(op.startMouse) || []);
-      var overlay = globe.overlayData.field();
+      var field = globe.overlayData.field();
       var coords = globe.map.projection.invert(globe.op.startMouse);
       var path = d3.geo.path().projection(globe.map.projection).pointRadius(7);
       var mark = d3.select(".location-mark");
-      // Show coordinates and overlay grid value
-      var scalar = scalarize(overlay.bilinear(coords));
+      // Show coordinates and field grid value
+      var scalar = scalarize(field.bilinear(coords));
 
-console.log("globe.onGlobeClick", globe.onGlobeClick, overlay, scalar, overlay.bilinear(coords))
-      globe.onGlobeClick && globe.onGlobeClick(formatCoordinates(coords[0], coords[1]), scalar);//(+formatScalar(scalar, overlay)).toLocaleString())
+// console.log("<globe.onGlobeClick> GLOBE:", globe)
+// console.log("globe.overlayData:", globe.overlayData)
+// console.log("globe.overlayData.grid:", globe.overlayData.grid())
+// console.log("globe.overlayData.grid.closest:", globe.overlayData.grid().closest(coords))
+// console.log("field:", field)
+// console.log("field.valueAt:", field.valueAt(1))
+// console.log("field.nearest:", field.nearest(coords))
+      globe.onGlobeClick && globe.onGlobeClick(formatCoordinates(coords[0], coords[1]), scalar, globe.overlayData.grid().closest(coords));//(+formatScalar(scalar, overlay)).toLocaleString())
 
       // Draw location mark
       if (!mark.node()) {
-        mark = d3.select("#foreground").append("path").attr("class", "location-mark");
+        mark = d3.select("#foreground")
+          .append("path")
+          .attr("class", "location-mark")
+          .on("click", e => (mark.remove(), globe.onPointRemove()));
       }
       mark.datum({ type: "Point", coordinates: coords }).attr("d", path)
+
     } else if (globe.op.type !== 'spurious') {
       // signalEnd();
       console.log('update the coastline')
@@ -432,11 +448,13 @@ globe.getScaleSix = (mapData, options) => {
         .range([0, 1, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12])
 
   var cheatingbounds = cheatingScaleTwo.quantiles()
-  console.log(bounds)
+// console.log(bounds)
   // var bounds = []
   var colorBounds = options.bounds
   var colors = options.colors
-  return Object.assign(require('./palette/wind.js')(cheatingbounds,'BrBG'))
+  // return Object.assign(require('./palette/wind.js')(cheatingbounds, "BrBG");
+  // return Object.assign(require('./palette/wind.js')(cheatingbounds, "RdBu", 150, true));
+  return Object.assign(require('./palette/wind.js')(cheatingbounds, "RdYlBu", 150, true));
 }
 
 globe.drawGeoJson = function (mapData, options) {
