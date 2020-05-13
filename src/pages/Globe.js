@@ -24,8 +24,8 @@ import d3 from "d3v3"
 // console.log('array length', tempData.data.length)
 
 
-// const MAX_YEAR = 1785,
-const MAX_YEAR = 500,
+const MAX_YEAR = 1785,
+// const MAX_YEAR = 500,
   START_DATA = []
 for (let i = 0; i < MAX_YEAR; ++i) {
   START_DATA.push({ x: i + 1, y: null });
@@ -174,11 +174,11 @@ class Home extends React.Component {
 
   getScaleDomain(data) {
     if (this.state.displayMode === "global-anomalies") {
-      // return [-4, -2, -1.5, -1, -0.5, 0, 0.5, 1, 1.5, 2, 4];
-      const cheatingScaleTwo = d3.scale.quantile()
-        .domain(data)
-        .range([0, 1, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12])
-      return cheatingScaleTwo.quantiles();
+      return [-4, -2, -1.5, -1, -0.5, 0, 0.5, 1, 1.5, 2, 4];
+      // const cheatingScaleTwo = d3.scale.quantile()
+      //   .domain(data)
+      //   .range([0, 1, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12])
+      // return cheatingScaleTwo.quantiles();
     }
     return [-25, -15, -10, -6, -3, 0, 10, 20, 26, 27, 28];
   }
