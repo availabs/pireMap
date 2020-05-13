@@ -33,7 +33,7 @@ class Home extends React.Component {
   MOUNTED = false;
 
   state = {
-    year: 1,
+    year: 0,
     allData: {},
 
     data: [...START_DATA],
@@ -80,6 +80,9 @@ class Home extends React.Component {
 
             if (!(i % 50)) {
               this.setState({ allData, data, min, max });
+            }
+            if(this.state.year === 0 ) {
+              this.setState({year: 1})
             }
           })
       )
@@ -174,6 +177,9 @@ class Home extends React.Component {
             } }
             height={ '100%' }
             leftOffset={ 1 }
+            year={this.state.year}
+            displayMode={this.state.displayMode}
+            anomalyRange={this.state.anomalyRange}
           />
 
           <div style={ {
@@ -264,18 +270,32 @@ class Home extends React.Component {
                   left: 50,
                   top: 20
                 } }
-                onClick={ data => this.setState({ year: data.index }) }
+                onClick={ data => {
+                    console.log('onClick', data)
+                    return this.setState({ year: data.index }) 
+                }}
                 enablePoints={ false }
                 lineWidth={ 1 }
                 enableGridX={ false }
-                tooltip={
+                sliceTooltip={
                   p => (
-                    <ToolTip point={ p.point }
+                    <ToolTip 
+                      d={p}
+                      point={ p.slice.points[0] }
                       xFormat={ format }
                       yFormat={ float }/>
                   )
                 }
-                useMesh={ true }
+                tooltip={
+                  p => (
+                    <ToolTip 
+                      d={p}
+                      point={ p.point }
+                      xFormat={ format }
+                      yFormat={ float }/>
+                  )
+                }
+                useMesh={true}
                 axisLeft={ {
                   tickValues: 4
                 } }
@@ -337,14 +357,16 @@ const Input = ({ prefix, postfix, ...rest }) =>
     { postfix ? <div className="postfix">{ postfix }</div> : null }
   </InputDiv>
 
-const ToolTip = ({ point, xFormat, yFormat }) =>
-  <div style={ {
+const ToolTip = ({ d, point, xFormat, yFormat }) => {
+  return ( <div style={ {
     backgroundColor: "#fff",
     padding: "10px",
     borderRadius: "3px"
   } }>
     { xFormat(point.data.x) }: { yFormat(point.data.y) }{ '°' }C
-  </div>
+  </div>)
+}
+ 
 
 const Button = styled.button`
   width: 100%;

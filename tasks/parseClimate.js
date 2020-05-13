@@ -18,7 +18,7 @@ function sortFlat(ob1,ob2) {
 }
 
 
-var sample = "./allYears.json"
+var sample = "./YearsAll_3.json"
          
 fs.readFile(sample, "utf8", function(error, rawData) {
     let fullData = JSON.parse(rawData)

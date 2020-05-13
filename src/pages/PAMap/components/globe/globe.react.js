@@ -49,6 +49,18 @@ class GlobeDemo extends React.Component {
     }
   }
 
+  shouldComponentUpdate(nextProps, nextState) {
+    console.log(this.props.year, nextProps.year)
+    if(nextProps.year !== this.props.year 
+      || nextProps.displayMode !== this.props.displayMode
+      || nextProps.anomalyRange[0] !== this.props.anomalyRange[0]
+      || nextProps.anomalyRange[1] !== this.props.anomalyRange[1]
+      ){
+      return true
+    }
+    return false
+  }
+
   // componentWillReceiveProps (nextProps) {
   //   if (this.props.projection !== nextProps.projection) {
   //     d3.selectAll('#' + this.props.container + ' .display').remove()
