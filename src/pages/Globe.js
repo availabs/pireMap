@@ -174,6 +174,7 @@ class Home extends React.Component {
 
   getScaleDomain(data) {
     if (this.state.displayMode === "global-anomalies") {
+      // return [-4, -2, -1.5, -1, -0.5, 0, 0.5, 1, 1.5, 2, 4];
       const cheatingScaleTwo = d3.scale.quantile()
         .domain(data)
         .range([0, 1, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12])
