@@ -401,9 +401,8 @@ globe.interpolateField = function (grids, cb) {
   })()
 }
 
-globe.drawCanvas = function (mapData, options) {
-  options = options || {}
-  var scale = globe.getScaleSix(mapData, options)
+globe.drawCanvas = function (mapData, options = {}) {
+  var scale = globe.getScaleSix(mapData, options);
   globe.defaultCanvas.scale = scale
   globe.overlayData = Object.assign(globe.defaultCanvas, buildGrid(globe.defaultCanvas.builder([mapData])))
 
@@ -430,31 +429,32 @@ globe.getScaleOne = (mapData, options) => {
   var bounds = options.bounds ?
     [options.bounds[0], options.bounds[options.bounds.length - 1]] :
     [ d3.min(mapData.data), d3.max(mapData.data) ]
-  console.log('the bounds', bounds,cheatingbounds)
   return Object.assign(require('./palette/pallette1.js')(cheatingbounds))
 }
 
 globe.getScaleSix = (mapData, options) => {
-  var min = -50
-  var max = 50
-  var step = 25
-  var bounds = Array((max-min)/step+1).fill().map((d, i) => i)
-  var delta = (max - min) / step
-  bounds = bounds.map((d, i) => {
-    return min + (i * step)
-  })
-  var cheatingScaleTwo = d3.scale.quantile()
-        .domain(mapData.data)
-        .range([0, 1, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12])
+  // var min = -50
+  // var max = 50
+  // var step = 25
+  // var bounds = Array((max-min)/step+1).fill().map((d, i) => i)
+  // var delta = (max - min) / step
+  // bounds = bounds.map((d, i) => {
+  //   return min + (i * step)
+  // })
+  let bounds = options.bounds || [193, 328] // units: kelvins;
+console.log("HERE:", options)
+  if (options.useQuantiles) {
+    var cheatingScaleTwo = d3.scale.quantile()
+          .domain(mapData.data)
+          .range([0, 1, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12])
 
-  var cheatingbounds = cheatingScaleTwo.quantiles()
-// console.log(bounds)
-  // var bounds = []
-  var colorBounds = options.bounds
-  var colors = options.colors
+    bounds = cheatingScaleTwo.quantiles();
+  }
+
   // return Object.assign(require('./palette/wind.js')(cheatingbounds, "BrBG");
   // return Object.assign(require('./palette/wind.js')(cheatingbounds, "RdBu", 150, true));
-  return Object.assign(require('./palette/wind.js')(cheatingbounds, "RdYlBu", 150, true));
+  // return Object.assign(require('./palette/wind.js')(cheatingbounds, "RdYlBu", 150, true));
+  return Object.assign(require('./palette/wind.js')(bounds, "RdYlBu", true));
 }
 
 globe.drawGeoJson = function (mapData, options) {
@@ -520,7 +520,7 @@ globe.defaultCanvas = {
         { label: 'K', conversion: function (x) { return x }, precision: 1 }
   ],
 
-  scale: Object.assign(require('./palette/wind.js')(), { gradient: globe.scale })
+  // scale: Object.assign(require('./palette/wind.js')(), { gradient: globe.scale })
     // {
     //     bounds: [-100, 100],
     //     gradient: globe.scale

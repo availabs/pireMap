@@ -21,7 +21,8 @@ import d3 from "d3v3"
 //
 // console.log('array length', tempData.data.length)
 
-const MAX_YEAR = 500,//1785,
+const MAX_YEAR = 1785,
+// const MAX_YEAR = 500,
   START_DATA = []
 for (let i = 0; i < MAX_YEAR; ++i) {
   START_DATA.push({ x: i + 1, y: null });
@@ -86,22 +87,9 @@ class Home extends React.Component {
       )
     , Promise.resolve())
       .then(() => {
-        const [l, h] = this.state.anomalyRange,
-          num = h - l + 1;
-        let means = null;
-        for (let y = l; y <= h; ++y) {
-          if (means === null) {
-            means = [...this.state.allData[y]];
-          }
-          else {
-            this.state.allData[y].forEach((v, i) => means[i] += v);
-          }
-        }
-        this.setState({
-          loading: false,
-          allData, data, min, max,
-          anomalyRangeMeans: means.map(v => v / num)
-        })
+        this.setState({ allData, data, min, max });
+        this.calcAnomalyRangeMeans();
+        this.setState({ loading: false });
       });
   }
   componentWillUnmount() {
@@ -136,18 +124,46 @@ class Home extends React.Component {
     this.setState({ arUpdate: [ar11 || ar1, ar22 || ar2] });
   }
   setAnomalyRange() {
+    this.clearMapClick();
     this.setState({
-      anomalyRange: [...this.state.arUpdate],
+      anomalyRange: [...this.state.arUpdate]
+    })
+    this.calcAnomalyRangeMeans();
+  }
+  calcAnomalyRangeMeans() {
+    this.setState(state => {
+      const [l, h] = state.anomalyRange,
+        num = h - l + 1;
+      let means = null;
+      for (let y = l; y <= h; ++y) {
+        if (means === null) {
+          means = [...state.allData[y]];
+        }
+        else {
+          state.allData[y].forEach((v, i) => means[i] += v);
+        }
+      }
+      return {
+        anomalyRangeMeans: means.map(v => v / num)
+      }
+    })
+  }
+
+  clearMapClick() {
+    this.setState({
       mapClick: null
     })
   }
 
-  onPointRemove() {
-    this.setState({ mapClick: null })
-  }
   setDisplayMode(dm) {
-    this.setState({ displayMode: dm, mapClick: null })
+    this.clearMapClick();
+    this.setState({
+      displayMode: dm
+    })
     d3.select("#foreground .location-mark").remove();
+  }
+  onGlobeClick(coords, temp, index) {
+    this.setState({ mapClick: { coords, temp, index } });
   }
 
   render() {
@@ -161,8 +177,10 @@ class Home extends React.Component {
       _format = d3format(",d"),
       format = v => `${ _format(v) } AD`,
       float = d3format(".2f");
+
     let tMin = min, tMax = max;
-    const indexData = Object.values(allData).reduce((a, c, i) => {
+    const indexData = Object.values(allData)
+      .reduce((a, c, i) => {
         if (mapClick) {
           const y = c[mapClick.index];
           tMin = Math.min(tMin, y);
@@ -171,162 +189,160 @@ class Home extends React.Component {
         }
         return a;
       }, [])
-console.log("MAP CLICK:", mapClick, indexData);
 
     return (
+      <div style={ {
+        width: "100vw",
+        height: "100vh",
+        backgroundColor: '#2e2e2e',
+        position: "relative",
+        marginTop: "-51px"
+      } }>
+        <Globe useQuantiles={ displayMode === "global-anomalies" }
+          onGlobeClick={ (...args) => this.onGlobeClick(...args) }
+          onPointRemove={ () => this.clearMapClick() }
+          scaleDomain={ [-25, -15, -10, -6, -3, 0, 10, 20, 26, 27, 28] }
+          canvasData={ {
+            header: {
+              lo1: 0,
+              la1: 90,
+              dx: 2.5,
+              dy: 1.9,
+              nx: 144,
+              ny: 96
+             },
+             data: this.getGlobeData()
+          } }
+          height={ '100%' }
+          leftOffset={ 1 }
+        />
+
         <div style={ {
-          width: "100vw",
-          height: "100vh",
-          backgroundColor: '#2e2e2e',
-          position: "relative",
-          marginTop: "-51px"
+          backgroundColor: "rgba(255, 255, 255, 0.75)",
+          position: "absolute",
+          borderRadius: "4px",
+          top: "61px",
+          right: "10px",
+          width: "300px"
         } }>
-          <Globe
-            onGlobeClick={
-              (coords, temp, index) => this.setState({ mapClick: { coords, temp, index } })
+          <div style={ { padding: "15px 20px" } }>
+            <div>Current Year: { year } AD</div>
+            <div>Mean Tempuature: { float(d3array.mean(allData[year] || [])) }{ '°' }C</div>
+            { !get(this.state, ["mapClick"], null) ? null :
+              <>
+                <div style={ { borderBottom: "2px solid currentColor", margin: "5px 0px" } }/>
+                <div>Coords: { mapClick.coords }</div>
+                <div>
+                  Temperature{ displayMode === "global-anomalies" ? " Difference" : "" }:
+                  {" "}{ float(mapClick.temp) }{ '°' }C
+                </div>
+              </>
             }
-            onPointRemove={ () => this.onPointRemove() }
-            canvasData={ {
-              header: {
-                lo1: 0,
-                la1: 90,
-                dx: 2.5,
-                dy: 1.9,
-                nx: 144,
-                ny: 96
-               },
-               data: this.getGlobeData()
-            } }
-            height={ '100%' }
-            leftOffset={ 1 }
-          />
-
-          <div style={ {
-            backgroundColor: "rgba(255, 255, 255, 0.75)",
-            position: "absolute",
-            borderRadius: "4px",
-            top: "61px",
-            right: "10px",
-            width: "300px"
-          } }>
-            <div style={ { padding: "15px 20px" } }>
-              <div>Current Year: { year } AD</div>
-              <div>Mean Tempuature: { float(d3array.mean(allData[year] || [])) }{ '°' }C</div>
-              { !get(this.state, ["mapClick"], null) ? null :
-                <>
-                  <div style={ { borderBottom: "2px solid currentColor", margin: "5px 0px" } }/>
-                  <div>Coords: { mapClick.coords }</div>
-                  <div>
-                    Temperature{ this.state.displayMode === "global-anomalies" ? " Difference" : "" }:
-                    {" "}{ float(mapClick.temp) }{ '°' }C
-                  </div>
-                </>
-              }
-              <div style={ { borderBottom: "2px solid currentColor", margin: "5px 0px" } }/>
-              <Dropdown disabled={ loading }
-                onSelect={ v => this.setDisplayMode(v) }
-                value={ displayMode }
-                options={ [
-                  { name: "Global Temperatures", value: "global-temps" },
-                  { name: "Global Anomalies", value: "global-anomalies" }
-                ] }/>
-              { displayMode === "global-temps" ? null :
-                <>
-                  <div style={ { marginTop: "5px" } }>
-                    Base Anamoly Range
-                  </div>
-                  <InputContainer>
-                    <Input
-                      prefix="Start"
-                      postfix="AD"
-                      type="number"
-                      min={ 1 }
-                      max={ MAX_YEAR }
-                      value={ arUpdate[0] }
-                      onChange={
-                        e => this.updateAnomalyRange(+e.target.value, null)
-                      }/>
-                    <Input
-                      prefix="End"
-                      postfix="AD"
-                      type="number"
-                      min={ 1 }
-                      max={ MAX_YEAR }
-                      value={ arUpdate[1] }
-                      onChange={
-                        e => this.updateAnomalyRange(null, +e.target.value)
-                      }/>
-                    <Button disabled={ deepequal(anomalyRange, arUpdate) }
-                      onClick={ () => this.setAnomalyRange() }>
-                      Update Anomaly Range
-                    </Button>
-                  </InputContainer>
-                </>
-              }
-            </div>
-          </div>
-
-          <div style={ {
-            backgroundColor: "rgba(255, 255, 255, 0.75)",
-            borderRadius: "4px",
-            position: "fixed",
-            height: "150px",
-            bottom: "10px",
-            left: "10px",
-            right: "10px"
-          } }>
-            <div style={ {
-              position: "relative",
-              height: "100%",
-              width: "100%"
-            } }>
-
-              <NivoLine
-                colors={ ["#000", "#a00"] }
-                margin={ {
-                  bottom: 30,
-                  right: 20,
-                  left: 50,
-                  top: 20
-                } }
-                onClick={ data => this.setState({ year: data.index }) }
-                enablePoints={ false }
-                lineWidth={ 2 }
-                enableGridX={ false }
-                tooltip={
-                  p => (
-                    <ToolTip point={ p.point }
-                      xFormat={ format }
-                      yFormat={ float }/>
-                  )
-                }
-                useMesh={ true }
-                axisLeft={ {
-                  tickValues: 4
-                } }
-                axisBottom={ {
-                  tickValues,
-                  format
-                } }
-                yScale={ {
-                  type: "linear",
-                  min: tMin * 0.9,
-                  max: tMax * 1.1
-                } }
-                data={ [
-                  { id: "Mean Temperature",
-                    title: "Mean Tempuature",
-                    data },
-                  { id: "Index",
-                    title: "",
-                    data: indexData }
-                ] }/>
-
-              </div>
+            <div style={ { borderBottom: "2px solid currentColor", margin: "5px 0px" } }/>
+            <Dropdown disabled={ loading }
+              onSelect={ v => this.setDisplayMode(v) }
+              value={ displayMode }
+              options={ [
+                { name: "Global Temperatures", value: "global-temps" },
+                { name: "Global Anomalies", value: "global-anomalies" }
+              ] }/>
+            { displayMode === "global-temps" ? null :
+              <>
+                <div style={ { marginTop: "5px" } }>
+                  Base Anamoly Range
+                </div>
+                <InputContainer>
+                  <Input
+                    prefix="Start"
+                    postfix="AD"
+                    type="number"
+                    min={ 1 }
+                    max={ MAX_YEAR }
+                    value={ arUpdate[0] }
+                    onChange={
+                      e => this.updateAnomalyRange(+e.target.value, null)
+                    }/>
+                  <Input
+                    prefix="End"
+                    postfix="AD"
+                    type="number"
+                    min={ 1 }
+                    max={ MAX_YEAR }
+                    value={ arUpdate[1] }
+                    onChange={
+                      e => this.updateAnomalyRange(null, +e.target.value)
+                    }/>
+                  <Button disabled={ deepequal(anomalyRange, arUpdate) }
+                    onClick={ () => this.setAnomalyRange() }>
+                    Update Anomaly Range
+                  </Button>
+                </InputContainer>
+              </>
+            }
           </div>
         </div>
-      );
-    }
+
+        <div style={ {
+          backgroundColor: "rgba(255, 255, 255, 0.75)",
+          borderRadius: "4px",
+          position: "fixed",
+          height: "150px",
+          bottom: "10px",
+          left: "10px",
+          right: "10px"
+        } }>
+          <div style={ {
+            position: "relative",
+            height: "100%",
+            width: "100%"
+          } }>
+
+            <NivoLine
+              colors={ ["#000", "#a00"] }
+              margin={ {
+                bottom: 30,
+                right: 20,
+                left: 50,
+                top: 20
+              } }
+              onClick={ data => this.setState({ year: data.index }) }
+              enablePoints={ false }
+              lineWidth={ 1 }
+              enableGridX={ false }
+              tooltip={
+                p => (
+                  <ToolTip point={ p.point }
+                    xFormat={ format }
+                    yFormat={ float }/>
+                )
+              }
+              useMesh={ true }
+              axisLeft={ {
+                tickValues: 4
+              } }
+              axisBottom={ {
+                tickValues,
+                format
+              } }
+              yScale={ {
+                type: "linear",
+                min: tMin * 0.9,
+                max: tMax * 1.1
+              } }
+              data={ [
+                { id: "Mean Temperature",
+                  title: "Mean Tempuature",
+                  data },
+                { id: "Index",
+                  title: "",
+                  data: indexData }
+              ] }/>
+
+            </div>
+        </div>
+      </div>
+    );
+  }
 }
 const InputContainer = styled.div`
   > * {
