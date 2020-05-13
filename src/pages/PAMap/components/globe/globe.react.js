@@ -65,8 +65,8 @@ class GlobeDemo extends React.Component {
   }
 
   shouldComponentUpdate(nextProps, nextState) {
-    console.log(this.props.year, nextProps.year)
-    if(nextProps.year !== this.props.year 
+    // console.log(this.props.year, nextProps.year)
+    if(nextProps.year !== this.props.year
       || nextProps.displayMode !== this.props.displayMode
       || nextProps.anomalyRange[0] !== this.props.anomalyRange[0]
       || nextProps.anomalyRange[1] !== this.props.anomalyRange[1]

@@ -221,10 +221,6 @@ globe.zoom = d3.behavior.zoom()
       // dispatch.trigger("click", op.startMouse, globe.projection.invert(op.startMouse) || []);
       var field = globe.overlayData.field();
       var coords = globe.map.projection.invert(globe.op.startMouse);
-      var path = d3.geo.path().projection(globe.map.projection).pointRadius(7);
-      var mark = d3.select(".location-mark");
-      // Show coordinates and field grid value
-      var scalar = scalarize(field.bilinear(coords));
 
 // console.log("<globe.onGlobeClick> GLOBE:", globe)
 // console.log("globe.overlayData:", globe.overlayData)
@@ -233,16 +229,29 @@ globe.zoom = d3.behavior.zoom()
 // console.log("field:", field)
 // console.log("field.valueAt:", field.valueAt(1))
 // console.log("field.nearest:", field.nearest(coords))
-      globe.onGlobeClick && globe.onGlobeClick(formatCoordinates(coords[0], coords[1]), scalar, globe.overlayData.grid().closest(coords));//(+formatScalar(scalar, overlay)).toLocaleString())
 
-      // Draw location mark
-      if (!mark.node()) {
-        mark = d3.select("#foreground")
-          .append("path")
-          .attr("class", "location-mark")
-          .on("click", e => (mark.remove(), globe.onPointRemove()));
+      if (!isNaN(coords[0]) && !isNaN(coords[1])) {
+        var path = d3.geo.path().projection(globe.map.projection).pointRadius(7);
+        var mark = d3.select(".location-mark");
+        // Show coordinates and field grid value
+        var scalar = scalarize(field.bilinear(coords));
+
+        globe.onGlobeClick &&
+          globe.onGlobeClick(
+            formatCoordinates(coords[0], coords[1]),
+            scalar,
+            globe.overlayData.grid().closest(coords)
+          );//(+formatScalar(scalar, overlay)).toLocaleString())
+
+        // Draw location mark
+        if (!mark.node()) {
+          mark = d3.select("#foreground")
+            .append("path")
+            .attr("class", "location-mark")
+            .on("click", e => (mark.remove(), globe.onPointRemove()));
+        }
+        mark.datum({ type: "Point", coordinates: coords }).attr("d", path)
       }
-      mark.datum({ type: "Point", coordinates: coords }).attr("d", path)
 
     } else if (globe.op.type !== 'spurious') {
       // signalEnd();
@@ -442,14 +451,6 @@ globe.getScaleSix = (mapData, options) => {
   //   return min + (i * step)
   // })
   let bounds = options.bounds || [193, 328] // units: kelvins;
-  console.log("HERE:", options)
-  if (options.useQuantiles) {
-    var cheatingScaleTwo = d3.scale.quantile()
-          .domain(mapData.data)
-          .range([0, 1, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12])
-
-    bounds = cheatingScaleTwo.quantiles();
-  }
 
   // return Object.assign(require('./palette/wind.js')(cheatingbounds, "BrBG");
   // return Object.assign(require('./palette/wind.js')(cheatingbounds, "RdBu", 150, true));

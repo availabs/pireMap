@@ -9,6 +9,8 @@ import dynamicData from 'pages/PAMap/components/globe/dynamicData'
 
 import { ResponsiveLine as NivoLine } from "@nivo/line"
 
+import colorbrewer from "colorbrewer"
+
 import deepequal from "deep-equal"
 import get from "lodash.get"
 import styled from "styled-components"
@@ -22,8 +24,8 @@ import d3 from "d3v3"
 // console.log('array length', tempData.data.length)
 
 
-const MAX_YEAR = 1785,
-// const MAX_YEAR = 500,
+// const MAX_YEAR = 1785,
+const MAX_YEAR = 500,
   START_DATA = []
 for (let i = 0; i < MAX_YEAR; ++i) {
   START_DATA.push({ x: i + 1, y: null });
@@ -170,6 +172,16 @@ class Home extends React.Component {
     this.setState({ mapClick: { coords, temp, index } });
   }
 
+  getScaleDomain(data) {
+    if (this.state.displayMode === "global-anomalies") {
+      const cheatingScaleTwo = d3.scale.quantile()
+        .domain(data)
+        .range([0, 1, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12])
+      return cheatingScaleTwo.quantiles();
+    }
+    return [-25, -15, -10, -6, -3, 0, 10, 20, 26, 27, 28];
+  }
+
   render() {
     const {
         year, allData, data, min,
@@ -192,7 +204,13 @@ class Home extends React.Component {
           a.push({ x: i + 1, y });
         }
         return a;
-      }, [])
+      }, []);
+
+    const colors = colorbrewer["RdYlBu"][11].slice().reverse(),
+      globeData = this.getGlobeData(),
+      scaleDomain = this.getScaleDomain(globeData),
+      _lFormat = displayMode === "global-anomalies" ? d3format(".2f") : (v => v),
+      lFormat = v => `${ _lFormat(v) }°C`
 
     return (
       <div style={ {
@@ -205,7 +223,7 @@ class Home extends React.Component {
         <Globe useQuantiles={ displayMode === "global-anomalies" }
           onGlobeClick={ (...args) => this.onGlobeClick(...args) }
           onPointRemove={ () => this.clearMapClick() }
-          scaleDomain={ [-25, -15, -10, -6, -3, 0, 10, 20, 26, 27, 28] }
+          scaleDomain={ scaleDomain }
           canvasData={ {
             header: {
               lo1: 0,
@@ -215,7 +233,7 @@ class Home extends React.Component {
               nx: 144,
               ny: 96
              },
-             data: this.getGlobeData()
+             data: globeData
           } }
           height={ '100%' }
           leftOffset={ 1 }
@@ -223,6 +241,33 @@ class Home extends React.Component {
           displayMode={this.state.displayMode}
           anomalyRange={this.state.anomalyRange}
         />
+
+          <div style={ {
+            backgroundColor: "rgba(255, 255, 255, 0.75)",
+            position: "absolute",
+            borderRadius: "4px",
+            top: "61px",
+            left: "10px",
+          } }>
+            <LegendContainer>
+              <div>Temperatures</div>
+              <div>
+                { colors.map(c =>
+                    <div key={ c }
+                      style={ { width: "50px", height: "25px", backgroundColor: c} }/>
+                  )
+                }
+              </div>
+              <div>
+                { scaleDomain.map(d =>
+                    <div key={ d } style={ { width: "50px", height: "25px" } }>
+                     { lFormat(d) }
+                    </div>
+                  )
+                }
+              </div>
+            </LegendContainer>
+          </div>
 
         <div style={ {
           backgroundColor: "rgba(255, 255, 255, 0.75)",
@@ -289,7 +334,6 @@ class Home extends React.Component {
           </div>
         </div>
 
-
         <div style={ {
           backgroundColor: "rgba(255, 255, 255, 0.05)",
           borderRadius: "4px",
@@ -313,7 +357,7 @@ class Home extends React.Component {
                     text: {
                       fill: '#eee',
                       fontSize: '14px',
-                      
+
                     },
                     line: {
                       stroke: '#888'
@@ -371,6 +415,32 @@ class Home extends React.Component {
     );
   }
 }
+
+const LegendContainer = styled.div`
+  padding: 8px 20px 5px 20px;
+  display: flex;
+  flex-direction: column;
+
+  > div {
+    display: flex;
+  }
+  > div:first-child {
+    font-size: 18px;
+  }
+
+  > div > div {
+    text-align: center;
+  }
+  > div > div:first-child {
+    border-top-left-radius: 3px;
+    border-bottom-left-radius: 3px;
+  }
+  > div > div:last-child {
+    border-top-right-radius: 3px;
+    border-bottom-right-radius: 3px;
+  }
+`
+
 const InputContainer = styled.div`
   > * {
     margin-bottom: 5px;
