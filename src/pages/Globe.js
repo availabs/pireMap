@@ -202,10 +202,16 @@ class Home extends React.Component {
         position: "relative",
         marginTop: "-51px"
       } }>
-        <Globe useQuantiles={ displayMode === "global-anomalies" }
+        <Globe
+          useQuantiles = {displayMode === "global-anomalies"} 
           onGlobeClick={ (...args) => this.onGlobeClick(...args) }
           onPointRemove={ () => this.clearMapClick() }
-          scaleDomain={ [-25, -15, -10, -6, -3, 0, 10, 20, 26, 27, 28] }
+          scaleDomain={ 
+            displayMode === "global-anomalies" ? 
+            [-0, -2, -1.5, -1, -0.5, 0, 0.5, 1, 1.5, 2, 4]  : 
+            //[-20, -8, -6, -4, -2, 0, 2, 4, 6, 8, 20]  : 
+            [-25, -15, -10, -6, -3, 0, 10, 20, 26, 27, 28] 
+          }
           canvasData={ {
             header: {
               lo1: 0,
