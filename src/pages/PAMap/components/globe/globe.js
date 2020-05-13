@@ -1,3 +1,6 @@
+const colorbrewer = require("colorbrewer")
+//console.log("COLORS:", colorbrewer)
+
 var d3 = require('d3v3')
 var topojson = require('topojson')
 var _ = require('underscore')
@@ -19,10 +22,12 @@ var globe = {
   path: null,
   leftOffset: 0,
   fastOverlay: null,
-  onGlobeClick: null,
+  onGlobeClick: () => {},
+  onPointRemove: () => {},
   scale: d3.scale.quantile()
           .domain([-100, -80, -60, -40, -20, 20, 40, 60, 80, 100])
           .range(['#67001f', '#b2182b', '#d6604d', '#f4a582', '#fddbc7', '#f7f7f7', '#d1e5f0', '#92c5de', '#4393c3', '#2166ac', '#053061'])
+          // .range(colorbrewer["RdBu"][11])
 }
 
 globe.init = function (container, options) {
@@ -59,7 +64,7 @@ globe.init = function (container, options) {
     .attr('class', 'fill-screen')
 
   globe.display.on('click', (a,b,c,d) => {
-    console.log('simple click on init', a, b, c ,d)
+    //console.log('simple click on init', a, b, c ,d)
   })
 
   this.view = this.getView()
@@ -104,10 +109,11 @@ globe.init = function (container, options) {
   if (options.onGlobeClick) {
     globe.onGlobeClick = options.onGlobeClick
   }
+  options.onPointRemove && (globe.onPointRemove = options.onPointRemove);
 
   window.onresize = function () {
     globe.view = globe.getView()
-    console.log('resize')
+    //console.log('resize')
     d3.selectAll('.fill-screen')
             .attr('width', scope.view.width)
             .attr('height', scope.view.height)
@@ -126,7 +132,7 @@ globe.setupWebGL = function () {
   var start = Date.now()
   var glReport = require('./gl/glCheck')
   var msg = glReport.pass ? 'ok' : JSON.stringify(glReport)
-  console.log('check gl (' + (Date.now() - start) + 'ms): ' + msg)
+  //console.log('check gl (' + (Date.now() - start) + 'ms): ' + msg)
   if (!glReport.pass) {
     return
   }
@@ -168,7 +174,7 @@ globe.newOp = function (startMouse, startScale) {
 
 globe.location = function location(p,z) {
   var view = globe.getView()
-  console.log('location', p, view)
+  //console.log('location', p, view)
   return [ (p[0] - view.width) / z, (p[1] - view.height) / z];
 }
 
@@ -210,27 +216,37 @@ globe.zoom = d3.behavior.zoom()
   .on('zoomend', function () {
     globe.op.manipulator.end()
     // Render hi-res coastlines and lakes
-    console.log('zoomend', globe.op.type)
+    //console.log('zoomend', globe.op.type)
     if (globe.op.type === 'click') {
       // dispatch.trigger("click", op.startMouse, globe.projection.invert(op.startMouse) || []);
-      var overlay = globe.overlayData.field();
+      var field = globe.overlayData.field();
       var coords = globe.map.projection.invert(globe.op.startMouse);
       var path = d3.geo.path().projection(globe.map.projection).pointRadius(7);
       var mark = d3.select(".location-mark");
-      // Show coordinates and overlay grid value
-      var scalar = scalarize(overlay.bilinear(coords));
+      // Show coordinates and field grid value
+      var scalar = scalarize(field.bilinear(coords));
 
-console.log("globe.onGlobeClick", globe.onGlobeClick, overlay, scalar, overlay.bilinear(coords))
-      globe.onGlobeClick && globe.onGlobeClick(formatCoordinates(coords[0], coords[1]), scalar);//(+formatScalar(scalar, overlay)).toLocaleString())
+// console.log("<globe.onGlobeClick> GLOBE:", globe)
+// console.log("globe.overlayData:", globe.overlayData)
+// console.log("globe.overlayData.grid:", globe.overlayData.grid())
+// console.log("globe.overlayData.grid.closest:", globe.overlayData.grid().closest(coords))
+// console.log("field:", field)
+// console.log("field.valueAt:", field.valueAt(1))
+// console.log("field.nearest:", field.nearest(coords))
+      globe.onGlobeClick && globe.onGlobeClick(formatCoordinates(coords[0], coords[1]), scalar, globe.overlayData.grid().closest(coords));//(+formatScalar(scalar, overlay)).toLocaleString())
 
       // Draw location mark
       if (!mark.node()) {
-        mark = d3.select("#foreground").append("path").attr("class", "location-mark");
+        mark = d3.select("#foreground")
+          .append("path")
+          .attr("class", "location-mark")
+          .on("click", e => (mark.remove(), globe.onPointRemove()));
       }
       mark.datum({ type: "Point", coordinates: coords }).attr("d", path)
+
     } else if (globe.op.type !== 'spurious') {
       // signalEnd();
-      console.log('update the coastline')
+      //console.log('update the coastline')
       var coastline = globe.display.select('.coastline');
       var lakes = globe.display.select('.lakes');
       //coastline.datum(globe.coastHi);
@@ -372,7 +388,7 @@ globe.interpolateField = function (grids, cb) {
       x += 2
       if ((Date.now() - start) > MAX_TASK_TIME) {
                 // Interpolation is taking too long. Schedule the next batch for later and yield.
-        console.log(' Interpolation is taking too long. Schedule the next batch for later and yield.')
+        //console.log(' Interpolation is taking too long. Schedule the next batch for later and yield.')
         setTimeout(batchInterpolate, MIN_SLEEP_TIME)
         return
       }
@@ -385,9 +401,8 @@ globe.interpolateField = function (grids, cb) {
   })()
 }
 
-globe.drawCanvas = function (mapData, options) {
-  options = options || {}
-  var scale = globe.getScaleSix(mapData, options)
+globe.drawCanvas = function (mapData, options = {}) {
+  var scale = globe.getScaleSix(mapData, options);
   globe.defaultCanvas.scale = scale
   globe.overlayData = Object.assign(globe.defaultCanvas, buildGrid(globe.defaultCanvas.builder([mapData])))
 
@@ -414,29 +429,32 @@ globe.getScaleOne = (mapData, options) => {
   var bounds = options.bounds ?
     [options.bounds[0], options.bounds[options.bounds.length - 1]] :
     [ d3.min(mapData.data), d3.max(mapData.data) ]
-  console.log('the bounds', bounds,cheatingbounds)
   return Object.assign(require('./palette/pallette1.js')(cheatingbounds))
 }
 
 globe.getScaleSix = (mapData, options) => {
-  var min = -50
-  var max = 50
-  var step = 25
-  var bounds = Array((max-min)/step+1).fill().map((d, i) => i)
-  var delta = (max - min) / step
-  bounds = bounds.map((d, i) => {
-    return min + (i * step)
-  })
-  var cheatingScaleTwo = d3.scale.quantile()
-        .domain(mapData.data)
-        .range([0, 1, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12])
+  // var min = -50
+  // var max = 50
+  // var step = 25
+  // var bounds = Array((max-min)/step+1).fill().map((d, i) => i)
+  // var delta = (max - min) / step
+  // bounds = bounds.map((d, i) => {
+  //   return min + (i * step)
+  // })
+  let bounds = options.bounds || [193, 328] // units: kelvins;
+  console.log("HERE:", options)
+  if (options.useQuantiles) {
+    var cheatingScaleTwo = d3.scale.quantile()
+          .domain(mapData.data)
+          .range([0, 1, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12])
 
-  var cheatingbounds = cheatingScaleTwo.quantiles()
-  console.log(bounds)
-  // var bounds = []
-  var colorBounds = options.bounds
-  var colors = options.colors
-  return Object.assign(require('./palette/wind.js')(cheatingbounds,'BrBG'))
+    bounds = cheatingScaleTwo.quantiles();
+  }
+
+  // return Object.assign(require('./palette/wind.js')(cheatingbounds, "BrBG");
+  // return Object.assign(require('./palette/wind.js')(cheatingbounds, "RdBu", 150, true));
+  // return Object.assign(require('./palette/wind.js')(cheatingbounds, "RdYlBu", 150, true));
+  return Object.assign(require('./palette/wind.js')(bounds, "RdYlBu", true));
 }
 
 globe.drawGeoJson = function (mapData, options) {
@@ -502,7 +520,7 @@ globe.defaultCanvas = {
         { label: 'K', conversion: function (x) { return x }, precision: 1 }
   ],
 
-  scale: Object.assign(require('./palette/wind.js')(), { gradient: globe.scale })
+  // scale: Object.assign(require('./palette/wind.js')(), { gradient: globe.scale })
     // {
     //     bounds: [-100, 100],
     //     gradient: globe.scale
@@ -546,7 +564,7 @@ function buildGrid (builder) {
   var lat = { dimensions:'lat', sequence: { delta: -Δφ, size:header.ny, start: header.la1 } }
   var _grid = require('./gl/rectangularGrid.js')(lon.sequence, lat.sequence)
   var defaultInterpolator = bilinear.scalar(_grid, builder.data)
-  console.log('builder data', builder)
+  //console.log('builder data', builder)
 
     // Scan mode 0 assumed. Longitude increases from λ0, and latitude decreases from φ0.
     // http://www.nco.ncep.noaa.gov/pmb/docs/grib2/grib2_table3-4.shtml

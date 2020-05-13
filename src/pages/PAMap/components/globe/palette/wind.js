@@ -89,21 +89,22 @@ var five = function (bounds, inColors, resolution) {
   return scale
 }
 
-var six = function (bounds, scheme, resolution) {
+var six = function (bounds, scheme, reverse = false) {
     // var resolution = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : 2000;
-
 
   var palette = require('./palette')
   // var resolution = resolution || 2000
-  var resolution = 150
-  var bounds = bounds || [193, 328] // units: kelvins
+  var resolution = 500
+  bounds = bounds || [193, 328] // units: kelvins
+
   var colorbrewer = require('colorbrewer')
-  console.log('bounds', colorbrewer)
+  // console.log('bounds', colorbrewer)
   var scheme = scheme || 'RdBu'
   var colors = colorbrewer[scheme][11].map(hexToRgb)
+  reverse && colors.reverse();
 
   var segments = bounds.map((d, i) => [d, colors[i]])
-  var totalBounds = bounds ? [bounds[0], bounds[bounds.length - 1]] : [193, 328] // units: kelvins
+  var totalBounds = [bounds[0], bounds[bounds.length - 1]]
   return palette.buildScaleFromSegments(totalBounds, segments, resolution)
 }
 

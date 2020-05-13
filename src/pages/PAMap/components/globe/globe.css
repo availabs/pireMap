@@ -64,5 +64,10 @@
 
 .location-mark {
   stroke: #3aff3a;
-  stroke-width: 2.5;
-  fill: none; }
+  stroke-width: 2px;
+  fill: #3aff3a;
+  fill-opacity: 0.25;
+  cursor: pointer; }
+
+.location-mark:hover {
+  fill-opacity: 0.5; }

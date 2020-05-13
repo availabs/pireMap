@@ -9,7 +9,11 @@ var React = require('react'),
 class GlobeDemo extends React.Component {
 
   static defaultProps = {
-    container: "globeDiv"
+    container: "globeDiv",
+    onGlobeClick: () => {},
+    onPointRemove: () => {},
+    scaleDomain: [-25, -15, -10, -6, -3, 0, 10, 20, 26, 27, 28],
+    useQuantiles: false
   }
 
   constructor (props )  {
@@ -29,14 +33,25 @@ class GlobeDemo extends React.Component {
     if (props.leftOffset) {
       globe.leftOffset = props.leftOffset;
     }
-    globe.init('#' + props.container, { projection: props.projection, onGlobeClick: props.onGlobeClick }) // onGlobeClick: this.props.globeClick
+    globe.init('#' + props.container, {
+      projection: props.projection,
+      onGlobeClick: props.onGlobeClick,
+      onPointRemove: props.onPointRemove
+    })
     if (this.props.scale) {
       globe.setScale(this.props.scale);
     }
     if (props.canvasData) {
-// console.log("INIT GLOBE:", this.props.bounds, this.props.colors);
-       globe.drawCanvas(props.canvasData, { bounds: this.props.bounds, colors: this.props.colors });
+      this.drawGlobe(props);
     }
+  }
+
+  drawGlobe(props) {
+    globe.drawCanvas(props.canvasData,
+      { bounds: props.scaleDomain,
+        useQuantiles: props.useQuantiles
+      }
+    );
   }
 
   componentDidUpdate(oldProps, oldState) {
@@ -45,7 +60,7 @@ class GlobeDemo extends React.Component {
       this.initGlobe(this.props);
     }
     if (this.props.canvasData) {
-      globe.drawCanvas(this.props.canvasData, { bounds: this.props.bounds, colors: this.props.colors });
+      this.drawGlobe(this.props);
     }
   }
 

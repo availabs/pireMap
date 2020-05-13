@@ -8,7 +8,7 @@ import Test from "./pages/Test";
 import Globe from "./pages/Globe";
 
 const routes = [
-    PAMap,
+    ...PAMap,
     Globe,
     Test,
 
