@@ -32,9 +32,9 @@ class Public extends React.Component {
                                 </div>
                             </div>
                         </div>
-                    </div>   
+                    </div>
                 </Link>
-                <Link to='/treeringviewer' style={{display: 'flex', flexDirection: 'column'}}>
+                <Link to='/forest-stress' style={{display: 'flex', flexDirection: 'column'}}>
                     <div style={{height: 300, width: '100%', background: 'url(/img/foreststress.png)', backgroundPosition: 'center right',  }}>
                         <div className='container' style={{height:'100%'}}>
                             <div className='row' style={{height:'100%'}}>
@@ -46,7 +46,7 @@ class Public extends React.Component {
                                 </div>
                             </div>
                         </div>
-                    </div>   
+                    </div>
                 </Link>
                 <Link to='/phyda' style={{display: 'flex', flexDirection: 'column'}}>
                     <div style={{height: 300, width: '100%', background: 'url(/img/phyda.png)', backgroundPosition: 'center right',  }}>
@@ -60,10 +60,10 @@ class Public extends React.Component {
                                 </div>
                             </div>
                         </div>
-                    </div>   
+                    </div>
                 </Link>
             </div>
-      
+
         )
     }
 }
@@ -93,4 +93,3 @@ export default [{
       },
     component: Public
 }];
-

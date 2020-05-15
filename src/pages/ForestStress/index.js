@@ -1,36 +1,21 @@
 import React, { Component } from "react";
 import AvlMap from "components/AvlMap";
-//import PaEventsLayer from "./layers/PaEventsLayer";
-import styled from "styled-components";
 
-const MapWrapper = styled.div`
-  width: 100vw;
-  height: calc(100vh - 41px);
-`;
+import LayerFactory from "./layers/ForestStress.layer"
 
-
-class PAMap extends Component {
+class ForestStress extends Component {
+  ForestStressLayer = LayerFactory({ active: true });
   render() {
     return (
-      <MapWrapper>
+      <div style={ { width: "100vw", height: "calc(100vh - 51px)" } }>
         <AvlMap
-          layers={[]}
-          sidebar={false}
-          zoom={1}
-          center={[-100.546875, 37.43997405227057]}
-          boxZoom={true}
-          styles={[
-            {
-              name: "Dark Streets",
-              style: "mapbox://styles/am3081/ck55pjv7a06p61cp7xvyngyu8"
-            },
-            {
-              name: "Light Streets",
-              style: "mapbox://styles/am3081/ck3t1g9a91vuy1crzp79ffuac"
-            }
-          ]}
-        />
-      </MapWrapper>
+          layers={ [this.ForestStressLayer] }
+          center={ [-100.546875, 37.43997405227057] }
+          zoom={ 3 }
+          sidebarPages={ ["layers"] }
+          sidebar={ false }
+          mapStyle="mapbox://styles/am3081/ck55pjv7a06p61cp7xvyngyu8"/>
+      </div>
     );
   }
 }
@@ -49,5 +34,5 @@ export default {
     layout: "menu-layout-compact",
     style: "color-style-default"
   },
-  component: PAMap
-};
+  component: ForestStress
+}

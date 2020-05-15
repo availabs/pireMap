@@ -13,7 +13,6 @@ const routes = [
     ForestStress,
     Globe,
     ...Public,
-    ...ForestStress,
     Logout,
     NoMatch
 ];
