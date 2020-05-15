@@ -10,12 +10,14 @@ class ForestStressLayer extends MapLayer {
   render(map) {
     const filter = this.filters.dataType,
       color = filter.domain.reduce((a, c) => c.value === filter.value ? c.color : a, "#000");
+
     map.setPaintProperty("forest-stress", "circle-color",
       ["to-color", ["get", color], "#000"]
     );
     map.setPaintProperty("forest-stress", "circle-opacity",
       ["case", ["==", ["get", color], "NA"], 0.5, 1.0]
     );
+    // map.setLayoutProperty("forest-stress", "circle-sort-key", 3);
   }
 }
 
@@ -36,11 +38,22 @@ export default (props = {}) =>
         source: "fs-source",
         type: "circle",
         paint: {
-          "circle-color": ["to-color", ["get", "colora"], "#000"]
+          "circle-color": ["to-color", ["get", "colora"], "#000"],
+          "circle-radius": [
+            "interpolate", ["linear"], ["zoom"],
+            2, 10, 10, 60, 20, 120
+          ],
+          "circle-blur": [
+            "interpolate", ["linear"], ["zoom"],
+            2, 1, 8, 0.5, 16, 0.0
+          ],
+          "circle-pitch-alignment": "map"
         }
       }
     ],
+
     ...props,
+    
     filters: {
       dataType: {
         name: "Data Type",
