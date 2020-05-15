@@ -97,7 +97,7 @@ export default (props = {}) =>
       return (
         <StyledSelector
           className={ this.props.selected ? "selected" : null }
-          onClick={ this.props.onClick }>
+          onClick={ this.props.selected ? null : this.props.onClick }>
           <div style={ { width: "30px" } }>
             <span className="fa fa-check"/>
           </div>
