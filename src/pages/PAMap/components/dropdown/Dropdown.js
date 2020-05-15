@@ -33,15 +33,15 @@ class Dropdown extends React.Component {
 
   render() {
 
-    
+
     return (
-    
+
         <label>
           Filter by Species:
           <select value={this.state.value} onChange={this.handleChange}>
 
             {this.state.values.map(item => (
-              <option  value={item}> {item} </option>
+              <option key={ item }  value={item}> {item} </option>
             ))}
           </select>
         </label>

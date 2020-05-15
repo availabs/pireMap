@@ -166,7 +166,7 @@ class Sidebar extends Component {
         }
 
         <Pages>
-          {
+          { pages.length < 2 ? null :
             pages.map(({ page, Icon }) => <Icon key={ page }/>)
           }
         </Pages>

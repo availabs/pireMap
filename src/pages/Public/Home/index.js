@@ -33,10 +33,10 @@ class Public extends React.Component {
                                 </div>
                             </div>
                         </div>
-                    </div>   
+                    </div>
                 </Link>
                 <Link to='/forest-stress' style={{display: 'flex', alignItems: 'center', justifyContent: 'center', flexDirection: 'column', padding: '25px'}}>
-                    <div style={{height: 250, width: '75%', background: 'url(/img/foreststress3.png)', backgroundPosition: 'center right',  }}>
+                    <div style={{height: 250, width: '75%', background: 'url(/img/foreststress5.png)', backgroundPosition: 'center right',  }}>
                         <div className='container' style={{height:'75%'}}>
                             <div className='row' style={{height:'100%'}}>
                                 <div className='col-12 col-md-6' style={{backgroundColor: 'rgba(0,0,0,0.75)', height: '90%', margin: 10}}>
@@ -47,7 +47,7 @@ class Public extends React.Component {
                                 </div>
                             </div>
                         </div>
-                    </div>   
+                    </div>
                 </Link>
                 <Link to='/phyda' style={{display: 'flex', alignItems: 'center', justifyContent: 'center', flexDirection: 'column', padding: '25px'}}>
                     <div style={{height: 250, width: '75%', background: 'url(/img/phyda2.png)', backgroundPosition: 'center',  }}>
@@ -61,10 +61,10 @@ class Public extends React.Component {
                                 </div>
                             </div>
                         </div>
-                    </div>   
+                    </div>
                 </Link>
             </div>
-      
+
         )
     }
 }
@@ -94,4 +94,3 @@ export default [{
       },
     component: Public
 }];
-
