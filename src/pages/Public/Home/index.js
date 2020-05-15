@@ -1,9 +1,6 @@
 import React from 'react';
-import {connect} from 'react-redux';
-import {reduxFalcor} from 'utils/redux-falcor'
-import {createMatchSelector} from 'react-router-redux'
-import Element from 'components/light-admin/containers/Element'
-import ElementBox from "../../../components/light-admin/containers/ElementBox";
+import {Link} from 'react-router-dom'
+
 
 
 class Public extends React.Component {
@@ -17,12 +14,57 @@ class Public extends React.Component {
 
     render() {
         return (
-            <div>
-                <ElementBox>
-                    <h2>Welcome to the Page</h2>
-                </ElementBox>
-
+            <div style={{
+                width: "100vw",
+                height: "100vh",
+                backgroundColor: '#2e2e2e',
+                position: "relative",
+                color: '#efefef'
+              }}>
+                <Link style={{display: 'flex', flexDirection: 'column'}}>
+                    <div style={{height: 300, width: '100%', background: 'url(/img/treering.png)', backgroundPosition: 'center',  }}>
+                        <div className='container' style={{height:'100%'}}>
+                            <div className='row' style={{height:'100%'}}>
+                                <div className='col-12 col-md-6' style={{backgroundColor: 'rgba(0,0,0,0.35)', height: '90%', margin: 10}}>
+                                    <h1 style={{color:'#cfcfcf'}}>Tree Ring Viewer</h1>
+                                    <p style={{color:'#efefef'}}>
+                                    Tree Ring Viewer: The PIRE CREATE visualization tool provides unique access to NOAA's tree-ring and speleothem archives, as well as an unrivaled number of new, unpublished records, via an interactive mapping and visualization platform for the scientific community, policy-makers and public at large. The visualization platform incorporates PIRE’s collection of paleoclimate research to generate powerful insights for government and public officials of the future risks associated with climate change around the world.
+                                    </p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>   
+                </Link>
+                <Link to='/treeringviewer' style={{display: 'flex', flexDirection: 'column'}}>
+                    <div style={{height: 300, width: '100%', background: 'url(/img/foreststress.png)', backgroundPosition: 'center right',  }}>
+                        <div className='container' style={{height:'100%'}}>
+                            <div className='row' style={{height:'100%'}}>
+                                <div className='col-12 col-md-6' style={{backgroundColor: 'rgba(0,0,0,0.35)', height: '90%', margin: 10}}>
+                                    <h1 style={{color:'#cfcfcf'}}>Forest Stress</h1>
+                                    <p style={{color:'#efefef', textDecoration: 'none'}}>
+                                    Tree Ring Viewer: The PIRE CREATE visualization tool provides unique access to NOAA's tree-ring and speleothem archives, as well as an unrivaled number of new, unpublished records, via an interactive mapping and visualization platform for the scientific community, policy-makers and public at large. The visualization platform incorporates PIRE’s collection of paleoclimate research to generate powerful insights for government and public officials of the future risks associated with climate change around the world.
+                                    </p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>   
+                </Link>
+                <Link to='/phyda' style={{display: 'flex', flexDirection: 'column'}}>
+                    <div style={{height: 300, width: '100%', background: 'url(/img/phyda.png)', backgroundPosition: 'center right',  }}>
+                        <div className='container' style={{height:'100%'}}>
+                            <div className='row' style={{height:'100%'}}>
+                                <div className='col-12 col-md-6' style={{backgroundColor: 'rgba(0,0,0,0.35)', height: '90%', margin: 10}}>
+                                    <h1 style={{color:'#cfcfcf'}}>PHYDA</h1>
+                                    <p style={{color:'#efefef', textDecoration: 'none'}}>
+                                    Tree Ring Viewer: The PIRE CREATE visualization tool provides unique access to NOAA's tree-ring and speleothem archives, as well as an unrivaled number of new, unpublished records, via an interactive mapping and visualization platform for the scientific community, policy-makers and public at large. The visualization platform incorporates PIRE’s collection of paleoclimate research to generate powerful insights for government and public officials of the future risks associated with climate change around the world.
+                                    </p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>   
+                </Link>
             </div>
+      
         )
     }
 }
