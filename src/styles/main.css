@@ -21599,3 +21599,5 @@ Contents:
     margin: 0px auto; } }
 
 /* ##. User Override Styles */
+a:hover {
+  text-decoration: none; }

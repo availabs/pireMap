@@ -589,7 +589,7 @@ const Dropdown = ({ disabled, value, options = [], onSelect = (() => {}) }) =>
   </StyledDropdown>
 
 export default {
-  path: "/phydra",
+  path: "/phyda",
   exact: true,
   mainNav: true,
   menuSettings: {
@@ -600,7 +600,7 @@ export default {
     layout: "menu-layout-compact",
     style: "color-style-default"
   },
-  name: "PHYDRA",
+  name: "PHYDA",
   auth: false,
   component: Home
 };
