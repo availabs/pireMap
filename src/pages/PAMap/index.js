@@ -35,22 +35,7 @@ class PAMap extends Component {
   }
 }
 
-export default [{
-  path: "/",
-  name: "Tree Ring Viewer",
-  exact: true,
-  auth: false,
-  mainNav: false,
-  menuSettings: {
-    image: "none",
-    display: "none",
-    scheme: "color-scheme-dark",
-    position: "menu-position-top",
-    layout: "menu-layout-compact",
-    style: "color-style-default"
-  },
-  component: PAMap
-},
+export default [
 {
   path: "/treeringviewer",
   name: "Tree Ring Viewer",

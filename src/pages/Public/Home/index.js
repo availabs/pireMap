@@ -19,7 +19,7 @@ class Public extends React.Component {
         return (
             <div>
                 <ElementBox>
-                    <h2>Welcome to the PA Map Page</h2>
+                    <h2>Welcome to the Page</h2>
                 </ElementBox>
 
             </div>
@@ -37,22 +37,19 @@ const mapStateToProps = (state, ownProps) => {
 const mapDispatchToProps = {};
 export default [{
     icon: 'os-icon-home',
-    path: '/public',
+    path: '/',
     exact: true,
-    name: 'Public',
-    auth: true,
-    mainNav: true,
-    breadcrumbs: [
-        {name: 'Home', path: '/public'},
-        {param: 'geoid', path: '/public/'}
-    ],
+    name: 'Home',
+    auth: false,
+    mainNav: false,
     menuSettings: {
-        image: 'none',
-        scheme: 'color-scheme-dark',
-        position: 'menu-position-top',
-        layout: 'menu-layout-full',
-        style: 'color-style-default'
-    },
-    component: connect(mapStateToProps, mapDispatchToProps)(reduxFalcor(Public))
+        image: "none",
+        display: "none",
+        scheme: "color-scheme-dark",
+        position: "menu-position-top",
+        layout: "menu-layout-compact",
+        style: "color-style-default"
+      },
+    component: Public
 }];
 
