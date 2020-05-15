@@ -16,7 +16,7 @@ class Public extends React.Component {
         return (
             <div style={{
                 width: "100vw",
-                height: "100vh",
+               
                 backgroundColor: '#2e2e2e',
                 position: "relative",
                 color: '#efefef'
