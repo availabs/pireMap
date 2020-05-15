@@ -7,10 +7,14 @@ import Public from "./pages/Public/Home";
 import Test from "./pages/Test";
 import Globe from "./pages/Globe";
 
+import ForestStress from "./pages/ForestStress"
+
 const routes = [
     ...PAMap,
     Globe,
     Test,
+
+    ...ForestStress,
 
     //Globe,
     Logout,

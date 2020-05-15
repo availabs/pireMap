@@ -58,6 +58,7 @@ class AvlMap extends React.Component {
 		height: "100%",
 	  styles: [...DEFAULT_STYLES],
 	  style: "Dark",
+		mapStyle: null,
 		center: [-73.680647, 42.68],
 		minZoom: 2,
 		zoom: 10,
@@ -65,7 +66,7 @@ class AvlMap extends React.Component {
 	  mapControl: 'bottom-right',
 	  scrollZoom: true,
 	  sidebar: true,
-        mapactions: true,
+    mapactions: true,
 	  update: [],
 		header: "AVAIL Map",
 	  sidebarPages: ["layers", "basemaps"],
@@ -92,8 +93,7 @@ class AvlMap extends React.Component {
       component && component[action] && component[action].call(component, ...args);
     }
   }
-	sta
-  testFunc(...args) {
+	static testFunc(...args) {
     console.log("TEST FUNCTION:", ...[...args].map(arg => arg.toString()));
   }
 
@@ -138,14 +138,15 @@ class AvlMap extends React.Component {
     	minZoom,
     	zoom,
       mapControl,
-			preserveDrawingBuffer
+			preserveDrawingBuffer,
+			mapStyle
     } = this.props;
 
 		const { id } = this.state;
 
     const map = new mapboxgl.Map({
       container: id,
-      style: this.state.style.style,
+      style: mapStyle || this.state.style.style,
       center,
       minZoom,
       zoom,
@@ -177,6 +178,9 @@ class AvlMap extends React.Component {
     });
 
     map.on('load',  () => {
+
+			this.setState({ map });
+
       const activeLayers = [];
       this.props.layers.forEach(layer => {
 
@@ -198,7 +202,7 @@ class AvlMap extends React.Component {
       if (this.props.fitBounds){
         map.fitBounds(this.props.fitBounds)
       }
-      this.setState({ map, activeLayers })
+      this.setState({ activeLayers })
 
       AvlMap.addActiveMap(id, this, map);
     })
@@ -237,7 +241,7 @@ class AvlMap extends React.Component {
 
 		if (!layer) return;
 
-console.log("LAYER FACTORY:", layerFactory)
+// console.log("LAYER FACTORY:", layerFactory)
 		const newLayer = layerFactory.call(null, layer),
 			newLayerName = newLayer.name,
 			allLayers = [
