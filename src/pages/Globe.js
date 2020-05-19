@@ -297,7 +297,7 @@ class Home extends React.Component {
         } }>
           <div style={ { padding: "15px 20px" } }>
             <div>Current Year: { year } AD</div>
-            <div>Mean Tempuature: { float(d3array.mean(allData[year] || [])) }{ '°' }C</div>
+            <div>Mean Temperature: { float(d3array.mean(allData[year] || [])) }{ '°' }C</div>
             { !get(this.state, ["mapClick"], null) ? null :
               <>
                 <div style={ { borderBottom: "2px solid currentColor", margin: "5px 0px" } }/>
