@@ -23,7 +23,6 @@ import d3 from "d3v3"
 //
 // console.log('array length', tempData.data.length)
 
-
 const MAX_YEAR = 1785,
 // const MAX_YEAR = 500,
   START_DATA = []
@@ -108,6 +107,17 @@ class Home extends React.Component {
       .catch(err => (console.log('error', err), []));
   }
 
+  getLineData() {
+    const { data, anomalyRangeMeans, displayMode } = this.state,
+      arMean = d3array.mean(anomalyRangeMeans);
+    switch (displayMode) {
+      case "global-temps":
+        return data;
+      case "global-anomalies":
+        return data.map(({ y, x }) => ({ y: y - arMean, x }));
+    }
+  }
+
   getGlobeData() {
     const { allData, year, displayMode, anomalyRangeMeans } = this.state,
       data = get(allData, year, []);
@@ -185,24 +195,31 @@ class Home extends React.Component {
 
   render() {
     const {
-        year, allData, data, min,
-        max, anomalyRange, arUpdate,
+        year, allData, anomalyRangeMeans,
+        anomalyRange, arUpdate,
         mapClick, loading, displayMode
       } = this.state,
+      lineData = this.getLineData(),
       tickValues = [250, 500, 750, 1000, 1250, 1500, 1750]
-        .filter(y => data.length >= y),
+        .filter(y => lineData.length >= y),
       _format = d3format(",d"),
       format = v => `${ _format(v) } AD`,
       float = d3format(".2f");
 
+    const [min, max] = d3array.extent(lineData, d => d.y);
+
     let tMin = min, tMax = max;
-    const indexData = Object.values(allData)
-      .reduce((a, c, i) => {
+    const indexData = Object.keys(allData)
+      .sort((a, b) => a - b)
+      .reduce((a, x) => {
         if (mapClick) {
-          const y = c[mapClick.index];
+          let y = allData[x][mapClick.index];
+          if (this.state.displayMode === "global-anomalies") {
+            y -= anomalyRangeMeans[mapClick.index];
+          }
           tMin = Math.min(tMin, y);
           tMax = Math.max(tMax, y);
-          a.push({ x: i + 1, y });
+          a.push({ x, y });
         }
         return a;
       }, []);
@@ -405,7 +422,7 @@ class Home extends React.Component {
               data={ [
                 { id: "Mean Temperature",
                   title: "Mean Tempuature",
-                  data },
+                  data: lineData },
                 { id: "Index",
                   title: "",
                   data: indexData }
