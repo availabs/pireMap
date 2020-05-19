@@ -458,6 +458,7 @@ const LegendContainer = styled.div`
 const LegendItem = styled.div`
   width: 50px;
   height: 20px;
+  line-height: 20px;
 `
 
 const InputContainer = styled.div`
