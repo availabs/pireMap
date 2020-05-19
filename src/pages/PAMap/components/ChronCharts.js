@@ -1,24 +1,22 @@
 import React, { Component } from "react";
-import Tree from "./Tree";
-//import InfoBox from "./InfoBox";
-import ChronCharts from "../components/ChronCharts";
-
+import Chronology from "./chronology";
+import InfoBox from "./InfoBox";
 
 
 function parseLine(line) {
 	return {
-		name: line.substring(0, 8),
-		year: line.substring(8, 12),
-		v1: line.substring(14, 18),
-		v2: line.substring(20, 24),
-		v3: line.substring(26, 30),
-		v4: line.substring(32, 36),
+		name: line.substring(0, 6),
+		year: line.substring(6, 10),
+		v1: line.substring(10,14 ),
+		v2: line.substring(17, 21),
+		v3: line.substring(24, 28),
+		v4: line.substring(31, 35),
 		v5: line.substring(38, 42),
-		v6: line.substring(44, 48),
-		v7: line.substring(50, 54),
-		v8: line.substring(56, 60),
-		v9: line.substring(62, 66),
-		v10: line.substring(68, 72)
+		v6: line.substring(45, 49),
+		v7: line.substring(52, 56),
+		v8: line.substring(59, 63),
+		v9: line.substring(66, 70),
+		v10: line.substring(73, 77)
 	};
 }
 
@@ -35,9 +33,10 @@ function siteDataLoader(xmlid, cb) {
 
 			//find all data which has only *.rwl file--exclude out all crs, xls, noaa.rwl
 			let studyDataFileSelected = studyDataFile.find(
-				item => item.urlDescription === "Raw Measurements"
+				item => item.urlDescription === "Chronology"
 			);
 
+      
 
 			let studyDataUrl = studyDataFileSelected.fileUrl;
 			console.log("studyDataURL---------", studyDataUrl, studyDataFile);
@@ -45,20 +44,30 @@ function siteDataLoader(xmlid, cb) {
 			fetch(studyDataUrl)
 				.then(res => res.text())
 				.then(textData => {
-					/*console.log(textData);*/
+
+
+					/*console.log('textData----',textData);*/
 
 					let lines = textData.split("\n");
+						//console.log("lines1-------", lines);
 					lines.splice(0, 3);
+						//console.log("lines2-------", lines);
 					lines.pop();
+				    lines.pop();
 
-					/*	console.log("lines-------", lines);*/
+			/*			console.log("lines3-------", lines);*/
 
 					let data = lines.map(line => parseLine(line));
+					console.log('lineData-----', data)
 
 					cb(data);
 				});
+
+     
+
 		});
 }
+
 
 class Charts extends Component {
 	constructor() {
@@ -76,7 +85,7 @@ class Charts extends Component {
 		/*	const sample = "/data/ak132x-noaa.tsv";*/
 		siteDataLoader(this.props.site, data => {
 			this.setState({ data: this.processTreeData(data) });
-			console.log("data---", data);
+			/*console.log("data---------", data);*/
 		});
 		console.log("chart did mount");
 		console.log("studyData-----", this.props.authors, this.props.species)
@@ -97,7 +106,8 @@ class Charts extends Component {
 
 				let values = Object.values(row).slice(2);
 
-				/*console.log("values---", values, treekey, startYear, rowYears);*/
+
+				console.log("values---", values, treekey, startYear, rowYears);
 
 				if (!output[treekey]) {
 					output[treekey] = {};
@@ -107,10 +117,11 @@ class Charts extends Component {
 						!isNaN(+values[i]) &&
 						+values[i] !== 0 &&
 						+values[i] !== 9999 &&
+					    +values[i] !== 9990 &&
 						+values[i] !== 999 &&
 						+values[i] !== 8888 &&
 						+values[i] !== -999 &&
-						+values[i] !== -9999
+						+values[i] !== -9999 
 
 					) {
 						if (!years[rowYears[i]]) {
@@ -126,7 +137,7 @@ class Charts extends Component {
 				return output;
 			}, {}); //parsed data with new final format
 
-			/*console.log("treedata---------------------", trees);*/
+			console.log("treedata---------------------", trees);
 
 			let TotalTreeWidths = Object.keys(trees).map(treekey =>
 				Object.values(trees[treekey]).reduce((a, b) => a + b, 0)
@@ -184,7 +195,7 @@ class Charts extends Component {
 		return Object.keys(this.state.data.trees).filter(d => d).map(treeKey => {
 			return (
 			
-				<Tree
+				<Chronology
 					name={treeKey}
 					data={this.state.data.trees}
 					meta={this.state.data.meta}
@@ -196,7 +207,8 @@ class Charts extends Component {
 	}
 
 
-/*	renderInfoBox() {
+
+	renderInfoBox() {
 		if (!this.state.data) {
 			return <div>Loading</div>;
 		}
@@ -215,22 +227,23 @@ class Charts extends Component {
 			);
 	
 	}
-*/
+
 
 
 	render() {
 		return (
 			<div style={{display: 'flex'}}>
 
-					<div style={{ display: "flex", flexWrap: "wrap",   padding: 5, justifyContent: 'flex-start'}}> 
+					<div style={{ display: "flex", flexWrap: "wrap",   padding: 5, justifyContent: 'scenter'}}> 
 						{this.renderTrees()}
 					</div>
-
-{/*					<div style={{ display: "flex", flexWrap: "wrap",  flexBasis:"400px",  padding: 10}}>  border: '1px solid white', 
+					<div style={{ display: "flex", flexWrap: "wrap",  flexBasis:"400px",  padding: 10}}>  {/*border: '1px solid white',*/} 
 						<div style={{width: 300}}>
 						{this.renderInfoBox()}
 						</div>
-				    </div>*/}
+				    </div>
+
+				
 			</div>
 		);
 	}

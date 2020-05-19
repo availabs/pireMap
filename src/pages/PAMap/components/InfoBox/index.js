@@ -2,9 +2,9 @@ import React, { Component } from "react";
 import styled from "styled-components";
 
 const InfoBoxContainer = styled.div`
-	width: 300px;
-	height: 600px;
-	margin: 10px;
+	width: 400px;
+	height: 500px;
+	margin: 5px;
 	border-radius: 10px;
 	background: #2e2e2e;
 	box-shadow:  -5px -5px 10px #272727, 

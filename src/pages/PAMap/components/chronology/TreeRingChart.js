@@ -27,7 +27,7 @@ class Circles extends Component {
 
 
 		let dataValue = Object.values(trees[treeKey]);
-		/*console.log('dataValue----', dataValue)*/
+		console.log('dataValue----', dataValue)
 
 
 		//circle chart start here ----
@@ -101,8 +101,8 @@ class Circles extends Component {
 			})
 
 			.attr("r", function(d, i) {
-				return ringScale(d);
-				//return d*0.005/2
+				//return ringScale(d);
+				return d*0.0005
 			})
 
 			//.attr("fill-opacity","0.2")

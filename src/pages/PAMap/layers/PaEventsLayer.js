@@ -14,6 +14,7 @@ import { fnum } from "utils/sheldusUtils";
 
 
 import Charts from "../components/Charts";
+import ChronCharts from "../components/ChronCharts";
 /*import Charts from "../components/svg";*/
 /*import Charts from "../components/test";*/
 
@@ -167,7 +168,16 @@ const PaLayer = (options = {}) =>
       modals: {
         RingModal: {
           title: "Tree Ring Widths",
-          comp: ({ layer }) => <Charts site={layer.activeSite} authors={layer.authors} species={layer.species} meta={layer.meta} />,
+          comp: ({ layer }) => 
+{
+              return (
+              <div>
+              <ChronCharts site={layer.activeSite} authors={layer.authors} species={layer.species} meta={layer.meta} />
+              <Charts site={layer.activeSite} authors={layer.authors} species={layer.species} meta={layer.meta} />
+              </div>
+            )},
+
+
           show: false
         }
       },
