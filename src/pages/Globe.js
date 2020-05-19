@@ -271,16 +271,13 @@ class Home extends React.Component {
               <div>Temperatures</div>
               <div>
                 { colors.map(c =>
-                    <div key={ c }
-                      style={ { width: "50px", height: "25px", backgroundColor: c} }/>
+                    <LegendItem key={ c } style={ { backgroundColor: c} }/>
                   )
                 }
               </div>
               <div>
                 { scaleDomain.map(d =>
-                    <div key={ d } style={ { width: "50px", height: "25px" } }>
-                     { lFormat(d) }
-                    </div>
+                    <LegendItem key={ d }>{ lFormat(d) }</LegendItem>
                   )
                 }
               </div>
@@ -457,6 +454,10 @@ const LegendContainer = styled.div`
     border-top-right-radius: 3px;
     border-bottom-right-radius: 3px;
   }
+`
+const LegendItem = styled.div`
+  width: 50px;
+  height: 20px;
 `
 
 const InputContainer = styled.div`
