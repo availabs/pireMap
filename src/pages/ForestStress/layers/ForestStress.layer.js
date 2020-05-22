@@ -6,6 +6,14 @@ import geojson from "./geojson"
 
 import styled from "styled-components"
 
+
+let AboutText = {
+  synchrony: 'syncrhony Lorem ipsum',
+  change: 'Lorem Ipsem stuf and stuff',
+  significance: 'significancesignificance significancesignificancesignificance significance'
+
+}
+
 class ForestStressLayer extends MapLayer {
   render(map) {
     const filter = this.filters.dataType,
@@ -108,14 +116,18 @@ export default (props = {}) =>
   class Selector extends React.Component {
     render() {
       return (
-        <StyledSelector
-          className={ this.props.selected ? "selected" : null }
-          onClick={ this.props.selected ? null : this.props.onClick }>
-          <div style={ { width: "30px" } }>
-            <span className="fa fa-check"/>
-          </div>
-          <div>{ this.props.name }</div>
-        </StyledSelector>
+        <div>
+          <StyledSelector
+            className={ this.props.selected ? "selected" : null }
+            onClick={ this.props.selected ? null : this.props.onClick }>
+            <div style={ { width: "30px" } }>
+              <span className="fa fa-check"/>
+            </div>
+            <div>{ this.props.name }</div>
+           
+          </StyledSelector>
+           {this.props.selected ? (<div style={{padding: 10}}>{AboutText[this.props.value]}</div>) : ''}
+        </div>
       )
     }
   }
