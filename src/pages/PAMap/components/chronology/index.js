@@ -4,12 +4,14 @@ import LineChart from "./LineChart";
 import styled from "styled-components";
 
 const TreeContainer = styled.div`
-	width: 1235px;
+	width: 1600px;
 	height: 500px;
 	margin: 10px;
+	align: center;
 	border-radius: 20px;
 	background: #2e2e2e;
-    align-items: center;
+    display: 'flex';
+    justify-content: 'center';
 	box-shadow:  -5px -5px 10px #272727, 
              5px 5px 15px #353535;
 `;
@@ -47,7 +49,10 @@ const titleStyle = {
       width: '100%',
       padding: '15px',
       fontFamily: 'Roboto',
-      fontWeight: 'bold'
+      fontWeight: 'bold',
+      display: "flex",
+      justifyContent: 'center',
+      flexDirection: 'row'
     
     };
 
@@ -66,25 +71,30 @@ const subTitleStyle = {
 
 
 const Tree = ({ name, data, meta, ...rest }) => {
-	console.log("index props ----", name, data, meta )
+/*	console.log("index props ----", name, data, meta )
 		let startYears = Object.keys(data[name]).sort();
 		let startYear=	startYears[0];
-		let EndYear = startYears[startYears.length - 1];
+		let EndYear = startYears[startYears.length - 1];*/
 	/*	console.log('startYears----', startYear, EndYear)*/
 
 	return (
+
+
 		<TreeContainer>
+
 			<div style={titleStyle}> Chronology</div>
 		
 
-			<div className='linechartContainer' style={{marginTop: 40}}>
+			<div style={{ display: "flex", flexWrap: "wrap",   margin: 50, justifyContent: 'center'}} >
 
 				<LineChart name={name} data={data} meta={meta}  />
+
+	            <TreeRingChart name={name} data={data} meta={meta}/>
 				
 			</div>
 			
 
-			{/*<TreeRingChart name={name} data={data} meta={meta}/>*/}
+		
 		</TreeContainer>
 	);
 };

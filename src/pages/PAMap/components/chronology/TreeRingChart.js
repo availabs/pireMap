@@ -19,9 +19,9 @@ class Circles extends Component {
         let treeRingColor= meta.treeRingColor
 
 
-		var margin = { top: 70, right: 40, bottom: 0, left: 40 },
-			width = 300,
-			height = 300;
+		var margin = { top: 5, right: 40, bottom: 0, left: 40 },
+			width = 350,
+			height = 350;
 
 		let treeKey = this.props.name;
 
@@ -32,11 +32,7 @@ class Circles extends Component {
 
 		//circle chart start here ----
 
-		var ringScale = d3
-			.scaleLinear()
-			.domain([ d3.min(TotalTreeWidths), d3.max(TotalTreeWidths) /* d3.max(accuRingWidths)*/]) // d3.max(TotalTreeWidths)
-			.range([5, height / 2]);
-
+	
 		let TreeContainer = d3
 			.select(`.tree-${this.props.name}`)
 			.append("div")
@@ -56,6 +52,11 @@ class Circles extends Component {
 		}, []);
 
 		console.log('accuRingWidths---', accuRingWidths  )
+		
+	    var ringScale = d3
+			.scaleLinear()
+			.domain([ d3.min(accuRingWidths),/* d3.max(TotalTreeWidths)*/  d3.max(accuRingWidths)]) // d3.max(TotalTreeWidths)
+			.range([5, height / 2]);
 
 
 
@@ -101,8 +102,8 @@ class Circles extends Component {
 			})
 
 			.attr("r", function(d, i) {
-				//return ringScale(d);
-				return d*0.0005
+				return ringScale(d);
+				//return d*0.0004
 			})
 
 			//.attr("fill-opacity","0.2")

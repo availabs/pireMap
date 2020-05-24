@@ -1,6 +1,6 @@
 import React, { Component } from "react";
 import Tree from "./Tree";
-//import InfoBox from "./InfoBox";
+import InfoBox from "./InfoBox";
 import ChronCharts from "../components/ChronCharts";
 
 
@@ -38,9 +38,11 @@ function siteDataLoader(xmlid, cb) {
 				item => item.urlDescription === "Raw Measurements"
 			);
 
+            console.log("studyDataFile---------", studyDataFile);
 
 			let studyDataUrl = studyDataFileSelected.fileUrl;
-			console.log("studyDataURL---------", studyDataUrl, studyDataFile);
+
+			console.log("studyDataURL---------", studyDataUrl);
 
 			fetch(studyDataUrl)
 				.then(res => res.text())
@@ -107,6 +109,7 @@ class Charts extends Component {
 						!isNaN(+values[i]) &&
 						+values[i] !== 0 &&
 						+values[i] !== 9999 &&
+				        +values[i] !== 9990 &&
 						+values[i] !== 999 &&
 						+values[i] !== 8888 &&
 						+values[i] !== -999 &&
@@ -196,7 +199,7 @@ class Charts extends Component {
 	}
 
 
-/*	renderInfoBox() {
+	renderInfoBox() {
 		if (!this.state.data) {
 			return <div>Loading</div>;
 		}
@@ -215,7 +218,7 @@ class Charts extends Component {
 			);
 	
 	}
-*/
+
 
 
 	render() {
@@ -226,11 +229,11 @@ class Charts extends Component {
 						{this.renderTrees()}
 					</div>
 
-{/*					<div style={{ display: "flex", flexWrap: "wrap",  flexBasis:"400px",  padding: 10}}>  border: '1px solid white', 
+					<div style={{ display: "flex", flexWrap: "wrap",  flexBasis:"400px",  padding: 5, justifyContent: 'flex-start'}}> {/* border: '1px solid white', */}
 						<div style={{width: 300}}>
 						{this.renderInfoBox()}
 						</div>
-				    </div>*/}
+				    </div>
 			</div>
 		);
 	}

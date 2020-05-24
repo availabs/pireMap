@@ -160,7 +160,7 @@ class Lines extends Component {
 			        .attr("x", 15)
 			      	.attr("dy", ".31em");
 
-			    svg.append("rect")
+			/*    svg.append("rect")
 			        .attr("transform", "translate(" + 0 + "," + margin.top + ")")
 		            .attr("fill", "none")
 			        .attr("pointer-events", "all")
@@ -183,7 +183,7 @@ class Lines extends Component {
 			      focus.select("text").text(function() { return d.value; });
 			      focus.select(".x-hover-line").attr("y2", height - y(d.value));
 
-			    }
+			    }*/
 
 
 //coerce to number

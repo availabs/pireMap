@@ -169,10 +169,13 @@ const PaLayer = (options = {}) =>
         RingModal: {
           title: "Tree Ring Widths",
           comp: ({ layer }) => 
-{
+        {
               return (
               <div>
-              <ChronCharts site={layer.activeSite} authors={layer.authors} species={layer.species} meta={layer.meta} />
+                   <div style={{ display: "flex", flexWrap: "wrap",   padding: 5, justifyContent: 'center'}}>
+                  <ChronCharts site={layer.activeSite} authors={layer.authors} species={layer.species} meta={layer.meta} />
+                     </div>
+
               <Charts site={layer.activeSite} authors={layer.authors} species={layer.species} meta={layer.meta} />
               </div>
             )},

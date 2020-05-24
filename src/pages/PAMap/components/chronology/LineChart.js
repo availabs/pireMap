@@ -49,7 +49,7 @@ class Lines extends Component {
 		//line chart start here ----
 
 		var margin = { top: 5, right: 40, bottom: 30, left: 40 },
-			width = 1150,
+			width = 900,
 			height = 300;
 
 		var bisectDate = d3.bisector(function(d) { return d.year; }).left

@@ -1,6 +1,6 @@
 import React, { Component } from "react";
 import Chronology from "./chronology";
-import InfoBox from "./InfoBox";
+/*import InfoBox from "./InfoBox";*/
 
 
 function parseLine(line) {
@@ -31,37 +31,42 @@ function siteDataLoader(xmlid, cb) {
 			let studyDataFile =
 				studyData.study[0].site[0].paleoData[0].dataFile;
 
-			//find all data which has only *.rwl file--exclude out all crs, xls, noaa.rwl
+			//find all data which has only *.crn file
 			let studyDataFileSelected = studyDataFile.find(
 				item => item.urlDescription === "Chronology"
 			);
-
       
+			console.log("studyDataFileSelected---------", studyDataFileSelected);
 
-			let studyDataUrl = studyDataFileSelected.fileUrl;
-			console.log("studyDataURL---------", studyDataUrl, studyDataFile);
+            if (studyDataFileSelected) {
 
-			fetch(studyDataUrl)
-				.then(res => res.text())
-				.then(textData => {
+            	let studyDataUrl = studyDataFileSelected.fileUrl;
+			     console.log("ChronstudyDataURL---------", studyDataUrl, studyDataFile);
+
+				fetch(studyDataUrl)
+					.then(res => res.text())
+					.then(textData => {
 
 
-					/*console.log('textData----',textData);*/
+						/*console.log('textData----',textData);*/
 
-					let lines = textData.split("\n");
-						//console.log("lines1-------", lines);
-					lines.splice(0, 3);
-						//console.log("lines2-------", lines);
-					lines.pop();
-				    lines.pop();
+						let lines = textData.split("\n");
+							//console.log("lines1-------", lines);
+						lines.splice(0, 3);
+							//console.log("lines2-------", lines);
+						lines.pop();
+					    lines.pop();
 
-			/*			console.log("lines3-------", lines);*/
+				         /* console.log("lines3-------", lines);*/
 
-					let data = lines.map(line => parseLine(line));
-					console.log('lineData-----', data)
+						let data = lines.map(line => parseLine(line));
+						console.log('ChronlineData-----', data)
 
-					cb(data);
-				});
+						cb(data);
+					});
+            }
+
+			
 
      
 
@@ -189,7 +194,7 @@ class Charts extends Component {
 
 	renderTrees() {
 		if (!this.state.data) {
-			return <div>Loading</div>;
+			return <div>No Chronlogy Data is available</div>;
 		}
 
 		return Object.keys(this.state.data.trees).filter(d => d).map(treeKey => {
@@ -208,7 +213,7 @@ class Charts extends Component {
 
 
 
-	renderInfoBox() {
+/*	renderInfoBox() {
 		if (!this.state.data) {
 			return <div>Loading</div>;
 		}
@@ -226,7 +231,7 @@ class Charts extends Component {
 			
 			);
 	
-	}
+	}*/
 
 
 
@@ -234,14 +239,14 @@ class Charts extends Component {
 		return (
 			<div style={{display: 'flex'}}>
 
-					<div style={{ display: "flex", flexWrap: "wrap",   padding: 5, justifyContent: 'scenter'}}> 
+					<div style={{ display: "flex", flexWrap: "wrap",   padding: 5, justifyContent: 'center', alignContent: 'center' }}> 
 						{this.renderTrees()}
 					</div>
-					<div style={{ display: "flex", flexWrap: "wrap",  flexBasis:"400px",  padding: 10}}>  {/*border: '1px solid white',*/} 
+{/*					<div style={{ display: "flex", flexWrap: "wrap",  flexBasis:"400px",  padding: 10}}>  border: '1px solid white', 
 						<div style={{width: 300}}>
 						{this.renderInfoBox()}
 						</div>
-				    </div>
+				    </div>*/}
 
 				
 			</div>
@@ -249,3 +254,5 @@ class Charts extends Component {
 	}
 }
 export default Charts;
+
+

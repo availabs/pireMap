@@ -77,5 +77,3 @@ const Tree = ({ name, data, meta, ...rest }) => {
 };
 
 export default Tree;
-
-
