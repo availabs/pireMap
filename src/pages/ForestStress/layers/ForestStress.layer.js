@@ -27,6 +27,12 @@ class ForestStressLayer extends MapLayer {
     const filter = this.filters.dataType,
       color = filter.domain.reduce((a, c) => c.value === filter.value ? c.color : a, "#000");
 
+    if(filter.value === 'synchrony') {
+      map.setLayoutProperty('modeled-synchrony-layer', 'visibility', 'visible');
+    } else {
+      map.setLayoutProperty('modeled-synchrony-layer', 'visibility', 'none');
+    }
+
     map.setPaintProperty("forest-stress", "circle-color",
       ["to-color", ["get", color], "#000"]
     );
@@ -47,9 +53,22 @@ export default (props = {}) =>
           type: "geojson",
           data: geojson
         }
+      },
+      {
+        id: 'modeled-synchrony',
+        source: {
+          type: 'raster',
+          url: 'mapbox://am3081.cn1kniyo'
+        }
       }
     ],
     layers: [
+      {
+        id :'modeled-synchrony-layer',
+        source: 'modeled-synchrony',
+        'source-layer': 'modelled_synchrony_2-4aqax3',
+        type: 'raster'
+      },
       { id: "forest-stress",
         source: "fs-source",
         type: "circle",
@@ -57,15 +76,16 @@ export default (props = {}) =>
           "circle-color": ["to-color", ["get", "colora"], "#000"],
           "circle-radius": [
             "interpolate", ["linear"], ["zoom"],
-            2, 10, 10, 60, 20, 120
+            1, 4, 8, 15, 25, 40
           ],
-          "circle-blur": [
-            "interpolate", ["linear"], ["zoom"],
-            2, 1, 8, 0.5, 16, 0.0
-          ],
+          // "circle-blur": [
+          //   "interpolate", ["linear"], ["zoom"],
+          //   2, 1, 8, 0.5, 16, 0.0
+          // ],
           "circle-pitch-alignment": "map"
         }
-      }
+      },
+      
     ],
 
     ...props,
@@ -131,10 +151,10 @@ export default (props = {}) =>
             <div style={ { width: "30px" } }>
               <span className="fa fa-check"/>
             </div>
-            <div>{ this.props.name }</div>
+            <div style={{fontWeight: '700', fontSize: '1.3em'}}>{ this.props.name }</div>
            
           </StyledSelector>
-           {this.props.selected ? (<div style={{padding: 10}}>{AboutText[this.props.value]}</div>) : ''}
+           {this.props.selected ? (<div style={{padding: 10}}>{AboutText[this.props.value].split('\n').map(d => (<p style={{color: '#fff', lineHeight: '1.2em', fontSize: '1.2em'}}>{d}</p>))}</div>) : ''}
         </div>
       )
     }

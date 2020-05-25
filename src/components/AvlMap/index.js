@@ -60,7 +60,7 @@ class AvlMap extends React.Component {
 	  style: "Dark",
 		mapStyle: null,
 		center: [-73.680647, 42.68],
-		minZoom: 2,
+		minZoom: 0,
 		zoom: 10,
 		layers: [],
 	  mapControl: 'bottom-right',

@@ -24,7 +24,13 @@ class Public extends React.Component {
                 <Link to='/' style={{display: 'flex', padding: '25px' }}>
                     <div style={{height: 250, width: '75%', margin: 'auto' }}>
                         <div className='row' style={{height:'100%'}}>
-                         <div className='col-12 col-md-12' style={{background: 'url(/img/pirecreate.png)', height: '95%', margin: 5}}>
+                         <div className='col-12 col-md-12' style={{
+                            background: 'url(/img/pirecreate.png)', 
+                            backgroundSize: 'contain',
+                            backgroundRepeat: 'no-repeat', 
+                            height: 'auto',
+                            bakgroundPosition: 'center',
+                            paddingBottom: 20}}>
                          </div>
                         </div>
                      </div>

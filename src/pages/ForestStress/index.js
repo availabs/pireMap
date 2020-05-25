@@ -10,8 +10,8 @@ class ForestStress extends Component {
       <div style={ { width: "100vw", height: "calc(100vh - 51px)" } }>
         <AvlMap
           layers={ [this.ForestStressLayer] }
-          center={ [-100.546875, 37.43997405227057] }
-          zoom={ 3 }
+          center={ [0,0] }
+          zoom={ 1.5 }
           sidebarPages={ ["layers"] }
           sidebar={ false }
           mapStyle="mapbox://styles/am3081/ck55pjv7a06p61cp7xvyngyu8"/>
