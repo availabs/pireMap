@@ -57,7 +57,7 @@ class Public extends React.Component {
                                     risks of climate change and place future projections in a broad
                                     historical context. The project is co-funded by the US National
                                     Science Foundation (NSF) and the Sao Paulo State Research
-                                    Agency (FAPESP).  Learn more about the PIRE CREATE Project﻿.
+                                    Agency (FAPESP). <a href="https://www.pirecreate.com/" target="_blank">Learn more about the PIRE CREATE Project﻿.</a> 
                                     </p>
                                 </div>
                               
