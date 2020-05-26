@@ -12,6 +12,7 @@ let AboutText = {
 How can we study the level of environmental stress of trees?
 There are multiple ways to study this particular issue. In our case, we used more than a century’s worth of data (from 1901 to 2012) from NOAA’s International Tree Ring Data Bank to analyze historical tree growth at 3,579 forests around the world and study how climate is affecting their level of environmental stress. To do this, we assessed climate’s historical impacts, such as changes in precipitation and temperature, on forest tree-ring growth through a concept known as ‘synchrony’, which relies on the assumption that the world around us is a spatially, auto-correlated system. We found that a large portion of this synchrony can be explained by climate (temperature and precipitation). 
 `,
+  'future-synchrony': `The projected future synchrony.`,
   change: `What does synchrony mean?
 A forest with high synchrony is more environmentally stressed. In other words, the climate stress levels of that forest are higher, and the opposite is true in forests with low synchrony. Both high and low synchrony forests have multiple implications. For instance, a high synchrony forest would have less potential to act as a carbon pool, and a low synchrony forest would be more affected by local characteristics (competition, insect outbreaks, fires, etc..). Synchrony can therefore serve as a tool for diagnosing effects of global climate change on tree growth of global forests.
 `,
@@ -27,11 +28,15 @@ class ForestStressLayer extends MapLayer {
     const filter = this.filters.dataType,
       color = filter.domain.reduce((a, c) => c.value === filter.value ? c.color : a, "#000");
 
-    if(filter.value === 'synchrony') {
-      map.setLayoutProperty('modeled-synchrony-layer', 'visibility', 'visible');
-    } else {
-      map.setLayoutProperty('modeled-synchrony-layer', 'visibility', 'none');
-    }
+
+    filter.domain.forEach(({value}) => {
+
+      if(filter.value === value) {
+        map.setLayoutProperty(value, 'visibility', 'visible');
+      } else {
+        map.setLayoutProperty(value, 'visibility', 'none');
+      }
+    })
 
     map.setPaintProperty("forest-stress", "circle-color",
       ["to-color", ["get", color], "#000"]
@@ -60,16 +65,48 @@ export default (props = {}) =>
           type: 'raster',
           url: 'mapbox://am3081.cn1kniyo'
         }
+      },
+      {
+        id: 'future-synchrony',
+        source: {
+          type: 'raster',
+          url: 'mapbox://am3081.33m9npzt'
+        }
+      },
+       {
+        id: 'synchrony-change',
+        source: {
+          type: 'raster',
+          url: 'mapbox://am3081.3rzg13z6'
+        }
       }
+      
+      
     ],
     layers: [
       {
-        id :'modeled-synchrony-layer',
+        id :'synchrony',
         source: 'modeled-synchrony',
         'source-layer': 'modelled_synchrony_2-4aqax3',
         type: 'raster'
       },
-      { id: "forest-stress",
+      {
+        id :'future-synchrony',
+        source: 'future-synchrony',
+        'source-layer': 'modelled_future_synchrony-7cb4wd',
+        type: 'raster'
+        
+      },
+      {
+        id :'change',
+        source: 'synchrony-change',
+        'source-layer': 'modelled_synchrony_change-04jtt0',
+        type: 'raster'
+       
+      },
+
+      { 
+        id: "forest-stress",
         source: "fs-source",
         type: "circle",
         paint: {
@@ -96,8 +133,9 @@ export default (props = {}) =>
         type: "single",
         value: "synchrony",
         domain: [
-          { name: "Synchrony", value: "synchrony", color: "colora" },
-          { name: "Synchrony Change", value: "change", color: "colorb" },
+          { name: "Modelled Synchrony", value: "synchrony", color: "colora" },
+          { name: "Modelled Future Synchrony", value: "future-synchrony", color: "colora" },
+          { name: "Modelled Synchrony Change", value: "change", color: "colorb" },
           { name: "Synchrony Significance", value: "significance", color: "colorc" }
         ]
       }
