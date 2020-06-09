@@ -78,7 +78,7 @@ class Public extends React.Component {
                                 <div className='col-12 col-md-6' style={{backgroundColor: 'rgba(0,0,0,0.55)', height: '95%', margin: 5}}>
                                     <h1 style={{color:'#cfcfcf', fontSize: '1.35em'}}>Tree Ring Viewer</h1>
                                     <p style={{color:'#efefef', fontSize: '1.0em'}}>
-                                    Tree Ring Viewer: The PIRE CREATE visualization tool provides unique access to NOAA's tree-ring and speleothem archives, as well as an unrivaled number of new, unpublished records, via an interactive mapping and visualization platform for the scientific community, policy-makers and public at large. The visualization platform incorporates PIRE’s collection of paleoclimate research to generate powerful insights for government and public officials of the future risks associated with climate change around the world.
+                                    Tree Ring Viewer: The PIRE CREATE visualization tool provides unique access to NOAA's tree-ring and speleothem archives, as well as an unrivaled number of new, unpublished records, via an interactive mapping and visualization platform for the scientific community, policy-makers and public at large. The visualization platform incorporates PIRE’s collection of paleoclimate research to generate powerful insights for government and public officials of the future risks associated with climate change around the world. This visualization was made possible through the published work of Tejedor, E., R. Serrano-Notivoli, M. de Luis, M. Saz, C. Hartl, S. St. George, U. Büntgen, A. Liebhold, M. Vuille & J. Esper, 2020: A global perspective on the climate-driven growth synchrony of neighboring trees. Global Ecol. Biogeogr., 29(7), 1114-1125, doi:10.1111/geb.13090. <a href="https://onlinelibrary.wiley.com/doi/abs/10.1111/geb.13090" target="_blank">https://onlinelibrary.wiley.com/doi/abs/10.1111/geb.13090</a>.
                                     </p>
                                 </div>
                             </div>
@@ -93,7 +93,7 @@ class Public extends React.Component {
                                     <h1 style={{color:'#cfcfcf', fontSize: '1.35em'}}>Forest Stress</h1>
                                     <p style={{color:'#efefef', textDecoration: 'none', fontSize: '1.0em'}}>
                                     Researchers at the University at Albany Department of Atmospheric and Environmental Sciences (DAES) have turned to more than a century’s worth of data (from 1901 to 2012) through NOAA’s International Tree Ring Data Bank to analyze historical tree growth at 3,579 forests around the world and create a model for future projections (from 2045 to 2060). The Forest Stress visualization platform depicts this data on an unprecedented, global scale. 
-                                    Learn more about this study <a href="https://onlinelibrary.wiley.com/doi/epdf/10.1111/geb.13090" target="_blank">here</a>
+                                    Learn more about this study <a href="https://onlinelibrary.wiley.com/doi/epdf/10.1111/geb.13090" target="_blank">here</a>.
                                     </p>
                                 </div>
                             </div>
@@ -107,7 +107,8 @@ class Public extends React.Component {
                                 <div className='col-12 col-md-6' style={{backgroundColor: 'rgba(0,0,0,0.55)', height: '95%', margin: 5}}>
                                     <h1 style={{color:'#cfcfcf', fontSize: '1.35em'}}>PHYDA</h1>
                                     <p style={{color:'#efefef', fontSize: '1.0em', textDecoration: 'none'}}>
-                                    This Paleo Hydrodynamics Data Assimilation product (PHYDA) visualization tool maps 2,000 years of reconstructed hydroclimate and associated climate dynamical variables onto a global interface. Using annually or seasonally resolved global reconstructions, two spatiotemporal drought indices, near-surface air temperature, This innovative transformation optimizes exploration of an expansive database into an approachable web-based visualization platform for streamlined presentation and collaboration.
+                                    This Paleo Hydrodynamics Data Assimilation product (PHYDA) visualization tool maps 2,000 years of reconstructed hydroclimate and associated climate dynamical variables onto a global interface. Using annually or seasonally resolved global reconstructions, two spatiotemporal drought indices, near-surface air temperature, This innovative transformation optimizes exploration of an expansive database into an approachable web-based visualization platform for streamlined presentation and collaboration. This visualization was made possible through the published work of Steiger, N. J., J.E. Smerdon, E.R. Cook & B.I. Cook, 2018: A reconstruction of global hydroclimate and dynamical variables over the Common Era. Sci. Data, 5, 1–15. doi:10.1038/sdata.2018.86. <a href="https://www.nature.com/articles/sdata201886" target="_blank">https://www.nature.com/articles/sdata201886</a>.
+
                                     </p>
                                 </div>
                             </div>
