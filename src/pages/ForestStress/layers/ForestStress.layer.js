@@ -125,6 +125,17 @@ export default (props = {}) =>
       
     ],
 
+    legend: {
+          title: "Foreset Strees Test",
+          type: "ordinal",
+          types: ["ordinal"],
+          vertical: false,
+          range: [ "#fef0d9","#fdd49e","#fdbb84","#fc8d59", "#ef6548","#d7301f", "#990000"],
+          active: true,
+          domain: [500, 1000, 1200, 1400, 1600, 1800, 2000]
+        
+    },
+
     ...props,
     
     filters: {

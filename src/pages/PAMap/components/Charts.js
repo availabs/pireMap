@@ -5,6 +5,21 @@ import ChronCharts from "../components/ChronCharts";
 
 
 
+/*function checkValidData(data) {
+
+	if () {
+
+
+
+	}else {
+
+	return <div> The raw Measurements (.rwl) files for this site do not follow the ITRDB data formatting standard and cannot be displayed</div>
+	}
+}
+
+*/
+
+
 function parseLine(line) {
 	return {
 		name: line.substring(0, 8),
@@ -56,6 +71,8 @@ function siteDataLoader(xmlid, cb) {
 					/*	console.log("lines-------", lines);*/
 
 					let data = lines.map(line => parseLine(line));
+
+					console.log('lineData-----', data)
 
 					cb(data);
 				});

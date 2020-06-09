@@ -24,7 +24,7 @@ class Circles extends Component {
 			height = 300;
 
 		let treeKey = this.props.name;
-
+          console.log("Tree this.props.name---", this.props.name)
 
 		let dataValue = Object.values(trees[treeKey]);
 		/*console.log('dataValue----', dataValue)*/
@@ -51,7 +51,7 @@ class Circles extends Component {
 		var accuRingWidths = dataValue.reduce(function(r, a) {
 			if (r.length > 0) a += r[r.length - 1];
 			r.push(a);
-			//console.log('a---', a)
+			console.log('a---', a)
 			return r;
 		}, []);
 

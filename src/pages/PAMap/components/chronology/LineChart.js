@@ -12,6 +12,8 @@ class Lines extends Component {
 	/*	console.log('trees----', trees)*/
 
 		let treeKey = this.props.name;
+		
+		console.log('this.props.name----', this.props.name)
 
 		let meta = this.props.meta;
 		

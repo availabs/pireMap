@@ -28,4 +28,9 @@ user.json
 #data tasks
 /tasks/atlas/build
 
-tasks/*.json
+#big json data test
+
+public/data/YearsAll.json
+public/data/YearsAll_new.json
+public/data/allYearTemp.json
+src/pages/PAMap/components/globe/YearsAll_1.json
