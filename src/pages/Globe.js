@@ -188,7 +188,8 @@ class Home extends React.Component {
       const cheatingScaleTwo = d3.scale.quantile()
         .domain(data)
         .range([0, 1, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12])
-      return cheatingScaleTwo.quantiles();
+      //return //cheatingScaleTwo.quantiles();
+      return  [-1, -0.5, -0.25, -0.1, -0.5, 0, 0.1, 0.25, 0.5, 1, 1.5]
     }
     return [-25, -15, -10, -6, -3, 0, 10, 20, 26, 27, 28];
   }
@@ -261,11 +262,12 @@ class Home extends React.Component {
         />
 
           <div style={ {
-            backgroundColor: "rgba(255, 255, 255, 0.75)",
+            backgroundColor: "rgba(0, 0, 0, 0.05)",
             position: "absolute",
             borderRadius: "4px",
             top: "61px",
             left: "10px",
+            color: '#efefef'
           } }>
             <LegendContainer>
               <div>Temperatures</div>
@@ -282,18 +284,24 @@ class Home extends React.Component {
                 }
               </div>
             </LegendContainer>
+            <div style={{padding: 20}}>
+              <h4 style={{color: '#efefef'}}> PHYDA </h4>
+              <p> This is about text </p>
+            </div>
           </div>
 
         <div style={ {
-          backgroundColor: "rgba(255, 255, 255, 0.75)",
+          backgroundColor: "rgba(0, 0, 0, 0.05)",
           position: "absolute",
+          color: '#efefef',
           borderRadius: "4px",
           top: "61px",
           right: "10px",
           width: "300px"
         } }>
           <div style={ { padding: "15px 20px" } }>
-            <div>Current Year: { year } AD</div>
+            <div>Current Year:<br/> 
+            <span style={{fontSize: '3em'}}>{ year } AD</span></div>
             <div>Mean Temperature: { float(d3array.mean(allData[year] || [])) }{ '°' }C</div>
             { !get(this.state, ["mapClick"], null) ? null :
               <>
@@ -365,7 +373,7 @@ class Home extends React.Component {
           } }>
 
             <NivoLine
-              colors={ ["#047bf8", "#a00"] }
+              colors={ ["#fff", "#0a0"] }
               theme={{
                 axis: {
                   ticks: {
@@ -416,14 +424,43 @@ class Home extends React.Component {
                 min: tMin * 0.9,
                 max: tMax * 1.1
               } }
+
               data={ [
-                { id: "Mean Temperature",
+                { id: "Global Mean Temperature",
                   title: "Mean Tempuature",
                   data: lineData },
-                { id: "Index",
+                { id: "Local Mean Tempuature",
                   title: "",
                   data: indexData }
-              ] }/>
+              ]}
+              legends={[
+            {
+                anchor: 'top-right',
+                direction: 'row',
+                justify: false,
+                translateX: 0,
+                translateY: -20,
+                itemsSpacing: 0,
+                itemDirection: 'left-to-right',
+                itemWidth: 150,
+                itemHeight: 20,
+                itemOpacity: 0.75,
+                symbolSize: 12,
+                symbolShape: 'circle',
+                itemTextColor: '#efefef',
+                symbolBorderColor: 'rgba(0, 0, 0, .5)',
+                effects: [
+                    {
+                        on: 'hover',
+                        style: {
+                            itemBackground: 'rgba(0, 0, 0, .03)',
+                            itemOpacity: 1
+                        }
+                    }
+                ]
+            }
+        ]}
+              />
             </div>
         </div>
       </div>
@@ -490,7 +527,7 @@ const InputDiv = styled.div`
   }
 `
 const StyledInput = styled.input`
-  background-color: rgba(255, 255, 255, 0.5);
+  background-color: rgba(255, 255, 255, 0.9);
 `
 const Input = ({ prefix, postfix, ...rest }) =>
   <InputDiv>
@@ -538,7 +575,8 @@ const StlyedContentContainer = styled.div`
 `
 const StyledDropdownContent = styled.div`
   padding: 5px;
-  background-color: #eee;
+  background-color: rgba(0,0,0,0.1);
+  color: #efefef;
   border-radius: 4px;
 `
 const DropdownContent = ({ children }) =>
