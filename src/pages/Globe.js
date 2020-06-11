@@ -324,7 +324,7 @@ class Home extends React.Component {
             { displayMode === "global-temps" ? null :
               <>
                 <div style={ { marginTop: "5px" } }>
-                  Base Anamoly Range
+                  Base Anomaly Range
                 </div>
                 <InputContainer>
                   <Input
@@ -575,7 +575,7 @@ const StlyedContentContainer = styled.div`
 `
 const StyledDropdownContent = styled.div`
   padding: 5px;
-  background-color: rgba(0,0,0,0.1);
+  background-color: rgba(15,15,15,0.9);
   color: #efefef;
   border-radius: 4px;
 `
@@ -597,7 +597,7 @@ const StyledDropdownItem = styled.div`
   }
   &.selected, :hover {
     border-color: currentColor;
-    background-color: #cfcfcf;
+    background-color: rgba(255, 255, 255, 0.25);
   }
   &.selected:hover {
     cursor: not-allowed;
@@ -615,7 +615,7 @@ const StyledDropdown = styled.div`
     width: 100%;
   }
   :hover {
-    background-color: rgba(255, 255, 255, 0.5);
+    background-color: rgba(255, 255, 255, 0.25);
   }
   &.disabled {
     background-color: rgba(0, 0, 0, 0.25);
