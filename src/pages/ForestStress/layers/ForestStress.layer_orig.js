@@ -24,21 +24,9 @@ In addition, we use our model to predict the stress levels of the global forests
 
 }
 
-
-
-let rangeArray = [ { "colora": ["#CCE9F2","#E2F4F2","#6BA2CB","#83B9D7","#FFFFBF","#313695","#FDCD7E","#F67E4B","#F0F9D8","#9BCCE2","#5689BE","#FDB769","#BB1526","#E14631","#D22B26","#FEF0A9","#3A52A3","#436FB1","#EE613D","#FA9C58","#B4DDEB","#FEE294"]}, {"colorb": ["#C9ECF4","#41AE76","NA","#00441B",""]}, {"colorc": ["#4393C3","#D6604D","NA"]} ]
-
-let domainArray = [{"synchrony": [0.38,0.4,0.3,0.32,0.44,0.219634146,0.499661017,0.559722222,0.42,0.34,0.28,0.52,0.836451613,0.6,0.619047619,0.459821429,0.24,0.26,0.58,0.54,0.36,0.48]}, {"change":[0.069934628,0.119782239,null,0.173569187,null] }, {"significance": [0.049669276,0.049473881,null]}]
-   
-
-
-
-
 class ForestStressLayer extends MapLayer {
   render(map) {
-
     const filter = this.filters.dataType,
-
       color = filter.domain.reduce((a, c) => c.value === filter.value ? c.color : a, "#000");
 
 
@@ -50,7 +38,6 @@ class ForestStressLayer extends MapLayer {
         map.setLayoutProperty(value, 'visibility', 'none');
       }
     })
-
 
     map.setPaintProperty("forest-stress", "circle-color",
       ["to-color", ["get", color], "#000"]
@@ -183,22 +170,13 @@ export default (props = {}) =>
         type: "single",
         value: "synchrony",
         domain: [
-
-      /*    { name: "Modelled Synchrony", value: "synchrony", color: "colora" },
+          { name: "Modelled Synchrony", value: "synchrony", color: "colora" },
           { name: "Modelled Future Synchrony", value: "future-synchrony", color: "colora" },
           { name: "Modelled Synchrony Change", value: "change", color: "colorb" },
           { name: "Synchrony Significance", value: "significance", color: "colorc" }
-*/
-        { name: "Observations"},
-          { name: "Synchrony", value: "synchrony", color: "colora" },
-          { name: "Synchrony change", value: "change", color: "colorb" },
-          { name: "Synchrony Significance", color: "colorc" },
-        { name: "Model"},
-          { name: "Current climate synchrony ", value: "synchrony" },
-          { name: "Future climate (2045-2065) synchrony  ", value: "future-synchrony" },
-          { name: "Future synchrony change ", value: "change" }
 
 
+          
         ]
       }
     },
