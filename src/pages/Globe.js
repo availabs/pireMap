@@ -23,14 +23,14 @@ import d3 from "d3v3"
 //
 // console.log('array length', tempData.data.length)
 
-const MAX_YEAR = 1785,
+const MAX_YEAR = 2000,
 // const MAX_YEAR = 500,
   START_DATA = []
 for (let i = 0; i < MAX_YEAR; ++i) {
   START_DATA.push({ x: i + 1, y: null });
 }
 
-const RANGE = [MAX_YEAR - 100, MAX_YEAR];
+const RANGE = [1, 1000];
 
 class Home extends React.Component {
 
