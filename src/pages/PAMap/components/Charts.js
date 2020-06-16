@@ -5,19 +5,6 @@ import ChronCharts from "../components/ChronCharts";
 
 
 
-/*function checkValidData(data) {
-
-	if () {
-
-
-
-	}else {
-
-	return <div> The raw Measurements (.rwl) files for this site do not follow the ITRDB data formatting standard and cannot be displayed</div>
-	}
-}
-
-*/
 
 
 function parseLine(line) {
@@ -36,6 +23,9 @@ function parseLine(line) {
 		v10: line.substring(68, 72)
 	};
 }
+
+
+
 
 function siteDataLoader(xmlid, cb) {
 	let studyUrl = `https://www.ncdc.noaa.gov/paleo-search/study/search.json?xmlId=${xmlid}`;
@@ -79,6 +69,23 @@ function siteDataLoader(xmlid, cb) {
 		});
 }
 
+
+/*function checkValidData(data) {
+
+	if (name) {
+
+
+
+	}else {
+
+	return <div> The raw Measurements (.rwl) files for this site do not follow the ITRDB data formatting standard and cannot be displayed</div>
+	}
+}
+
+*/
+
+
+
 class Charts extends Component {
 	constructor() {
 		super();
@@ -104,22 +111,50 @@ class Charts extends Component {
 	processTreeData(data) {
 		    let years = {};
 
-	/*	let min = Infinity;
-			let max = 0;*/
+		 //	function remove(str){ str.replace(/[\W_]/g, "-"); }
+
+        //	function remove(str){ return str.replace(/[\. ,:-]+/g, "-"); }
+
+
+        	
+
+
 			let trees = data.reduce((output, row) => {
-				let treekey = row.name;
+
+				let test = row.name;
+
+				let treekey = test.replace(/[\. ,:-]+/g, "-")
+
+
+				//let treekey = row.name;
 				let startYear = +row.year;
 				let rowYears = [];
 				for (let i = 0; i < 10; i++) {
 					rowYears.push(startYear + i);
 				}
 
+
 				let values = Object.values(row).slice(2);
+
+
+
+			
+
+
+
+
+
 
 				/*console.log("values---", values, treekey, startYear, rowYears);*/
 
+				//modify here to debug 	lineChart and TreeRingChart .select(`.line-${this.props.name}`) errors
+				//  css .line- special charactors, space, . etc not allowed
+
+
 				if (!output[treekey]) {
 					output[treekey] = {};
+
+
 				}
 				for (let i = 0; i < 10; i++) {
 					if (
