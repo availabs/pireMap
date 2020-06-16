@@ -35,3 +35,4 @@ public/data/YearsAll_new.json
 public/data/allYearTemp.json
 src/pages/PAMap/components/globe/YearsAll_1.json
 tasks/*.ndjson
+tasks/*.json

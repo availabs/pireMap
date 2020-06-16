@@ -18,17 +18,17 @@ function sortFlat(ob1,ob2) {
 }
 
 
-var sample = "./YearsAll_3.json"
+var sample = "./YearsAll4.json"
          
 fs.readFile(sample, "utf8", function(error, rawData) {
     let fullData = JSON.parse(rawData)
     
     let sortable = Object.keys(fullData).forEach(year => {
-        let thisYear =  fullData[year].temp.map((d,i) => {
+        let thisYear =  fullData[year].map((d,i) => {
           return {
-            lat: fullData[year].lat[i],
-            lon: fullData[year].lon[i],
-            d
+            lat: d.lat,
+            lon: d.lon,
+            d: d.d
           }
         })
         .sort(sortFlat)
