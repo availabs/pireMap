@@ -301,7 +301,8 @@ class Home extends React.Component {
         } }>
           <div style={ { padding: "15px 20px" } }>
             <div>Current Year:<br/> 
-            <span style={{fontSize: '3em'}}>{ year } AD</span></div>
+            <span style={{fontSize: '3em'}}>
+            <input style={{backgroundColor: 'transparent', color:'#efefef', border: 'none', width: 100}} type='number' value= { year } onChange={ (v) => this.setState({year:v.target.value}) } /> AD</span></div>
             <div>Mean Temperature: { float(d3array.mean(allData[year] || [])) }{ '°' }C</div>
             { !get(this.state, ["mapClick"], null) ? null :
               <>
