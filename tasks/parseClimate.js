@@ -18,24 +18,24 @@ function sortFlat(ob1,ob2) {
 }
 
 
-var sample = "./YearsAll_3.json"
+var sample = "./all"
          
 fs.readFile(sample, "utf8", function(error, rawData) {
     let fullData = JSON.parse(rawData)
 
 
     
-    // let sortable = Object.keys(fullData).map(year => {
-    //     return fullData[year].temp.map((d,i) => {
-    //       return {
-    //         lat: fullData[year].lat[i],
-    //         lon: fullData[year].lon[i],
-    //         d
-    //       }
-    //     })
-    //     .sort(sortFlat)
-    //     .map(d => +(d.d.toFixed(2)) )
-    // })
+    let sortable = Object.keys(fullData).map(year => {
+        return fullData[year].temp.map((d,i) => {
+          return {
+            lat: fullData[year].lat[i],
+            lon: fullData[year].lon[i],
+            d
+          }
+        })
+        .sort(sortFlat)
+        .map(d => +(d.d.toFixed(2)) )
+    })
 
     console.log(JSON.stringify(Object.keys(fullData), null, 4))
   

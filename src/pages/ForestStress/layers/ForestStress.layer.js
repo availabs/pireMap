@@ -73,6 +73,7 @@ class ForestStressLayer extends MapLayer {
       .filter(d => +d.properties[selection.scale])
       .map(d => +d.properties[selection.scale].toFixed(2)).sort()
     this.legend.range = selection.range
+    this.legend.active = true
     
 
     
@@ -188,9 +189,9 @@ export default (props = {}) =>
           type: "ordinal",
           types: ["ordinal"],
           vertical: false,
-          range:["#CCE9F2","#E2F4F2","#6BA2CB","#83B9D7","#FFFFBF","#313695","#FDCD7E","#F67E4B","#F0F9D8","#9BCCE2","#5689BE","#FDB769","#BB1526","#E14631","#D22B26","#FEF0A9","#3A52A3","#436FB1","#EE613D","#FA9C58","#B4DDEB","#FEE294"],
-          active: true,
-          domain: [0.38,0.4,0.3,0.32,0.44,0.219634146,0.499661017,0.559722222,0.42,0.34,0.28,0.52,0.836451613,0.6,0.619047619,0.459821429,0.24,0.26,0.58,0.54,0.36,0.48] 
+          range:[],
+          active: false,
+          domain: []
 
         
     },
