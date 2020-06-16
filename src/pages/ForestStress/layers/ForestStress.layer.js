@@ -43,14 +43,14 @@ let domainArray = [
 
 const sections = {
     "Observations": [
-          { name: "Synchrony", value: "synchrony", color: "colora", scale: 'synchrony', range: getColorRange(11,'RdYlBu')},
+          { name: "Synchrony", value: "synchrony", color: "colora", scale: 'synchrony', range: getColorRange(11,'RdYlBu').reverse()},
           { name: "Synchrony change", value: "change", color: "colorb", scale: 'change', range: getColorRange(3,'BuGn') },
           { name: "Synchrony Significance", value: 'significance', color: "colorc",  scale: 'significance', range: getColorRange(4,'RdBu')}
       ],
 
       'Model':[
-          { name: "Current climate synchrony ", value: "synchrony-m",  scale: 'synchrony', range: getColorRange(11,'RdYlBu')},
-          { name: "Future climate (2045-2065) synchrony  ", value: "future_synchrony-m",  scale: 'synchrony', range: getColorRange(11,'RdYlBu') },
+          { name: "Current climate synchrony ", value: "synchrony-m",  scale: 'synchrony', range: getColorRange(11,'RdYlBu').reverse()},
+          { name: "Future climate (2045-2065) synchrony  ", value: "future_synchrony-m",  scale: 'synchrony', range: getColorRange(11,'RdYlBu').reverse()},
           { name: "Future synchrony change ", value: "change-m", scale: 'change', range: getColorRange(3,'BuGn') }
       ]
 
