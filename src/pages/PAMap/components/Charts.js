@@ -111,9 +111,10 @@ class Charts extends Component {
 	processTreeData(data) {
 		    let years = {};
 
-		 //	function remove(str){ str.replace(/[\W_]/g, "-"); }
+		 function remove(str){ str.replace(/[\W_]/g, "-"); }
 
-        //	function remove(str){ return str.replace(/[\. ,:-]+/g, "-"); }
+       	//const remove(str) => str.replace(/[\. ,:-]+/g, "-")
+       	//var newString = str.replace(/[^A-Z0-9]/ig, "_");
 
 
         	
@@ -123,7 +124,7 @@ class Charts extends Component {
 
 				let test = row.name;
 
-				let treekey = test.replace(/[\. ,:-]+/g, "-")
+				let treekey = test.replace(/[^A-Z0-9]/ig, "")
 
 
 				//let treekey = row.name;

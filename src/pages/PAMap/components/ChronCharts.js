@@ -102,7 +102,14 @@ class Charts extends Component {
 	/*	let min = Infinity;
 			let max = 0;*/
 			let trees = data.reduce((output, row) => {
-				let treekey = row.name;
+
+                let test = row.name;
+
+				let treekey = test.replace(/[^A-Z0-9]/ig, "")
+
+
+
+				//let treekey = row.name;
 				let startYear = +row.year;
 				let rowYears = [];
 				for (let i = 0; i < 10; i++) {
