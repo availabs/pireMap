@@ -43,7 +43,7 @@ const sections = {
       'Model':[
           { name: "Current climate synchrony ", value: "synchrony-m",  scale: 'synchrony', range: getColorRange(11,'RdYlBu').reverse()},
           { name: "Future climate (2045-2065) synchrony  ", value: "future_synchrony-m",  scale: 'synchrony', range: getColorRange(11,'RdYlBu').reverse()},
-          { name: "Future synchrony change ", value: "change-m", scale: 'change', range: getColorRange(9,'BrBG'), domain: [0.2,.15,0.1,0.05,0,-0.05,-.1,-.15,-.2] }
+          { name: "Future synchrony change ", value: "change-m", scale: 'change', range: getColorRange(9,'BrBG').reverse(), domain: [0.2,.15,0.1,0.05,0,-0.05,-.1,-.15,-.2] }
       ]
 
 }
