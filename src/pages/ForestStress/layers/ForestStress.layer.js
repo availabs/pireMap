@@ -136,7 +136,7 @@ export default (props = {}) =>
         id: 'synchrony-change',
         source: {
           type: 'raster',
-          url: 'mapbox://am3081.9by5sa6b'
+          url: 'mapbox://am3081.6apbxl4c'
         }
       }
       
