@@ -33,6 +33,7 @@ let domainArray = [
    
 
 const sections = {
+
     "Observations": [
           { name: "Synchrony", value: "synchrony", color: "colora", scale: 'synchrony', range: getColorRange(11,'RdYlBu').reverse()},
           { name: "Synchrony change", value: "change", color: "colorb", scale: 'change', range: getColorRange(3,'BuGn') },
@@ -290,9 +291,17 @@ export default (props = {}) =>
       const filter = this.props.layer.filters.dataType,
         domain = filter.domain;
       return (
-        Object.keys(sections) // == ['Observations', 'Model']
+        <div>
+          <h4 style={{color: '#efefef'}}>About</h4>
+          <div style={{padding: 10}}>
+            <p style={{color: '#cce9f2', lineHeight: '1.2em', fontSize: '1.2em'}}>
+             About Text Goes here
+            </p>
+          </div>
+        {Object.keys(sections) // == ['Observations', 'Model']
         .map(section => 
           <div style={ { padding: "10px" } }>
+
             <h4 style={{color: '#efefef'}}>{section}</h4>
             <div>
               { sections[section].map(d =>
@@ -305,7 +314,8 @@ export default (props = {}) =>
               }
             </div>
           </div>
-        )
+        )}
+        </div>
       )
     }
   }
