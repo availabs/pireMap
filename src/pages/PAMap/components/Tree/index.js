@@ -5,7 +5,7 @@ import styled from "styled-components";
 
 const TreeContainer = styled.div`
 	width: 400px;
-	height: 600px;
+	height: 650px;
 	margin: 10px;
 	border-radius: 20px;
 	background: #2e2e2e;
@@ -49,31 +49,75 @@ const subTitleStyle = {
     };  
 
 
-const Tree = ({ name, data, meta, ...rest }) => {
-	/*console.log("index props ----", name, data, meta )*/
-		let startYears = Object.keys(data[name]).sort();
-		let startYear=	startYears[0];
-		let EndYear = startYears[startYears.length - 1];
-	/*	console.log('startYears----', startYear, EndYear)*/
 
-	return (
-		<TreeContainer>
-			<div style={titleStyle}> TREEKEY: {name}</div>
-			<div style={subTitleStyle}> 
-				<div>START YEAR: {startYear}</div>
-				<div>END YEAR: {EndYear} </div>
-			</div>
+class Tree extends Component {
+
+
+	constructor() {
+	super();
+
+	//this.state = {value: Species };
+	this.state = {
+	  year: 0  ,
+	  value: 0
+	};
+
+	this.gotData = this.gotData.bind(this);
+	}
+
+
+
+	gotData(year, value) {
+	this.setState({year: parseInt(year), value})
+	}
+
+
+
+	render () {
+
+			const {name, data, meta} = this.props
+
+
+				/*console.log("index props ----", name, data, meta )*/
+					let startYears = Object.keys(data[name]).sort();
+					let startYear=	startYears[0];
+					let EndYear = startYears[startYears.length - 1];
+				/*	console.log('startYears----', startYear, EndYear)*/
+
+				return (
+					<TreeContainer>
+						<div style={titleStyle}> TREEKEY: {name}</div>
+						<div style={subTitleStyle}> 
+							<div>START YEAR: {startYear}</div>
+							<div>END YEAR: {EndYear} </div>
+						</div>
+
+						  <div style={{color: '#efefef'}}>Year:{this.state.year}</div>
+                          <div style={{color: '#efefef'}}>Tree Ring Width:{this.state.value}</div>
+
+					
+						 <TreeRingChart name={name} data={data} meta={meta}  onChange={this.gotData} year={this.state.year} value={this.state.value} />
+
+						<div className='linechartContainer' style={{marginTop: -40}}>
+
+							<LineChart name={name} data={data} meta={meta}   onChange={this.gotData} year={this.state.year} value={this.state.value} />
+							
+						</div>
+						
+					</TreeContainer>
+				);
 		
-			<TreeRingChart name={name} data={data} meta={meta}/>
 
-			<div className='linechartContainer' style={{marginTop: -40}}>
 
-				<LineChart name={name} data={data} meta={meta}  />
-				
-			</div>
-			
-		</TreeContainer>
-	);
-};
+
+	}
+
+
+
+}
+
+
+
+
 
 export default Tree;

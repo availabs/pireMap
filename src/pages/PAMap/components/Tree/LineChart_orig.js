@@ -2,21 +2,6 @@ import React, { Component } from "react";
 import * as d3 from "d3v5";
 
 class Lines extends Component {
-	constructor() {
-    super();
-
-   //this.state = {value: Species };
-    this.state = {
-    	x:0,
-    	y:0,
-    	height:0
-    };
-
-	 console.log( "height1---", this.state.height)
-
-    }
-
-
 	componentDidMount() {
 		this.drawLine();
 	}
@@ -24,7 +9,7 @@ class Lines extends Component {
 	drawLine() {
 
 		let trees = this.props.data;
-	/*	console.log('trees----', trees)*/
+		//console.log('trees----', trees)
 
 		let treeKey = this.props.name;
 
@@ -48,8 +33,6 @@ class Lines extends Component {
 		/*	let startYears = meta.rowYears;*/
 
 		let startYears = Object.keys(trees[treeKey]).sort();
-		let years= Object.keys(trees[treeKey])
-		//console.log("years---", years)
 	
 		/*console.log('startYears---', startYears)*/
 
@@ -134,21 +117,32 @@ class Lines extends Component {
 					.range([height, 0]);
 				/*	svg.append("g").call(d3.axisLeft(y));*/
 
-	         
+	           // Add the line
+				svg.append("path")
+					.datum(lineData)
+					.attr("fill", "none")
+					.attr("stroke", lineColor) 
+					.attr("stroke-width", 2)
+					.attr(
+						"d",
+						d3
+							.line()
+							.x(function(d) {
+								return x(d.year);
+							})
+							.y(function(d) {
+								return y(d.value);
+							})
+					);
 
      
 // adding tooltip
 
 		        var focus = svg.append("g")
-
-
-		          // .attr('class', 'line_year_')		
-		            .attr("class", "line_key_" + treeKey)      
-		       
 		            .style("display", "none");
 
 
-        // hover line 
+             // hover line 
 		        focus.append("line")
 	                .attr("class", "x-hover-line")
 		            .attr("stroke", "#fff")
@@ -169,7 +163,7 @@ class Lines extends Component {
 			        .attr("x", 15)
 			      	.attr("dy", ".31em");
 
-			    svg.append("rect")
+			/*    svg.append("rect")
 			        .attr("transform", "translate(" + 0 + "," + margin.top + ")")
 		            .attr("fill", "none")
 			        .attr("pointer-events", "all")
@@ -178,10 +172,6 @@ class Lines extends Component {
 			        .on("mouseover", function() { focus.style("display", null); })
 			        .on("mouseout", function() { focus.style("display", "none"); })
 			        .on("mousemove", mousemove);
-
-
-
-			    let changeData= this.props.onChange 
 
 			    function mousemove() {
 			      var x0 = x.invert(d3.mouse(this)[0]),
@@ -192,31 +182,11 @@ class Lines extends Component {
 
 			          //console.log('mousemove-------', x0,i,d)
 
-			           changeData(d.year,d.value)
-
 			      focus.attr("transform", "translate(" + x(d.year) + "," + y(d.value) + ")");
 			      focus.select("text").text(function() { return d.value; });
 			      focus.select(".x-hover-line").attr("y2", height - y(d.value));
 
-			    }
-
- // Add the line
-				svg.append("path")
-					.datum(lineData)
-					.attr("fill", "none")
-					.attr("stroke", lineColor) 
-					.attr("stroke-width", 2)
-					.attr(
-						"d",
-						d3
-							.line()
-							.x(function(d) {
-								return x(d.year);
-							})
-							.y(function(d) {
-								return y(d.value);
-							})
-					);
+			    }*/
 
 
 //coerce to number
@@ -225,48 +195,10 @@ class Lines extends Component {
 					d.value = +d.value; // coerce to number
 					return d;
 				}
+	}
 
-			    this.setState({
-					    	x:x,
-					    	y:y,
-					    	height:height
-					    })
-		}
-
-
-
-		componentDidUpdate(prevProps) {
-			if(prevProps.year !== this.props.year) {
-				console.log('going to update the LineChart')
-				// set a class for focus above
-
-				let {x,y,height} = this.state
-
-			  console.log("type--", typeof this.props.year, typeof this.props.value, this.props.value)
-				
-			//let focus = d3.select(".x-hover-line")
-					          
-			let focus = d3.select('.line_key_'+ this.props.name)
-		               .style("display", null)
-				
-		
-				//focus.attr("transform", "translate(" + 500 + "," + 1000 + ")")
-				focus.attr("transform", "translate(" + x(this.props.year) + "," + y(this.props.value) + ")");
-				focus.select("text").style("display", null).text(this.props.value);
-				focus.select(".x-hover-line").attr("y2", height - y(this.props.value));	
-			}
-		
-		}
-
-
-
-
-		render() {
-			return <div className={`line-${this.props.name}`} />;
-		}
-
-
+	render() {
+		return <div className={`line-${this.props.name}`} />;
+	}
 }
-
-
 export default Lines;

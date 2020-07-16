@@ -12,7 +12,7 @@ const routes = [
     ...PAMap,
     ForestStress,
     Globe,
- /*   Test,*/
+   // Test,
     ...Public,
     Logout,
     NoMatch

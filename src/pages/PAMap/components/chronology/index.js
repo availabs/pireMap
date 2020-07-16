@@ -4,22 +4,22 @@ import LineChart from "./LineChart";
 import styled from "styled-components";
 
 const TreeContainer = styled.div`
-	width: 1600px;
-	height: 500px;
-	margin: 10px;
-	align: center;
-	border-radius: 20px;
-	background: #2e2e2e;
+  width: 1800px;
+  height: 700px;
+  margin: 10px;
+  align: center;
+  border-radius: 20px;
+  background: #2e2e2e;
     display: 'flex';
     justify-content: 'center';
-	box-shadow:  -5px -5px 10px #272727, 
+  box-shadow:  -5px -5px 10px #272727, 
              5px 5px 15px #353535;
 `;
 
 
 
 //const titleStyle = {
-	/*  borderRadius: "7px",*/
+  /*  borderRadius: "7px",*/
     /*background: "#10a6f9",*/   /* 10a6f9 fe5029*/ 
    /* boxShadow: "-4px 4px 8px #c77310, \n             4px -4px 8px #fd9314",*/
  /*   background:'#fd8d3c',*/
@@ -41,7 +41,7 @@ const TreeContainer = styled.div`
 
 
 const titleStyle = {
-	  borderRadius: "7px",
+    borderRadius: "7px",
       background: "#f48826", //f89f34 //ee5133
       color: '#fefefe',
       fontSize: "16px",
@@ -70,34 +70,61 @@ const subTitleStyle = {
     };  
 
 
-const Tree = ({ name, data, meta, ...rest }) => {
-/*	console.log("index props ----", name, data, meta )
-		let startYears = Object.keys(data[name]).sort();
-		let startYear=	startYears[0];
-		let EndYear = startYears[startYears.length - 1];*/
-	/*	console.log('startYears----', startYear, EndYear)*/
-
-	return (
 
 
-		<TreeContainer>
+class Tree extends Component {
 
-			<div style={titleStyle}> Chronology</div>
-		
+  constructor() {
+    super();
 
-			<div style={{ display: "flex", flexWrap: "wrap",   margin: 50, justifyContent: 'center'}} >
+   //this.state = {value: Species };
+    this.state = {
+      year: 0  ,
+      value: 0
+    };
 
-				<LineChart name={name} data={data} meta={meta}  />
+    this.gotData = this.gotData.bind(this);
+  }
 
-	            <TreeRingChart name={name} data={data} meta={meta}/>
-				
-			</div>
-			
 
-		
-		</TreeContainer>
-	);
-};
+
+  gotData(year, value) {
+    this.setState({year: parseInt(year), value})
+  }
+
+
+
+
+  render () {
+    const {name, data, meta } = this.props
+
+      	return (
+
+
+      		<TreeContainer>
+
+      			<div style={titleStyle}> Chronology</div>
+
+
+
+        		  <div style={{color: '#efefef'}}>Year:{this.state.year}</div>
+              <div style={{color: '#efefef'}}>Ring Width Index:{this.state.value}</div>
+
+        	  <div style={{ display: "flex", flexWrap: "wrap",    justifyContent: 'center'}} >
+
+      				<LineChart name={name} data={data} meta={meta}  onChange={this.gotData} year={this.state.year} value={this.state.value}/>
+
+      	      <TreeRingChart name={name} data={data} meta={meta} year={this.state.year} onChange={this.gotData} value={this.state.value}/>
+      				
+      			</div>
+      			
+
+      		
+      		</TreeContainer>
+      	);
+      }
+}
+
 
 export default Tree;
 
