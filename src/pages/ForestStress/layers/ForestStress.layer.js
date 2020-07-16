@@ -10,22 +10,13 @@ import { getColorRange } from "constants/color-ranges";
 
 
 let AboutText = {
-  synchrony: `Climate change impacts extend well beyond an increase in temperature or changes in precipitation regimes. Climate change is affecting forest ecosystems around the world. Our forests offer many valuable services. For instance, trees are carbon sinks, capturing CO2 – the main greenhouse gas warming up our planet – from the air and storing it until they die. As climate change continues, the level of environmental stress that these trees are undergoing is changing, and so it is their potential to act as carbon sinks (among other functions).
-How can we study the level of environmental stress of trees?
-There are multiple ways to study this particular issue. In our case, we used more than a century’s worth of data (from 1901 to 2012) from NOAA’s International Tree Ring Data Bank to analyze historical tree growth at 3,579 forests around the world and study how climate is affecting their level of environmental stress. To do this, we assessed climate’s historical impacts, such as changes in precipitation and temperature, on forest tree-ring growth through a concept known as ‘synchrony’, which relies on the assumption that the world around us is a spatially, auto-correlated system. We found that a large portion of this synchrony can be explained by climate (temperature and precipitation). 
-`,
-  'future_synchrony': `The projected future synchrony.`,
-
-  change: `What does synchrony mean?
-A forest with high synchrony is more environmentally stressed. In other words, the climate stress levels of that forest are higher, and the opposite is true in forests with low synchrony. Both high and low synchrony forests have multiple implications. For instance, a high synchrony forest would have less potential to act as a carbon pool, and a low synchrony forest would be more affected by local characteristics (competition, insect outbreaks, fires, etc..). Synchrony can therefore serve as a tool for diagnosing effects of global climate change on tree growth of global forests.
-`,
-  significance: `Why is this important?
-It is crucial to understand how the synchrony of the different forests around the world is changing with climate to determine potential adaptation/ mitigation measures for specific regions.
-In addition, we use our model to predict the stress levels of the global forests in the current climate and in a future climate scenario (2045-2060). As a result, we are able to detect the potential changes that the global forests will undergo in the near future, giving us a tool to determine potential measures for ecosystem management in specific regions.
-`,
-['synchrony-m'] : 'Lorem Ipsum',
-['future_synchrony-m'] : 'dolor slalsdsad',
-['change-m'] : 'I am text to change'
+  synchrony: 'Synchrony refers to the growth patterns between multiple trees aligning over time so that their patterns appear to be in sync both with each other and with the climate. Red denotes greater Synchrony and indicates more environmental stress.',
+  'future_synchrony': '',
+  change: 'Over time, changes in the synchrony of growth patterns indicates either diminished or intensified environmental stress.',
+  significance: 'The significance divides synchrony change into two categories: “increased” (more environmental stress) or “decreased” (less environmental stress).',
+['synchrony-m'] : 'Compiling and mapping observed synchrony data allows us to depict a current model of climate synchrony.',
+['future_synchrony-m'] : 'Based on collected data, this model forecasts the climate synchrony in the years 2045 to 2065.',
+['change-m'] : 'Synchrony change methodology can be applied to the forecast model to depict locations that are anticipated to see either increased or decreased synchrony.'
 
 }
 
@@ -42,6 +33,7 @@ let domainArray = [
    
 
 const sections = {
+
     "Observations": [
           { name: "Synchrony", value: "synchrony", color: "colora", scale: 'synchrony', range: getColorRange(11,'RdYlBu').reverse()},
           { name: "Synchrony change", value: "change", color: "colorb", scale: 'change', range: getColorRange(3,'BuGn') },
@@ -51,7 +43,7 @@ const sections = {
       'Model':[
           { name: "Current climate synchrony ", value: "synchrony-m",  scale: 'synchrony', range: getColorRange(11,'RdYlBu').reverse()},
           { name: "Future climate (2045-2065) synchrony  ", value: "future_synchrony-m",  scale: 'synchrony', range: getColorRange(11,'RdYlBu').reverse()},
-          { name: "Future synchrony change ", value: "change-m", scale: 'change', range: getColorRange(3,'BuGn') }
+          { name: "Future synchrony change ", value: "change-m", scale: 'change', range: getColorRange(9,'BrBG').reverse(), domain: [0.2,.15,0.1,0.05,0,-0.05,-.1,-.15,-.2] }
       ]
 
 }
@@ -67,12 +59,22 @@ class ForestStressLayer extends MapLayer {
     let selection = filter.domain.filter(d => d.value === filter.value)[0]
 
     console.log('what', geojson.features[0].properties, selection.scale)
-    this.legend.type = 'quantile'
-    this.legend.domain = geojson.features
-      .filter(d => +d.properties[selection.scale])
-      .map(d => +d.properties[selection.scale].toFixed(2)).sort()
-    this.legend.range = selection.range
-    this.legend.active = true
+    if(selection.domain) {
+      this.legend.type = 'threshold'
+
+      this.legend.domain = selection.domain
+      this.legend.range = selection.range
+      console.log('fsc',selection.range, selection.domain, this)
+    } else {
+
+
+      this.legend.type = 'quantile'
+      this.legend.domain = geojson.features
+        .filter(d => +d.properties[selection.scale])
+        .map(d => +d.properties[selection.scale].toFixed(2)).sort()
+      this.legend.range = selection.range
+      this.legend.active = true
+    }
     
 
     
@@ -135,7 +137,7 @@ export default (props = {}) =>
         id: 'synchrony-change',
         source: {
           type: 'raster',
-          url: 'mapbox://am3081.3rzg13z6'
+          url: 'mapbox://am3081.6apbxl4c'
         }
       }
       
@@ -289,9 +291,17 @@ export default (props = {}) =>
       const filter = this.props.layer.filters.dataType,
         domain = filter.domain;
       return (
-        Object.keys(sections) // == ['Observations', 'Model']
+        <div>
+          <h4 style={{color: '#efefef'}}>About</h4>
+          <div style={{padding: 10}}>
+            <p style={{color: '#cce9f2', lineHeight: '1.2em', fontSize: '1.2em'}}>
+             About Text Goes here
+            </p>
+          </div>
+        {Object.keys(sections) // == ['Observations', 'Model']
         .map(section => 
           <div style={ { padding: "10px" } }>
+
             <h4 style={{color: '#efefef'}}>{section}</h4>
             <div>
               { sections[section].map(d =>
@@ -304,7 +314,8 @@ export default (props = {}) =>
               }
             </div>
           </div>
-        )
+        )}
+        </div>
       )
     }
   }
