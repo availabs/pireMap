@@ -36,7 +36,7 @@ const sections = {
 
     "Observations": [
           { name: "Synchrony", value: "synchrony", color: "colora", scale: 'synchrony', range: getColorRange(11,'RdYlBu').reverse()},
-          { name: "Synchrony change", value: "change", color: "colorb", scale: 'change', range: getColorRange(3,'BuGn') },
+          { name: "Synchrony change", value: "change", color: "colorb", scale: 'change', range: getColorRange(2,'BuGn') },
           { name: "Synchrony Significance", value: 'significance', color: "colorc",  scale: 'significance', range: getColorRange(4,'RdBu')}
       ],
 

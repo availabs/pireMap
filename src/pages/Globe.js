@@ -30,7 +30,7 @@ for (let i = 0; i < MAX_YEAR; ++i) {
   START_DATA.push({ x: i + 1, y: null });
 }
 
-const RANGE = [1, 1000];
+const RANGE = [850, 1850];
 
 class Home extends React.Component {
 
