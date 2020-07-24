@@ -10,8 +10,7 @@ class Home extends Component {
     return (
       <div style={{ width: "100vw", minHeight: "100vh", backgroundColor: '#2e2e2e' }}>
         <Charts
-          site="4520
-        "
+          site="4520"
         />
       </div>
     );

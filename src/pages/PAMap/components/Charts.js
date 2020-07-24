@@ -1,7 +1,7 @@
 import React, { Component } from "react";
 import Tree from "./Tree";
 import InfoBox from "./InfoBox";
-import ChronCharts from "../components/ChronCharts";
+
 
 
 
@@ -113,7 +113,7 @@ class Charts extends Component {
 
 		 function remove(str){ str.replace(/[\W_]/g, "-"); }
 
-       	//const remove(str) => str.replace(/[\. ,:-]+/g, "-")
+       	//const remove(str) => str.replace(/[\. ,:-]+/g, "-")  // = function remove(str){ return str.replace(/[\. ,:-]+/g, "-"); }
        	//var newString = str.replace(/[^A-Z0-9]/ig, "_");
 
 
@@ -188,7 +188,7 @@ class Charts extends Component {
 				Object.values(trees[treekey]).reduce((a, b) => a + b, 0)
 			);
 
-			/*	console.log("TotalTreeWidths----", TotalTreeWidths);*/
+				console.log("TotalTreeWidths----", TotalTreeWidths);
 			let TotalTreeYears = [];
 
 			let TotalTreeYear = Object.keys(trees).map(treekey =>
@@ -201,7 +201,7 @@ class Charts extends Component {
 
 			const colors = {
 				ylOrRd: ["#fffde0","#feb24c","#f03b20"].reverse(),
-				ylOrRdBig: ["#f6f6d5","#ffeda0","#fed976","#feb24c","#fd8d3c","#fc4e2a","#e31a1c","#bd0026","#800026"].reverse(),
+				ylOrRdBig: ["#f6f6d5","#ffeda0","#fed976","#feb24c","#fd8d3c","#fc4e2a","#e31a1c","#bd0026","#800026"]/*.reverse()*/,
 				ylOrBr:  ["#ffffe5","#fff7bc","#fee391","#fec44f","#fe9929","#ec7014","#cc4c02","#993404","#662506"].reverse(),
 				ylOrRd5: ["#ffffb2","#fecc5c","#fd8d3c","#f03b20","#bd0026"].reverse(),
 				rdYlGn : ["#f03b20", "#ffffbf", "#006837"],

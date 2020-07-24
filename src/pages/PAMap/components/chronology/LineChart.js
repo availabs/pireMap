@@ -2,6 +2,22 @@ import React, { Component } from "react";
 import * as d3 from "d3v5";
 
 class Lines extends Component {
+
+	constructor() {
+    super();
+
+   //this.state = {value: Species };
+    this.state = {
+    	x:0,
+    	y:0,
+    	height:0
+    };
+
+	 //console.log( "height1---", this.state.height)
+
+    }
+
+
 	componentDidMount() {
 		this.drawLine();
 	}
@@ -12,16 +28,19 @@ class Lines extends Component {
 	/*	console.log('trees----', trees)*/
 
 		let treeKey = this.props.name;
-		
-		console.log('this.props.name----', this.props.name)
+
+		// console.log('this.props.name----', this.props.name)
 
 		let meta = this.props.meta;
 		
-		console.log("meta---", meta);
+		//console.log("meta---", meta);
 
 	    let TotalTreeWidths = meta.TotalTreeWidths;
 
 	    let lineColor = meta.lineColor;
+
+	    //let treeRingColor= meta.treeRingColor
+
 
 
 	
@@ -32,6 +51,8 @@ class Lines extends Component {
 		/*	let startYears = meta.rowYears;*/
 
 		let startYears = Object.keys(trees[treeKey]).sort();
+		let years= Object.keys(trees[treeKey])
+		console.log("years---", years)
 	
 		/*console.log('startYears---', startYears)*/
 
@@ -45,19 +66,18 @@ class Lines extends Component {
 			// AvgData[year] =yearAvg[i]
 			lineData.push({ year: year, value: dataValue[i] });
 		});
-       console.log("lineData-----", lineData);
+    //   console.log("lineData-----", lineData);
 
 
 		//line chart start here ----
 
 		var margin = { top: 5, right: 40, bottom: 30, left: 40 },
 			width = 900,
-			height = 300;
+			height = 500;
 
 		var bisectDate = d3.bisector(function(d) { return d.year; }).left
 
-		let LineContainer = d3
-			.select(`.line-${this.props.name}`)
+		let LineContainer = d3.select(`.line-${this.props.name}`)
 			.append("div")
 			.attr("class", "div" + treeKey);
 
@@ -88,6 +108,7 @@ class Lines extends Component {
 						)
 					)
 					.range([0, width]);
+
 				svg.append("g")
 					.attr("transform", "translate(0," + height + ")")
 					.attr("stroke", "#fefefe")
@@ -115,45 +136,37 @@ class Lines extends Component {
 						})
 					])
 					.range([height, 0]);
-					svg.append("g")
+
+				 svg.append("g")
 					.attr("stroke", "#fefefe")
 				    .attr("stroke-width", 1)
 					.call(d3.axisLeft(y));
 
-	           // Add the line
-				svg.append("path")
-					.datum(lineData)
-					.attr("fill", "none")
-					.attr("stroke", lineColor) 
-					.attr("stroke-width", 2)
-					.attr(
-						"d",
-						d3
-							.line()
-							.x(function(d) {
-								return x(d.year);
-							})
-							.y(function(d) {
-								return y(d.value);
-							})
-					);
 
-     
+
+
 // adding tooltip
 
-		        var focus = svg.append("g")
-		            .style("display", "none");
+		    var focus = svg.append("g")
+		                
+		              //  .attr('class', (d,i) => 'line_year_'+years[i])
 
+		                .attr('class', 'line_year_')
+ 
+		                .style("display", "none");
 
-             // hover line 
-		    /*    focus.append("line")
-	                .attr("class", "x-hover-line")
+ // hover line 
+               focus.append("line")
+                
+		            .attr("class", "x-hover-line")
 		            .attr("stroke", "#fff")
 			        .attr("stroke-width", 0.5)
 			        .attr("stroke-dasharray", 3,3)
 			        .attr("y1", 0)
-			        .attr("y2", height);*/
+			        .attr("y2", height)
+			        //.attr("visibility",this.state.visibility);
            
+      
 
 		        focus.append("circle")
 		            .attr("fill", "#fff")
@@ -172,9 +185,18 @@ class Lines extends Component {
 			        .attr("pointer-events", "all")
 			        .attr("width", width)
 			        .attr("height", height)
-			        .on("mouseover", function() { focus.style("display", null); })
-			        .on("mouseout", function() { focus.style("display", "none"); })
+
+			        .on("mouseover", function() { focus.style("display", null)
+                                              /*       d3.select('.year_'+this.props.year)
+			 					                       .attr("visibility",this.state.visibility)*/
+			                                    	; })
+			        .on("mouseout", function() { focus.style("display", "none")
+                                                    /* d3.select('.year_'+this.props.year)
+			 					                      .attr("visibility",this.state.visibility)*/
+			        	                          ; })
 			        .on("mousemove", mousemove);
+
+			    let changeData= this.props.onChange 
 
 			    function mousemove() {
 			      var x0 = x.invert(d3.mouse(this)[0]),
@@ -184,13 +206,37 @@ class Lines extends Component {
 			          d = x0 - d0.year > d1.year - x0 ? d1 : d0;
 
 			          //console.log('mousemove-------', x0,i,d)
+			          changeData(d.year,d.value)
 
 			      focus.attr("transform", "translate(" + x(d.year) + "," + y(d.value) + ")");
 			      focus.select("text").text(function() { return d.value; });
 			      focus.select(".x-hover-line").attr("y2", height - y(d.value));
+           
 
 			    }
 
+
+
+
+	           // Add the line
+				svg.append("path")
+					.datum(lineData)
+				  //  .attr('class', (d,i) => 'line_year_'+years[i])
+				
+					.attr("fill", "none")
+					.attr("stroke", lineColor) 
+					.attr("stroke-width", 2)
+					.attr(
+						"d",
+						d3
+							.line()
+							.x(function(d) {
+								return x(d.year);
+							})
+							.y(function(d) {
+								return y(d.value);
+							})
+					);
 
 //coerce to number
 
@@ -198,10 +244,56 @@ class Lines extends Component {
 					d.value = +d.value; // coerce to number
 					return d;
 				}
+
+     
+
+			    this.setState({
+					    	x:x,
+					    	y:y,
+					    	height:height
+					    })
+              
+
+
 	}
 
+
+	componentDidUpdate(prevProps) {
+		if(prevProps.year !== this.props.year) {
+			console.log('going to update the LineChart')
+			// set a class for focus above
+
+			let {x,y,height} = this.state
+
+		  console.log("type--", typeof this.props.year, typeof this.props.value, this.props.value)
+			
+		//let focus = d3.select(".x-hover-line")
+				      
+
+		let focus = d3.select('.line_year_')
+	               .style("display", null)
+			
+	
+			//focus.attr("transform", "translate(" + 500 + "," + 1000 + ")")
+			focus.attr("transform", "translate(" + x(this.props.year) + "," + y(this.props.value) + ")");
+			focus.select("text").style("display", null).text(this.props.value);
+			focus.select(".x-hover-line").attr("y2", height - y(this.props.value));	
+		}
+	
+	}
+
+
+
+
 	render() {
-		return <div className={`line-${this.props.name}`} />;
+		return (
+		<div style={{display: 'flex'}}> 
+			<div className={`line-${this.props.name}`} /> 
+
+	 {/*   <div className={`tree-${this.props.name}`} />*/}
+		    
+	    </div> 
+	    )
 	}
 }
 export default Lines;
