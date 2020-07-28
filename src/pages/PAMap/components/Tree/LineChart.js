@@ -63,7 +63,7 @@ class Lines extends Component {
 			// AvgData[year] =yearAvg[i]
 			lineData.push({ year: year, value: dataValue[i] });
 		});
-       console.log("lineData-----", lineData);
+      // console.log("lineData-----", lineData);
 
 
 		//line chart start here ----
@@ -133,6 +133,13 @@ class Lines extends Component {
 					])
 					.range([height, 0]);
 				/*	svg.append("g").call(d3.axisLeft(y));*/
+
+				/*
+				 svg.append("g")
+					.attr("stroke", "#fefefe")
+				    .attr("stroke-width", 1)
+					.call(d3.axisLeft(y));*/
+
 
 	         
 

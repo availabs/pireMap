@@ -4,7 +4,7 @@ import LineChart from "./LineChart";
 import styled from "styled-components";
 
 const TreeContainer = styled.div`
-  width: 1800px;
+  width: 1600px;
   height: 700px;
   margin: 10px;
   align: center;
@@ -71,6 +71,24 @@ const subTitleStyle = {
 
 
 
+const textStyle = {
+
+      color: '#f48826',  //fefefe,  f48826, 2296f3
+      borderRadius: '10px',
+      padding: '0.15rem',
+      fontSize: "12px",
+ 
+      fontFamily: /*"Source Sans Pro",*/"Roboto",
+        fontWeight: 'bold',
+     
+      display: 'flex',
+      flexWrap: "wrap",
+      justifyContent: 'flex-start',
+      margin: '20px',
+      fontWeight: 'bold'
+
+    };  
+
 
 class Tree extends Component {
 
@@ -107,10 +125,10 @@ class Tree extends Component {
 
 
 
-        		  <div style={{color: '#efefef'}}>Year:{this.state.year}</div>
-              <div style={{color: '#efefef'}}>Ring Width Index:{this.state.value}</div>
+        		  <div style={textStyle}>Year:{this.state.year} &nbsp; RWI:{this.state.value}</div>
+              
 
-        	  <div style={{ display: "flex", flexWrap: "wrap",    justifyContent: 'center'}} >
+        	  <div style={{ display: "flex", flexWrap: "wrap",  alignItems: "center",  justifyContent: 'center'}} >
 
       				<LineChart name={name} data={data} meta={meta}  onChange={this.gotData} year={this.state.year} value={this.state.value}/>
 

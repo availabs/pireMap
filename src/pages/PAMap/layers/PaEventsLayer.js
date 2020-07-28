@@ -160,7 +160,7 @@ const PaLayer = (options = {}) =>
                       [topFeature.properties.species],
                       [topFeature.properties.firstYear]
                   ];
-      /*    }*/
+    
         }
       },
 
