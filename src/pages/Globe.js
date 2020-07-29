@@ -286,7 +286,7 @@ class Home extends React.Component {
             </LegendContainer>
             <div style={{padding: 20}}>
               <h4 style={{color: '#efefef'}}> PHYDA </h4>
-              <p> This is about text </p>
+              <p> This Paleo Hydrodynamics Data Assimilation product (PHYDA) visualization tool maps <br></br> 2,000 years of reconstructed hydroclimate and associated climate dynamical variables <br></br> onto a global interface. Additional dynamical variables include thermometer measurements, <br></br>phenology observations, and sample data from coral reefs, lake sediment, ice cores, <br></br>speleothems, and tree rings. Using annually or seasonally resolved global reconstructions,<br></br> two spatiotemporal drought indices, near-surface air temperature, this innovative <br></br>transformation optimizes exploration of an expansive database into an approachable <br></br>web-based visualization platform for streamlined presentation and collaboration. This<br></br> visualization was made possible through the published work of Steiger, N. J., J.E. Smerdon,<br></br> E.R. Cook & B.I. Cook, 2018: A reconstruction of global hydroclimate and dynamical <br></br>variables over the Common Era. Sci. Data, 5, 1–15. doi:10.1038/sdata.2018.86. <br></br><a href="https://www.nature.com/articles/sdata201886" target="_blank">https://www.nature.com/articles/sdata201886</a>.</p>
             </div>
           </div>
 

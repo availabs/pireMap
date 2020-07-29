@@ -10,13 +10,12 @@ import { getColorRange } from "constants/color-ranges";
 
 
 let AboutText = {
-  synchrony: 'Synchrony refers to the growth patterns between multiple trees aligning over time so that their patterns appear to be in sync both with each other and with the climate. Red denotes greater Synchrony and indicates more environmental stress.',
-  'future_synchrony': '',
-  change: 'Over time, changes in the synchrony of growth patterns indicates either diminished or intensified environmental stress.',
-  significance: 'The significance divides synchrony change into two categories: “increased” (more environmental stress) or “decreased” (less environmental stress).',
-['synchrony-m'] : 'Compiling and mapping observed synchrony data allows us to depict a current model of climate synchrony.',
-['future_synchrony-m'] : 'Based on collected data, this model forecasts the climate synchrony in the years 2045 to 2065.',
-['change-m'] : 'Synchrony change methodology can be applied to the forecast model to depict locations that are anticipated to see either increased or decreased synchrony.'
+  synchrony: '',
+  change: '',
+  significance: '',
+['synchrony-m'] : '',
+['future_synchrony-m'] : '',
+['change-m'] : ''
 
 }
 
@@ -295,7 +294,7 @@ export default (props = {}) =>
           <h4 style={{color: '#efefef'}}>About</h4>
           <div style={{padding: 10}}>
             <p style={{color: '#cce9f2', lineHeight: '1.2em', fontSize: '1.2em'}}>
-             About Text Goes here
+             Synchrony refers to the growth patterns between multiple trees aligning over time so that their patterns appear to be in sync both with each other and with the climate. Red denotes greater Synchrony and indicates more environmental stress. Over time, changes in the synchrony of growth patterns indicates either diminished or intensified environmental stress. The significance divides synchrony change into two categories: “increased” (more environmental stress) or “decreased” (less environmental stress). Compiling and mapping observed synchrony data allows us to depict a current model of climate synchrony. Based on collected data, this model forecasts the climate synchrony in the years 2045 to 2065. Synchrony change methodology can be applied to the forecast model to depict locations that are anticipated to see either increased or decreased synchrony.
             </p>
           </div>
         {Object.keys(sections) // == ['Observations', 'Model']
