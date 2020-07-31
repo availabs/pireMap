@@ -102,7 +102,7 @@ class Home extends React.Component {
   }
 
   getData(year) {
-    return fetch(`/data/climate/${ year }.json`)
+    return fetch(`/data/pdsi/${ year }.json`)
       .then(res => res.json())
       .catch(err => (console.log('error', err), []));
   }
@@ -191,7 +191,8 @@ class Home extends React.Component {
       //return //cheatingScaleTwo.quantiles();
       return  [-1, -0.5, -0.25, -0.1, -0.5, 0, 0.1, 0.25, 0.5, 1, 1.5]
     }
-    return [-25, -15, -10, -6, -3, 0, 10, 20, 26, 27, 28];
+    return  [-1, -0.5, -0.25, -0.1, -0.5, 0, 0.1, 0.25, 0.5, 1, 1.5]
+    //return [-25, -15, -10, -6, -3, 0, 10, 20, 26, 27, 28];
   }
 
   render() {

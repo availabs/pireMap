@@ -18,13 +18,13 @@ function sortFlat(ob1,ob2) {
 }
 
 
-var sample = "./YearsAll4.json"
+var sample = "./allyears_pdsi.json"
          
 fs.readFile(sample, "utf8", function(error, rawData) {
     let fullData = JSON.parse(rawData)
     
-    //let sortable = Object.keys(fullData).forEach(year => {
-        let year = 1
+    let sortable = Object.keys(fullData).forEach(year => {
+        //let year = 1
         let thisYear =  fullData[year].map((d,i) => {
           return {
             lat: d.lat,
@@ -33,16 +33,26 @@ fs.readFile(sample, "utf8", function(error, rawData) {
           }
         })
         .sort(sortFlat)
-        .map(d => {
-          console.log(d.lat,d.lon)
-          return +(d.d.toFixed(2))
-        })
+        // .map(d => {
+        //   //xconsole.log(d.lat,d.lon)
+        //   return +(d.d.toFixed(2))
+        // })
 
+        let fullYear = []
+        for(let latb = 90; latb >= -90; latb -= 1.8947) {
+          for(let lonb = 0; lonb < 360; lonb += 2.5){
+            let data = thisYear.filter(d => Math.round(d.lat) === Math.round(latb) && d.lon === lonb)[0] || {}
+            
+            data.d ? fullYear.push(data.d) : fullYear.push(-9)
+          }
+        }
 
-        // try {
-        //   fs.writeFileSync(`./pdsi/${year}.json`, JSON.stringify(thisYear))
-        // } catch (err) {
-        //   console.error(err)
-        // }
-    //})
+        //console.log(fullYear)
+
+        try {
+          fs.writeFileSync(`./pdsi/${year}.json`, JSON.stringify(fullYear))
+        } catch (err) {
+          console.error(err)
+        }
+    })
 });
