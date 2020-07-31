@@ -52,7 +52,7 @@ class Lines extends Component {
 
 		let startYears = Object.keys(trees[treeKey]).sort();
 		let years= Object.keys(trees[treeKey])
-		console.log("years---", years)
+		//console.log("years---", years)
 	
 		/*console.log('startYears---', startYears)*/
 
@@ -71,9 +71,9 @@ class Lines extends Component {
 
 		//line chart start here ----
 
-		var margin = { top: 5, right: 40, bottom: 30, left: 40 },
-			width = 900,
-			height = 500;
+		var margin = { top: 5, right: 50, bottom: 30, left: 80 },
+			width = 800,
+			height = 400;
 
 		var bisectDate = d3.bisector(function(d) { return d.year; }).left
 
@@ -141,6 +141,18 @@ class Lines extends Component {
 					.attr("stroke", "#fefefe")
 				    .attr("stroke-width", 1)
 					.call(d3.axisLeft(y));
+
+			
+
+
+			   svg.append("text")
+			      .attr("transform", "rotate(-90)")
+			      .attr("stroke", "#fefefe")
+			      .attr("y", 0 - margin.left)
+			      .attr("x",0 - (height/2))
+			      .attr("dy", ".9em")
+			      .style("text-anchor", "middle")
+			      .text("Ring Width Index");
 
 
 
@@ -260,12 +272,12 @@ class Lines extends Component {
 
 	componentDidUpdate(prevProps) {
 		if(prevProps.year !== this.props.year) {
-			console.log('going to update the LineChart')
+		//	console.log('going to update the LineChart')
 			// set a class for focus above
 
 			let {x,y,height} = this.state
 
-		  console.log("type--", typeof this.props.year, typeof this.props.value, this.props.value)
+		 // console.log("type--", typeof this.props.year, typeof this.props.value, this.props.value)
 			
 		//let focus = d3.select(".x-hover-line")
 				      

@@ -1,8 +1,11 @@
 import React, { Component } from "react";
 import styled from "styled-components";
+import Legend from "components/AvlMap/components/legend/Legend";
+
+
 
 const InfoBoxContainer = styled.div`
-	width: 300px;
+	width: 400px;
 	height: 600px;
 	margin: 10px;
 	border-radius: 10px;
@@ -89,12 +92,23 @@ const textStyle = {
 
 
 
-const InfoBox = ({ xmlId,authors,species, meta}) => {
+const InfoBox = ({ xmlId,authors,species, smeta,meta}) => {
 	console.log("index props ----", xmlId,authors,species )
 	/*	let startYears = Object.keys(data[name]).sort();
 		let startYear=	startYears[0];
 		let EndYear = startYears[startYears.length - 1];*/
 	/*	console.log('startYears----', startYear, EndYear)*/
+
+	
+
+	  let treeRingColor= smeta.treeRingColor;
+	  let LinearScale = smeta.LinearScale;
+
+	console.log('treeRingColor----', treeRingColor)
+	console.log('LinearScale---', LinearScale)
+
+
+
 
 	return (
 		<InfoBoxContainer>
@@ -120,6 +134,20 @@ const InfoBox = ({ xmlId,authors,species, meta}) => {
 
 			  </InfoList>
 			</div>
+
+		    <div style={subTitleStyle}> 
+
+		    <Legend
+				    title ={"Tree Ring Widths"}
+				    vertical ={false}
+				
+				    domain = {LinearScale}
+				    range = {treeRingColor}
+				/>
+
+
+
+		    </div>
 		</InfoBoxContainer>
 	);
 };

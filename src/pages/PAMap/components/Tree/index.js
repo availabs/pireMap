@@ -49,6 +49,24 @@ const subTitleStyle = {
     };  
 
 
+const textStyle = {
+
+      color: '#f48826',  //fefefe,  f48826, 2296f3
+      borderRadius: '10px',
+    //  padding: '0.1rem',
+      fontSize: "12px",
+ 
+      fontFamily: /*"Source Sans Pro",*/"Roboto",
+        fontWeight: 'bold',
+     
+      display: 'flex',
+      flexWrap: "wrap",
+      justifyContent: 'center',
+    //  margin: '2px',
+      fontWeight: 'bold'
+
+    };  
+
 
 class Tree extends Component {
 
@@ -92,8 +110,7 @@ class Tree extends Component {
 							<div>END YEAR: {EndYear} </div>
 						</div>
 
-						  <div style={{color: '#efefef'}}>Year:{this.state.year}</div>
-                          <div style={{color: '#efefef'}}>Tree Ring Width:{this.state.value}</div>
+							<div style={textStyle}>Year:{this.state.year} &nbsp; TRW:{this.state.value}</div>
 
 					
 						 <TreeRingChart name={name} data={data} meta={meta}  onChange={this.gotData} year={this.state.year} value={this.state.value} />

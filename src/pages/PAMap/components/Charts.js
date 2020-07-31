@@ -1,7 +1,7 @@
 import React, { Component } from "react";
 import Tree from "./Tree";
 import InfoBox from "./InfoBox";
-
+import * as d3 from "d3v5";
 
 
 
@@ -139,13 +139,6 @@ class Charts extends Component {
 
 
 
-			
-
-
-
-
-
-
 				/*console.log("values---", values, treekey, startYear, rowYears);*/
 
 				//modify here to debug 	lineChart and TreeRingChart .select(`.line-${this.props.name}`) errors
@@ -182,13 +175,22 @@ class Charts extends Component {
 				return output;
 			}, {}); //parsed data with new final format
 
-			/*console.log("treedata---------------------", trees);*/
+			console.log("treedata---------------------", trees);
 
 			let TotalTreeWidths = Object.keys(trees).map(treekey =>
 				Object.values(trees[treekey]).reduce((a, b) => a + b, 0)
 			);
+			let AllTreeWidths = Object.keys(trees).reduce((out,treekey) => {
+				Object.values(trees[treekey])
+				return [...out, ...Object.values(trees[treekey])]
+			}, []).sort();
 
 				console.log("TotalTreeWidths----", TotalTreeWidths);
+				console.log("AllTreeWidths----", AllTreeWidths);
+
+           //let dataValue = Object.values(trees[treeKey]).reverse();
+
+
 			let TotalTreeYears = [];
 
 			let TotalTreeYear = Object.keys(trees).map(treekey =>
@@ -219,15 +221,50 @@ class Charts extends Component {
 			let lineColor = "#2296f3"
 			 // greenish --c7e9c0, 7fc97f, 4d9221 , yellow- ffffbf, white - fefefe blue-18a4f9 orange-fd6642 --green--5cb878 blue--2296f3
 
+
+
+		//Treering color scales----
+
+			let LinearScaleInterval = (d3.max(AllTreeWidths) - d3.min(AllTreeWidths)) / treeRingColor.length
+
+			let LinearScale = []
+			for(let i = d3.min(AllTreeWidths); i <= d3.max(AllTreeWidths); i+= LinearScaleInterval){
+				LinearScale.push(i)
+			}
+
+
+			var ringColorScale_Linear = d3
+			.scaleLinear()
+    		//.base(2)
+			//.domain([d3.min(dataValue),d3.max(dataValue)])
+			
+			.domain(LinearScale)
+			.range(treeRingColor); 
+
+
+			var ringColorScale_Quantile = d3
+			.scaleQuantile()
+			.domain(AllTreeWidths)
+			.range(treeRingColor)
+
+		//console.log('Quantiles',ringColorScale_Quantile.quantiles())
+
+		   const ringColorScale = ringColorScale_Linear
+
+		 
+
 		return {
 			trees,
 			meta: {
 				TotalTreeWidths,
+				AllTreeWidths,
 				uniqTotalTreeYears,
 				firstUniqTotalTreeYear,
 				lastUniqTotalTreeYear,
 				treeRingColor,
-				lineColor
+				lineColor,
+				LinearScale,
+				ringColorScale
 			}
 		};
 	}
@@ -244,6 +281,7 @@ class Charts extends Component {
 					name={treeKey}
 					data={this.state.data.trees}
 					meta={this.state.data.meta}
+
 				/>
 	
 			
@@ -260,11 +298,12 @@ class Charts extends Component {
 			return (
 			
 				<InfoBox
-		
-					authors={this.props.authors}
-						species={this.props.species}
-						xmlId={this.props.site}
-						meta={this.props.meta}
+				    authors={this.props.authors}
+					species={this.props.species}
+					xmlId={this.props.site}
+					smeta={this.state.data.meta}
+				    meta={this.props.meta}
+				
 				/>
 	
 			
@@ -276,14 +315,14 @@ class Charts extends Component {
 
 	render() {
 		return (
-			<div style={{display: 'flex'}}>
+			<div style={{display: 'flex', flexBasis:"auto"}}>
 
-					<div style={{ display: "flex", flexWrap: "wrap",   padding: 5, justifyContent: 'flex-start'}}> 
+					<div style={{ display: "flex", flexWrap: "wrap",   padding: 15, justifyContent: 'flex-start'}}> 
 						{this.renderTrees()}
 					</div>
 
-					<div style={{ display: "flex", flexWrap: "wrap",  flexBasis:"400px",  padding: 5, justifyContent: 'flex-start'}}> {/* border: '1px solid white', */}
-						<div style={{width: 300}}>
+					<div style={{ display: "flex", flexWrap: "wrap",   padding: 5, justifyContent: 'flex-start'}}> {/* border: '1px solid white', */}
+						<div style={{width: 430}}>
 						{this.renderInfoBox()}
 						</div>
 				    </div>

@@ -20,6 +20,8 @@ class Circles extends Component {
 		this.drawTreeRing();
 	}
 
+
+
 	drawTreeRing() {
 		let trees = this.props.data;
 /*		console.log('trees----', trees)*/
@@ -28,14 +30,17 @@ class Circles extends Component {
 		let meta = this.props.meta;
 		console.log("meta---", meta);
 
-        let TotalTreeWidths = meta.TotalTreeWidths;
+        let TotalTreeWidths = meta.TotalTreeWidths; // add of threewidth on that year 
 
-        let treeRingColor= meta.treeRingColor
+        let treeRingColor= meta.treeRingColor;
+
+		const ringColorScale = meta.ringColorScale
+
 
 
 		var margin = { top: 70, right: 40, bottom: 0, left: 40 },
-			width = 300,
-			height = 300;
+			width = 320,
+			height = 320;
 
 		let treeKey = this.props.name;
          // console.log("Tree this.props.name---", this.props.name)
@@ -65,37 +70,45 @@ class Circles extends Component {
 			return r;
 		}, []);
 
-		//console.log('accuRingWidths---', accuRingWidths  )
+		console.log('accuRingWidths---', accuRingWidths  )
 
 
 		var ringScale = d3
 			.scaleLinear()
-			.domain([ d3.min(TotalTreeWidths), d3.max(TotalTreeWidths)])  // With Total Tree Ring Width for all years of Study
+			.domain([ 0, d3.max(TotalTreeWidths)])  // With Total Tree Ring Width for all years of Study
 			//.domain([ d3.min(accuRingWidths), d3.max(accuRingWidths)])      
 			.range([5, height / 2]);
 
 
+	/*	let LinearScaleInterval = (d3.max(meta.AllTreeWidths) - d3.min(meta.AllTreeWidths)) / treeRingColor.length
+
+		let LinearScale = []
+		for(let i = d3.min(meta.AllTreeWidths); i <= d3.max(meta.AllTreeWidths); i+= LinearScaleInterval){
+			LinearScale.push(i)
+		}
+
 
 		var ringColorScale_Linear = d3
-			.scaleLog()
-    		.base(2)
+			.scaleLinear()
+    		//.base(2)
 			//.domain([d3.min(dataValue),d3.max(dataValue)])
 			
-			.domain([d3.min(dataValue),d3.median(dataValue) /*d3.mean(dataValue)*/, d3.max(dataValue)])
+			.domain(LinearScale)
 			.range(treeRingColor); 
 
 
 		var ringColorScale_Quantile = d3
 			.scaleQuantile()
-			.domain(dataValue)
+			.domain(meta.AllTreeWidths)
 			.range(treeRingColor)
+
+		//console.log('Quantiles',ringColorScale_Quantile.quantiles())
 
 		var ringColorScale_Threshold = d3
 			.scaleThreshold()
-			.domain([d3.min(dataValue),d3.median(dataValue) /*d3.mean(dataValue)*/, d3.max(dataValue)])
-			.range(treeRingColor)
+			.domain([d3.min(dataValue),d3.median(dataValue), d3.max(dataValue)])
+			.range(treeRingColor)*/
 
-		const ringColorScale = ringColorScale_Quantile
 
 
 
@@ -109,8 +122,8 @@ class Circles extends Component {
 		      .style("border-radius", "1px")
 		      .style("padding", "2px")
 		      .style("color", "white")
-		       .style("height", "5px")
-		       .style("width", "30px")
+		      .style("height", "5px")
+		      .style("width", "30px")
 		     // .html(" d3ed")
 
 		//console.log(d3.select(`.tooltip-${this.props.name}`), `.tooltip-${this.props.name}`)
@@ -179,7 +192,7 @@ class Circles extends Component {
 
 		g.append("circle")
 
-	   	    .attr('class', (d,i) => 'year_'+years[i])
+	   	    .attr('class', (d,i) => 'year_'+this.props.name+'_'+years[i])
 
 			.attr("cx", function(d) {
 				return (width + margin.left + margin.right)/ 2;
@@ -221,13 +234,13 @@ class Circles extends Component {
 
 	componentDidUpdate(prevProps) {
 		if(prevProps.year !== this.props.year) {
-			console.log('going to update the treering')
-			d3.select('.year_'+this.props.year)
+			console.log('going to update the treering',this.props.year)
+			d3.select('.year_'+this.props.name+'_'+this.props.year)
 		      	.attr("fill", function(d, x) {
 				//console.log(dataValue[i], ringColorScale(dataValue[i]))\
 				return 'chartreuse'//'rgba(0,0,0,0)' //"hsl(" + Math.random() * 360 + ",100%,100%)";
 			})
-		    d3.select('.year_'+prevProps.year)
+		    d3.select('.year_'+this.props.name+'_'+prevProps.year)
 		      	.attr("fill", (d, x) => {
 				//console.log(dataValue[i], ringColorScale(dataValue[i]))\
 				return this.state.ringColorScale(this.state.fullData[prevProps.year])//'rgba(0,0,0,0)' //"hsl(" + Math.random() * 360 + ",100%,100%)";
