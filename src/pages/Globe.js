@@ -24,13 +24,14 @@ import d3 from "d3v3"
 // console.log('array length', tempData.data.length)
 
 const MAX_YEAR = 2000,
-// const MAX_YEAR = 500,
+ //const MAX_YEAR = 500,
   START_DATA = []
 for (let i = 0; i < MAX_YEAR; ++i) {
   START_DATA.push({ x: i + 1, y: null });
 }
 
 const RANGE = [850, 1850];
+//const RANGE = [1,400]
 
 class Home extends React.Component {
 
@@ -39,8 +40,11 @@ class Home extends React.Component {
   state = {
     year: 0,
     allData: {},
-
+    allDataP: {},
     data: [...START_DATA],
+    pdsiData: [...START_DATA],
+    pdsiMin: Infinity,
+    pdsiMax: -Infinity,
     min: Infinity,
     max: -Infinity,
 
@@ -73,7 +77,7 @@ class Home extends React.Component {
 
     years.reduce((a, c, i) =>
       this.MOUNTED && a.then(() =>
-        this.getData(c)
+        this.getData(c, 'climate')
           .then(d => {
             allData[c] = d;
 
@@ -97,20 +101,59 @@ class Home extends React.Component {
         this.setState({ loading: false });
       });
   }
+
+  loadPDSI () {
+    const years = d3array.range(1, MAX_YEAR + 1);
+    const allDataP = {},
+      pdsiData = [...START_DATA];
+    
+
+    let min = Infinity,
+      max = -Infinity;
+
+    this.setState({ loading: true });
+
+    years.reduce((a, c, i) =>
+      a.then(() =>
+        this.getData(c, 'pdsi')
+          .then(d => {
+            allDataP[c] = d;
+
+            const mean = d3array.mean(d.filter(d => d !== -9));
+            pdsiData[i] = { ...pdsiData[i], y: mean };
+            min = Math.min(min, mean);
+            max = Math.max(max, mean);
+
+            if (!(i % 50)) {
+              this.setState({ allDataP, pdsiData, pdsiMin:min, pdsiMax:max });
+            }
+            if(this.state.year === 0 ) {
+              this.setState({year: 1})
+            }
+          })
+      )
+    , Promise.resolve())
+      .then(() => {
+        this.setState({ allDataP, pdsiData, pdsiMin:min, pdsiMax:max });
+        this.setState({ loading: false, pdsiLoaded: true });
+      });
+  }
   componentWillUnmount() {
     this.MOUNTED = false;
   }
 
-  getData(year) {
-    return fetch(`/data/pdsi/${ year }.json`)
+  getData(year, folder) {
+    return fetch(`/data/${folder}/${ year }.json`)
       .then(res => res.json())
       .catch(err => (console.log('error', err), []));
   }
 
   getLineData() {
-    const { data, anomalyRangeMeans, displayMode } = this.state,
+    const { data, pdsiData, anomalyRangeMeans, displayMode } = this.state,
       arMean = d3array.mean(anomalyRangeMeans);
     switch (displayMode) {
+      case "pdsi":
+        return pdsiData
       case "global-temps":
         return data;
       case "global-anomalies":
@@ -119,9 +162,11 @@ class Home extends React.Component {
   }
 
   getGlobeData() {
-    const { allData, year, displayMode, anomalyRangeMeans } = this.state,
+    const { allData, allDataP, year, displayMode, anomalyRangeMeans } = this.state,
       data = get(allData, year, []);
     switch (displayMode) {
+      case "pdsi":
+        return get(allDataP, year, []);
       case "global-temps":
         return data;
       case "global-anomalies":
@@ -173,6 +218,9 @@ class Home extends React.Component {
 
   setDisplayMode(dm) {
     this.clearMapClick();
+    if(dm === 'pdsi' && !this.state.pdsiLoaded){
+      this.loadPDSI()
+    }
     this.setState({
       displayMode: dm
     })
@@ -183,16 +231,19 @@ class Home extends React.Component {
   }
 
   getScaleDomain(data) {
-    if (this.state.displayMode === "global-anomalies") {
-      // return [-4, -2, -1.5, -1, -0.5, 0, 0.5, 1, 1.5, 2, 4];
-      const cheatingScaleTwo = d3.scale.quantile()
-        .domain(data)
-        .range([0, 1, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12])
-      //return //cheatingScaleTwo.quantiles();
-      return  [-1, -0.5, -0.25, -0.1, -0.5, 0, 0.1, 0.25, 0.5, 1, 1.5]
+    switch (this.state.displayMode) {
+      case "pdsi":
+        const cheatingScaleTwo = d3.scale.quantile()
+        .domain(data.filter(d => d !== -9))
+        .range([0, 1, 3, 4, 5, 6, 7, 8, 9, 10, 11,12])
+        console.log('quantiles', cheatingScaleTwo.quantiles())
+        return cheatingScaleTwo.quantiles();
+      case "global-temps":
+        return [-25, -15, -10, -6, -3, 0, 10, 20, 26, 27, 28];
+      case "global-anomalies":
+        return [-1, -0.5, -0.25, -0.1, -0.5, 0, 0.1, 0.25, 0.5, 1, 1.5];
     }
-    return  [-1, -0.5, -0.25, -0.1, -0.5, 0, 0.1, 0.25, 0.5, 1, 1.5]
-    //return [-25, -15, -10, -6, -3, 0, 10, 20, 26, 27, 28];
+   
   }
 
   render() {
@@ -226,11 +277,12 @@ class Home extends React.Component {
         return a;
       }, []);
 
-    const colors = colorbrewer["RdYlBu"][11].slice().reverse(),
+    const colors = colorbrewer[displayMode === "pdsi" ? 'BrBG' : "RdYlBu"][11].slice().reverse(),
       globeData = this.getGlobeData(),
-      scaleDomain = this.getScaleDomain(globeData),
+      scaleDomain = this.getScaleDomain(globeData).filter(d => !isNaN(d)),
       _lFormat = displayMode === "global-anomalies" ? d3format(".2f") : (v => v),
-      lFormat = v => `${ _lFormat(v) }°C`
+      lFormat = displayMode === "pdsi" ? d3format(".2f") : (v => `${ _lFormat(v) }°C`)
+
 
     return (
       <div style={ {
@@ -240,7 +292,8 @@ class Home extends React.Component {
         position: "relative",
         marginTop: "-51px"
       } }>
-        <Globe useQuantiles={ displayMode === "global-anomalies" }
+        <Globe 
+          useQuantiles={ displayMode === "global-anomalies" }
           onGlobeClick={ (...args) => this.onGlobeClick(...args) }
           onPointRemove={ () => this.clearMapClick() }
           scaleDomain={ scaleDomain }
@@ -321,9 +374,10 @@ class Home extends React.Component {
               value={ displayMode }
               options={ [
                 { name: "Global Temperatures", value: "global-temps" },
-                { name: "Global Anomalies", value: "global-anomalies" }
+                { name: "Global Anomalies", value: "global-anomalies" },
+                { name: "Palmer Drought Severity Index (PDSI)", value: "pdsi" }
               ] }/>
-            { displayMode === "global-temps" ? null :
+            { displayMode !== "global-anomalies" ? null :
               <>
                 <div style={ { marginTop: "5px" } }>
                   Base Anomaly Range

@@ -451,11 +451,12 @@ globe.getScaleSix = (mapData, options) => {
   //   return min + (i * step)
   // })
   let bounds = options.bounds || [193, 328] // units: kelvins;
+  let colors = options.colors || "RdYlBu"
 
   // return Object.assign(require('./palette/wind.js')(cheatingbounds, "BrBG");
   // return Object.assign(require('./palette/wind.js')(cheatingbounds, "RdBu", 150, true));
   // return Object.assign(require('./palette/wind.js')(cheatingbounds, "RdYlBu", 150, true));
-  return Object.assign(require('./palette/wind.js')(bounds, "RdYlBu", true));
+  return Object.assign(require('./palette/wind.js')(bounds, colors, true));
 }
 
 globe.drawGeoJson = function (mapData, options) {

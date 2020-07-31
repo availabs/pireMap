@@ -49,7 +49,8 @@ class GlobeDemo extends React.Component {
   drawGlobe(props) {
     globe.drawCanvas(props.canvasData,
       { bounds: props.scaleDomain,
-        useQuantiles: props.useQuantiles
+        useQuantiles: props.useQuantiles,
+        colors: props.displayMode === 'pdsi' ? 'BrBG' : 'RdYlBu'
       }
     );
   }
@@ -71,6 +72,8 @@ class GlobeDemo extends React.Component {
       || nextProps.anomalyRange[0] !== this.props.anomalyRange[0]
       || nextProps.anomalyRange[1] !== this.props.anomalyRange[1]
       ){
+      return true
+    } else if(this.props.canvasData.data.length !== nextProps.canvasData.length) {
       return true
     }
     return false
