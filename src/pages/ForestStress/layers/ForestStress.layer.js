@@ -37,13 +37,13 @@ const sections = {
     "Observations": [
           { name: "Synchrony", value: "synchrony", color: "colora", scale: 'synchrony', range: getColorRange(11,'RdYlBu').reverse()},
           { name: "Synchrony change", value: "change", color: "colorb", scale: 'change', range: getColorRange(2,'BuGn') },
-          { name: "Synchrony Significance", value: 'significance', color: "colorc",  scale: 'significance', range: getColorRange(4,'RdBu')}
+          { name: "Synchrony Significance", value: 'significance', color: "colorc",  scale: 'significance', range: [getColorRange(4,'RdBu')[3],getColorRange(4,'RdBu')[0]], format: (d) => d === 0 ? 'Decreased' : 'Increased'}
       ],
 
       'Model':[
           { name: "Current climate synchrony ", value: "synchrony-m",  scale: 'synchrony', range: getColorRange(11,'RdYlBu').reverse()},
           { name: "Future climate (2045-2065) synchrony  ", value: "future_synchrony-m",  scale: 'synchrony', range: getColorRange(11,'RdYlBu').reverse()},
-          { name: "Future synchrony change ", value: "change-m", scale: 'change', range: getColorRange(9,'BrBG').reverse(), domain: [0.2,.15,0.1,0.05,0,-0.05,-.1,-.15,-.2] }
+          { name: "Future synchrony change ", value: "change-m", scale: 'change', range: getColorRange(9,'BrBG'), domain: [0.2,.15,0.1,0.05,0,-0.05,-.1,-.15,-.2].reverse() }
       ]
 
 }
@@ -59,6 +59,9 @@ class ForestStressLayer extends MapLayer {
     let selection = filter.domain.filter(d => d.value === filter.value)[0]
 
     console.log('what', geojson.features[0].properties, selection.scale)
+    
+        this.legend.format = selection.format ? selection.format :  d => d 
+    
     if(selection.domain) {
       this.legend.type = 'threshold'
 

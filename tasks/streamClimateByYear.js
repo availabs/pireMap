@@ -1,9 +1,11 @@
 const fs = require('fs');
 const readline = require('readline');
 
+
 let output = {}
+const varName = 'pdsi_mn'
 async function processLineByLine() {
-  const fileStream = fs.createReadStream('allYearTemp_new_full.ndjson');
+  const fileStream = fs.createReadStream('pdsi_mn_full_fm.ndjson');
 
   const rl = readline.createInterface({
     input: fileStream,
@@ -16,13 +18,14 @@ async function processLineByLine() {
     // Each line in input.txt will be successively available here as `line`.
     //{"attributes":{"FID":27647993,"lon":340,"lat":90,"time":2000,"tas_mn":-13.638697230625898},"geometry":{"x":340,"y":90.00000000000011}}
     let feature = JSON.parse(line)
-    if(!output[feature.attributes.time]) {
-      output[feature.attributes.time] = []
+    // console.log('feature', line, feature)
+    if(!output[feature.time]) {
+      output[feature.time] = []
     }
-    output[feature.attributes.time].push({
-      lat: +feature.attributes.lat.toFixed(4),
-      lon: +feature.attributes.lon,
-      d: +feature.attributes.tas_mn.toFixed(2)
+    output[feature.time].push({
+      lat: +feature.lat.toFixed(4),
+      lon: +feature.lon,
+      d: +feature[varName].toFixed(2)
     })
     // console.log({
     //   lat:feature.attributes.lat,

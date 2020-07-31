@@ -23,7 +23,8 @@ var sample = "./YearsAll4.json"
 fs.readFile(sample, "utf8", function(error, rawData) {
     let fullData = JSON.parse(rawData)
     
-    let sortable = Object.keys(fullData).forEach(year => {
+    //let sortable = Object.keys(fullData).forEach(year => {
+        let year = 1
         let thisYear =  fullData[year].map((d,i) => {
           return {
             lat: d.lat,
@@ -32,12 +33,16 @@ fs.readFile(sample, "utf8", function(error, rawData) {
           }
         })
         .sort(sortFlat)
-        .map(d => +(d.d.toFixed(2)))
+        .map(d => {
+          console.log(d.lat,d.lon)
+          return +(d.d.toFixed(2))
+        })
 
-        try {
-          fs.writeFileSync(`./climate/${year}.json`, JSON.stringify(thisYear))
-        } catch (err) {
-          console.error(err)
-        }
-    })
+
+        // try {
+        //   fs.writeFileSync(`./pdsi/${year}.json`, JSON.stringify(thisYear))
+        // } catch (err) {
+        //   console.error(err)
+        // }
+    //})
 });
