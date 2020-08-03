@@ -10,13 +10,12 @@ import { getColorRange } from "constants/color-ranges";
 
 
 let AboutText = {
-  synchrony: 'Synchrony refers to the growth patterns between multiple trees aligning over time so that their patterns appear to be in sync both with each other and with the climate. Red denotes greater Synchrony and indicates more environmental stress.',
-  'future_synchrony': '',
-  change: 'Over time, changes in the synchrony of growth patterns indicates either diminished or intensified environmental stress.',
-  significance: 'The significance divides synchrony change into two categories: “increased” (more environmental stress) or “decreased” (less environmental stress).',
-['synchrony-m'] : 'Compiling and mapping observed synchrony data allows us to depict a current model of climate synchrony.',
-['future_synchrony-m'] : 'Based on collected data, this model forecasts the climate synchrony in the years 2045 to 2065.',
-['change-m'] : 'Synchrony change methodology can be applied to the forecast model to depict locations that are anticipated to see either increased or decreased synchrony.'
+  synchrony: '',
+  change: '',
+  significance: '',
+['synchrony-m'] : '',
+['future_synchrony-m'] : '',
+['change-m'] : ''
 
 }
 
@@ -36,14 +35,14 @@ const sections = {
 
     "Observations": [
           { name: "Synchrony", value: "synchrony", color: "colora", scale: 'synchrony', range: getColorRange(11,'RdYlBu').reverse()},
-          { name: "Synchrony change", value: "change", color: "colorb", scale: 'change', range: getColorRange(3,'BuGn') },
-          { name: "Synchrony Significance", value: 'significance', color: "colorc",  scale: 'significance', range: getColorRange(4,'RdBu')}
+          { name: "Synchrony change", value: "change", color: "colorb", scale: 'change', range: getColorRange(2,'BuGn') },
+          { name: "Synchrony Significance", value: 'significance', color: "colorc",  scale: 'significance', range: [getColorRange(4,'RdBu')[3],getColorRange(4,'RdBu')[0]], format: (d) => d === 0 ? 'Decreased' : 'Increased'}
       ],
 
       'Model':[
           { name: "Current climate synchrony ", value: "synchrony-m",  scale: 'synchrony', range: getColorRange(11,'RdYlBu').reverse()},
           { name: "Future climate (2045-2065) synchrony  ", value: "future_synchrony-m",  scale: 'synchrony', range: getColorRange(11,'RdYlBu').reverse()},
-          { name: "Future synchrony change ", value: "change-m", scale: 'change', range: getColorRange(9,'BrBG').reverse(), domain: [0.2,.15,0.1,0.05,0,-0.05,-.1,-.15,-.2] }
+          { name: "Future synchrony change ", value: "change-m", scale: 'change', range: getColorRange(9,'BrBG'), domain: [0.2,.15,0.1,0.05,0,-0.05,-.1,-.15,-.2].reverse() }
       ]
 
 }
@@ -59,6 +58,9 @@ class ForestStressLayer extends MapLayer {
     let selection = filter.domain.filter(d => d.value === filter.value)[0]
 
     console.log('what', geojson.features[0].properties, selection.scale)
+    
+        this.legend.format = selection.format ? selection.format :  d => d 
+    
     if(selection.domain) {
       this.legend.type = 'threshold'
 
@@ -295,7 +297,7 @@ export default (props = {}) =>
           <h4 style={{color: '#efefef'}}>About</h4>
           <div style={{padding: 10}}>
             <p style={{color: '#cce9f2', lineHeight: '1.2em', fontSize: '1.2em'}}>
-             About Text Goes here
+             Synchrony refers to the growth patterns between multiple trees aligning over time so that their patterns appear to be in sync both with each other and with the climate. Red denotes greater Synchrony and indicates more environmental stress. Over time, changes in the synchrony of growth patterns indicates either diminished or intensified environmental stress. The significance divides synchrony change into two categories: “increased” (more environmental stress) or “decreased” (less environmental stress). Compiling and mapping observed synchrony data allows us to depict a current model of climate synchrony. Based on collected data, this model forecasts the climate synchrony in the years 2045 to 2065. Synchrony change methodology can be applied to the forecast model to depict locations that are anticipated to see either increased or decreased synchrony.
             </p>
           </div>
         {Object.keys(sections) // == ['Observations', 'Model']
