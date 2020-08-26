@@ -29,7 +29,7 @@ let domainArray = [
   {"synchrony": [0.38,0.4,0.3,0.32,0.44,0.219634146,0.499661017,0.559722222,0.42,0.34,0.28,0.52,0.836451613,0.6,0.619047619,0.459821429,0.24,0.26,0.58,0.54,0.36,0.48]}, 
   {"change":[0.069934628,0.119782239,null,0.173569187,null] }, 
   {"significance": [0.049669276,0.049473881,null]}]*/
-   
+
 
 
 
@@ -69,8 +69,10 @@ class ForestStressLayer extends MapLayer {
 
     console.log('what', geojson.features[0].properties, selection.scale)
     
-        this.legend.format = selection.format ? selection.format :  d => d 
-    
+        this.legend.format = selection.format ? selection.format :  d => d
+        this.legend.subText =
+            filter.value === 'change-m' ? ['Increase', 'Decrease'] :
+                ['synchrony','synchrony-m','future_synchrony-m'].includes(filter.value) ? ['Very Low', 'Low', 'Moderate', 'High', 'Very High'] : null
     if(selection.domain) {
       this.legend.type = 'threshold'
 
