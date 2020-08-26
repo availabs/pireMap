@@ -452,6 +452,7 @@ globe.getScaleSix = (mapData, options) => {
   // })
   let bounds = options.bounds || [193, 328] // units: kelvins;
   let colors = options.colors || "RdYlBu"
+  //options.reverse ? colors.reverse()
 
   // return Object.assign(require('./palette/wind.js')(cheatingbounds, "BrBG");
   // return Object.assign(require('./palette/wind.js')(cheatingbounds, "RdBu", 150, true));

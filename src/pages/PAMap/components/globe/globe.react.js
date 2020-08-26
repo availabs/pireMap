@@ -50,7 +50,8 @@ class GlobeDemo extends React.Component {
     globe.drawCanvas(props.canvasData,
       { bounds: props.scaleDomain,
         useQuantiles: props.useQuantiles,
-        colors: props.displayMode === 'pdsi' ? 'BrBG' : 'RdYlBu'
+        colors: props.displayMode === 'pdsi' ? 'BrBG' : 'RdYlBu',
+        reverse:  props.displayMode === 'pdsi' 
       }
     );
   }

@@ -1,4 +1,4 @@
-
+import { CSVLink, CSVDownload } from "react-csv";
 import React, { Component, useState, useEffect } from "react";
 /*import Chart from "pages/PAMap/components/svg.js";*/
 /*import StudySite from "pages/PAMap/components/StudySite.js";
@@ -24,14 +24,14 @@ import d3 from "d3v3"
 // console.log('array length', tempData.data.length)
 
 const MAX_YEAR = 2000,
- //const MAX_YEAR = 500,
+//const MAX_YEAR = 100,
   START_DATA = []
 for (let i = 0; i < MAX_YEAR; ++i) {
   START_DATA.push({ x: i + 1, y: null });
 }
 
 const RANGE = [850, 1850];
-//const RANGE = [1,400]
+//const RANGE = [1,50]
 
 class Home extends React.Component {
 
@@ -153,7 +153,7 @@ class Home extends React.Component {
       arMean = d3array.mean(anomalyRangeMeans);
     switch (displayMode) {
       case "pdsi":
-        return pdsiData
+        return []
       case "global-temps":
         return data;
       case "global-anomalies":
@@ -226,6 +226,7 @@ class Home extends React.Component {
     })
     d3.select("#foreground .location-mark").remove();
   }
+
   onGlobeClick(coords, temp, index) {
     this.setState({ mapClick: { coords, temp, index } });
   }
@@ -236,8 +237,9 @@ class Home extends React.Component {
         const cheatingScaleTwo = d3.scale.quantile()
         .domain(data.filter(d => d !== -9))
         .range([0, 1, 3, 4, 5, 6, 7, 8, 9, 10, 11,12])
-        console.log('quantiles', cheatingScaleTwo.quantiles())
-        return cheatingScaleTwo.quantiles();
+        let scale = cheatingScaleTwo.quantiles()
+        console.log('quantiles', scale)
+        return [-0.63,-0.47,-0.34,-0.24,-0.17,-0.10,-0.04,0.04,0.15,0.29,0.57]
       case "global-temps":
         return [-25, -15, -10, -6, -3, 0, 10, 20, 26, 27, 28];
       case "global-anomalies":
@@ -248,7 +250,7 @@ class Home extends React.Component {
 
   render() {
     const {
-        year, allData, anomalyRangeMeans,
+        year, allData, allDataP, anomalyRangeMeans,
         anomalyRange, arUpdate,
         mapClick, loading, displayMode
       } = this.state,
@@ -259,14 +261,15 @@ class Home extends React.Component {
       format = v => `${ _format(v) } AD`,
       float = d3format(".2f");
 
-    const [min, max] = d3array.extent(lineData, d => d.y);
+    const [min, max] =  this.state.displayMode === 'pdsi' ? [-.75, .75]  : d3array.extent(lineData, d => d.y);
 
     let tMin = min, tMax = max;
-    const indexData = Object.keys(allData)
+    let clickData = this.state.displayMode === 'pdsi' ? allDataP : allData
+    const indexData = Object.keys(clickData)
       .sort((a, b) => a - b)
       .reduce((a, x) => {
         if (mapClick) {
-          let y = allData[x][mapClick.index];
+          let y = clickData[x][mapClick.index];
           if (this.state.displayMode === "global-anomalies") {
             y -= anomalyRangeMeans[mapClick.index];
           }
@@ -277,6 +280,7 @@ class Home extends React.Component {
         return a;
       }, []);
 
+    console.log('IndexData', tMin, tMax, indexData)
     const colors = colorbrewer[displayMode === "pdsi" ? 'BrBG' : "RdYlBu"][11].slice().reverse(),
       globeData = this.getGlobeData(),
       scaleDomain = this.getScaleDomain(globeData).filter(d => !isNaN(d)),
@@ -324,7 +328,7 @@ class Home extends React.Component {
             color: '#efefef'
           } }>
             <LegendContainer>
-              <div>Temperatures</div>
+              <div>{this.state.displayMode === 'pdsi' ? 'Palmer Drought Severity Index (PDSI)' :  'Temperatures'}</div>
               <div>
                 { colors.map(c =>
                     <LegendItem key={ c } style={ { backgroundColor: c} }/>
@@ -340,7 +344,24 @@ class Home extends React.Component {
             </LegendContainer>
             <div style={{padding: 20}}>
               <h4 style={{color: '#efefef'}}> PHYDA </h4>
-              <p> This Paleo Hydrodynamics Data Assimilation product (PHYDA) visualization tool maps <br></br> 2,000 years of reconstructed hydroclimate and associated climate dynamical variables <br></br> onto a global interface. Additional dynamical variables include thermometer measurements, <br></br>phenology observations, and sample data from coral reefs, lake sediment, ice cores, <br></br>speleothems, and tree rings. Using annually or seasonally resolved global reconstructions,<br></br> two spatiotemporal drought indices, near-surface air temperature, this innovative <br></br>transformation optimizes exploration of an expansive database into an approachable <br></br>web-based visualization platform for streamlined presentation and collaboration. This<br></br> visualization was made possible through the published work of Steiger, N. J., J.E. Smerdon,<br></br> E.R. Cook & B.I. Cook, 2018: A reconstruction of global hydroclimate and dynamical <br></br>variables over the Common Era. Sci. Data, 5, 1–15. doi:10.1038/sdata.2018.86. <br></br><a href="https://www.nature.com/articles/sdata201886" target="_blank">https://www.nature.com/articles/sdata201886</a>.</p>
+              <p className='scroll' style={{width: 600, height: 300, overflowY: 'scroll'}}> This Paleo Hydrodynamics Data Assimilation product (PHYDA) visualization tool maps
+2,000 years of reconstructed temperature and hydroclimate onto a global interface. The dataset
+underlying this visualization is based on a global climate model with assimilated proxy data from
+natural archives, such as corals, lake sediments, ice cores, speleothems and tree rings. Using
+annually resolved global reconstructions of near-surface air temperature and drought (PDSI), this
+innovative transformation optimizes exploration of an expansive database into an approachable
+web-based visualization platform for streamlined presentation and collaboration.
+<br /><br />
+The user can rotate the globe, zoom into regions of interest and click on any location of the globe
+to download a time series of the variable of interest.<br /><br />
+When downloading data, please be aware that these values represent estimates of past climate
+and include significant uncertainties. These uncertainties increase back in time, as fewer proxy
+data are available, and they are also larger in regions where proxy data is generally limited, such
+as in the tropics and the southern hemisphere.<br /><br />
+This visualization was made possible through the published work of Steiger, N. J., J.E. Smerdon,
+E.R. Cook &amp; B.I. Cook, 2018: A reconstruction of global hydroclimate and dynamical
+variables over the Common Era. Sci. Data, 5, 1–15. doi:10.1038/sdata.2018.86.
+<a href="https://www.nature.com/articles/sdata201886" target="_blank">https://www.nature.com/articles/sdata201886</a>.</p>
             </div>
           </div>
 
@@ -357,13 +378,13 @@ class Home extends React.Component {
             <div>Current Year:<br/> 
             <span style={{fontSize: '3em'}}>
             <input style={{backgroundColor: 'transparent', color:'#efefef', border: 'none', width: 100}} type='number' value= { year } onChange={ (v) => this.setState({year:v.target.value}) } /> AD</span></div>
-            <div>Mean Temperature: { float(d3array.mean(allData[year] || [])) }{ '°' }C</div>
+            <div>Mean {this.state.displayMode === 'pdsi' ? 'PDSI' :  'Temperatures'}: { float(d3array.mean(allData[year] || [])) }{ '°' }C</div>
             { !get(this.state, ["mapClick"], null) ? null :
               <>
                 <div style={ { borderBottom: "2px solid currentColor", margin: "5px 0px" } }/>
                 <div>Coords: { mapClick.coords }</div>
                 <div>
-                  Temperature{ displayMode === "global-anomalies" ? " Difference" : "" }:
+                  {this.state.displayMode === 'pdsi' ? 'Palmer Drought Severity Index (PDSI)' :  'Temperatures'}{ displayMode === "global-anomalies" ? " Difference" : "" }:
                   {" "}{ float(mapClick.temp) }{ '°' }C
                 </div>
               </>
@@ -378,7 +399,7 @@ class Home extends React.Component {
                 { name: "Palmer Drought Severity Index (PDSI)", value: "pdsi" }
               ] }/>
             { displayMode !== "global-anomalies" ? null :
-              <>
+              <React.Fragment>
                 <div style={ { marginTop: "5px" } }>
                   Base Anomaly Range
                 </div>
@@ -400,15 +421,13 @@ class Home extends React.Component {
                     min={ 1 }
                     max={ MAX_YEAR }
                     value={ arUpdate[1] }
-                    onChange={
-                      e => this.updateAnomalyRange(null, +e.target.value)
-                    }/>
+                    onChange={e => this.updateAnomalyRange(null, +e.target.value)}/>
                   <Button disabled={ deepequal(anomalyRange, arUpdate) }
                     onClick={ () => this.setAnomalyRange() }>
                     Update Anomaly Range
                   </Button>
                 </InputContainer>
-              </>
+              </React.Fragment>
             }
           </div>
         </div>
@@ -427,7 +446,9 @@ class Home extends React.Component {
             height: "100%",
             width: "100%"
           } }>
-
+            <div style={{position: 'absolute', right: '350px', zIndex: 9999, display: indexData.length > 0 ? 'block' : 'none'}}>
+              <CSVLink data={[indexData.map(d => d.x), indexData.map(d => d.y)]} filename={`${get(mapClick, 'coords', '_')}_${this.state.displayMode}.csv`} >Download</CSVLink>
+            </div>
             <NivoLine
               colors={ ["#fff", "#0a0"] }
               theme={{
@@ -482,10 +503,10 @@ class Home extends React.Component {
               } }
 
               data={ [
-                { id: "Global Mean Temperature",
+                { id: `${this.state.displayMode === 'pdsi' ? '' :  'Global Mean Temperatures'}`,
                   title: "Mean Tempuature",
                   data: lineData },
-                { id: "Local Mean Tempuature",
+                { id: `Local Mean ${this.state.displayMode === 'pdsi' ? 'PDSI' :  'Temperatures'}`,
                   title: "",
                   data: indexData }
               ]}
