@@ -138,7 +138,7 @@ const InfoBox = ({ xmlId,authors,species, smeta,meta}) => {
 		    <div style={subTitleStyle}> 
 
 		    <Legend
-				    title ={"Tree Ring Widths"}
+				    title ={" Tree-Ring Width (1/100 mm)"}
 				    vertical ={false}
 				
 				    domain = {LinearScale}
