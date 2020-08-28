@@ -1,5 +1,6 @@
 import { CSVLink, CSVDownload } from "react-csv";
 import React, { Component, useState, useEffect } from "react";
+import _ from 'lodash'
 /*import Chart from "pages/PAMap/components/svg.js";*/
 /*import StudySite from "pages/PAMap/components/StudySite.js";
 */
@@ -233,13 +234,15 @@ class Home extends React.Component {
 
   getScaleDomain(data) {
     switch (this.state.displayMode) {
-      case "pdsi":
-        const cheatingScaleTwo = d3.scale.quantile()
-        .domain(data.filter(d => d !== -9))
-        .range([0, 1, 3, 4, 5, 6, 7, 8, 9, 10, 11,12])
+        case "pdsi":
+        const cheatingScaleTwo =
+            d3.scale.quantile()
+                .domain(data)
+                .range([0, 1, 3, 4, 5, 6, 7, 8, 9, 10, 11,12])
         let scale = cheatingScaleTwo.quantiles()
-        console.log('quantiles', scale)
-        return [-0.63,-0.47,-0.34,-0.24,-0.17,-0.10,-0.04,0.04,0.15,0.29,0.57]
+
+        // return [-0.63,-0.47,-0.34,-0.24,-0.17,-0.10,-0.04,0.04,0.15,0.29,0.57]
+            return scale
       case "global-temps":
         return [-25, -15, -10, -6, -3, 0, 10, 20, 26, 27, 28];
       case "global-anomalies":
@@ -280,13 +283,12 @@ class Home extends React.Component {
         return a;
       }, []);
 
-    console.log('IndexData', tMin, tMax, indexData)
-    const colors = colorbrewer[displayMode === "pdsi" ? 'BrBG' : "RdYlBu"][11].slice().reverse(),
+    const colors = displayMode === "pdsi" ? colorbrewer['BrBG'][4].slice().reverse() :
+                                            colorbrewer["RdYlBu"][11].slice().reverse() ,
       globeData = this.getGlobeData(),
       scaleDomain = this.getScaleDomain(globeData).filter(d => !isNaN(d)),
       _lFormat = displayMode === "global-anomalies" ? d3format(".2f") : (v => v),
       lFormat = displayMode === "pdsi" ? d3format(".2f") : (v => `${ _lFormat(v) }°C`)
-
 
     return (
       <div style={ {
@@ -336,7 +338,9 @@ class Home extends React.Component {
                 }
               </div>
               <div>
-                { scaleDomain.map(d =>
+                { scaleDomain
+                    .filter(d => d !== -9)
+                    .map(d =>
                     <LegendItem key={ d }>{ lFormat(d) }</LegendItem>
                   )
                 }

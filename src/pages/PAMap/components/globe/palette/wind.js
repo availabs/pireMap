@@ -100,10 +100,15 @@ var six = function (bounds, scheme, reverse = false) {
   var colorbrewer = require('colorbrewer')
   // console.log('bounds', colorbrewer)
   var scheme = scheme || 'RdBu'
-  var colors = colorbrewer[scheme][11].map(hexToRgb)
+  var colors = colorbrewer[scheme][scheme === 'BrBG' ? 4 : 11].map(hexToRgb)
   reverse && colors.reverse();
 
-  var segments = bounds.map((d, i) => [d, colors[i]])
+  var segments = bounds
+      .filter(d => d !== -9)
+      .map((d, i) => {
+    return [d, colors[i]]
+  })
+  segments = [[-9,[204,204,204]],...segments]
   var totalBounds = [bounds[0], bounds[bounds.length - 1]]
   return palette.buildScaleFromSegments(totalBounds, segments, resolution)
 }
