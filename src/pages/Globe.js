@@ -24,15 +24,15 @@ import d3 from "d3v3"
 //
 // console.log('array length', tempData.data.length)
 
-const MAX_YEAR = 2000,
-//const MAX_YEAR = 100,
+//const MAX_YEAR = 2000,
+const MAX_YEAR = 100,
   START_DATA = []
 for (let i = 0; i < MAX_YEAR; ++i) {
   START_DATA.push({ x: i + 1, y: null });
 }
 
-const RANGE = [850, 1850];
-//const RANGE = [1,50]
+//const RANGE = [850, 1850];
+const RANGE = [1,50]
 
 class Home extends React.Component {
 
@@ -234,15 +234,13 @@ class Home extends React.Component {
 
   getScaleDomain(data) {
     switch (this.state.displayMode) {
-        case "pdsi":
-        const cheatingScaleTwo =
-            d3.scale.quantile()
-                .domain(data)
-                .range([0, 1, 3, 4, 5, 6, 7, 8, 9, 10, 11,12])
-        let scale = cheatingScaleTwo.quantiles()
-
-        // return [-0.63,-0.47,-0.34,-0.24,-0.17,-0.10,-0.04,0.04,0.15,0.29,0.57]
-            return scale
+      case "pdsi":
+        // const cheatingScaleTwo = d3.scale.quantile()
+        // .domain(data.filter(d => d !== -9))
+        // .range([0, 1, 3, 4, 5, 6, 7, 8, 9, 10, 11,12])
+        // let scale = cheatingScaleTwo.quantiles()
+        // console.log('quantiles', scale)
+        return [-0.63,-0.47,-0.34,-0.24,-0.17,-0.10,-0.04,0.04,0.15,0.29,0.57]
       case "global-temps":
         return [-25, -15, -10, -6, -3, 0, 10, 20, 26, 27, 28];
       case "global-anomalies":
