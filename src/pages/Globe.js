@@ -481,7 +481,7 @@ variables over the Common Era. Sci. Data, 5, 1–15. doi:10.1038/sdata.2018.86.
                 left: 50,
                 top: 20
               } }
-              onClick={ data => this.setState({ year: data.index }) }
+              onClick={ data => this.setState({ year: parseInt(data.data.x) }) }
               enablePoints={ false }
               lineWidth={ 1 }
               enableGridX={ false }
@@ -623,7 +623,7 @@ const ToolTip = ({ d, point, xFormat, yFormat }) => {
     padding: "10px",
     borderRadius: "3px"
   } }>
-    { xFormat(point.data.x) } { point.serieId }: { yFormat(point.data.y) }{ '°' }C
+    { xFormat(point.data.x) } { point.serieId }: { yFormat(point.data.y) }
   </div>)
 }
 
