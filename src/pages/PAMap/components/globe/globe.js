@@ -411,6 +411,7 @@ globe.interpolateField = function (grids, cb) {
 }
 
 globe.drawCanvas = function (mapData, options = {}) {
+  // mapData.data = mapData.data.filter(d => d !== -9)
   var scale = globe.getScaleSix(mapData, options);
   globe.defaultCanvas.scale = scale
   globe.overlayData = Object.assign(globe.defaultCanvas, buildGrid(globe.defaultCanvas.builder([mapData])))

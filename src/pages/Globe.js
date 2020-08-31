@@ -1,5 +1,6 @@
 import { CSVLink, CSVDownload } from "react-csv";
 import React, { Component, useState, useEffect } from "react";
+import _ from 'lodash'
 /*import Chart from "pages/PAMap/components/svg.js";*/
 /*import StudySite from "pages/PAMap/components/StudySite.js";
 */
@@ -280,13 +281,12 @@ class Home extends React.Component {
         return a;
       }, []);
 
-    console.log('IndexData', tMin, tMax, indexData)
-    const colors = colorbrewer[displayMode === "pdsi" ? 'BrBG' : "RdYlBu"][11].slice().reverse(),
+    const colors = displayMode === "pdsi" ? colorbrewer['BrBG'][4].slice().reverse() :
+                                            colorbrewer["RdYlBu"][11].slice().reverse() ,
       globeData = this.getGlobeData(),
       scaleDomain = this.getScaleDomain(globeData).filter(d => !isNaN(d)),
       _lFormat = displayMode === "global-anomalies" ? d3format(".2f") : (v => v),
       lFormat = displayMode === "pdsi" ? d3format(".2f") : (v => `${ _lFormat(v) }°C`)
-
 
     return (
       <div style={ {
@@ -336,7 +336,9 @@ class Home extends React.Component {
                 }
               </div>
               <div>
-                { scaleDomain.map(d =>
+                { scaleDomain
+                    .filter(d => d !== -9)
+                    .map(d =>
                     <LegendItem key={ d }>{ lFormat(d) }</LegendItem>
                   )
                 }
