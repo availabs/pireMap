@@ -100,7 +100,7 @@ var six = function (bounds, scheme, reverse = false) {
   var colorbrewer = require('colorbrewer')
   // console.log('bounds', colorbrewer)
   var scheme = scheme || 'RdBu'
-  var colors = colorbrewer[scheme][scheme === 'BrBG' ? 4 : 11].map(hexToRgb)
+  var colors = colorbrewer[scheme][scheme === 'BrBG' ? 11 : 11].map(hexToRgb)
   reverse && colors.reverse();
 
   var segments = bounds
