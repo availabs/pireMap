@@ -99,13 +99,13 @@ class InfoBox extends Component {
 
   render() {
 
-    const { theme, layers } = this.props,
-      activeLayers = layers.filter(l => l.active),
-      activeLegends = activeLayers
+    const { layers, activeLayers } = this.props,
+      _activeLayers = layers.filter(l => activeLayers.includes(l.name)),
+      activeLegends = _activeLayers
         .reduce((a, c) =>
           c.legend && (c.legend.active !== false) && c.legend.domain.length ? a.concat({ legend: c.legend, layer: c }) : a
         , []),
-      activeInfoBoxes = activeLayers
+      activeInfoBoxes = _activeLayers
         .reduce((a, c) =>
           c.infoBoxes ?
             a.concat(
@@ -152,7 +152,7 @@ class InfoBox extends Component {
                               <OpenInfoBoxTitle><b.title layer={ b.layer }/></OpenInfoBoxTitle>
                             : <OpenInfoBoxTitle>{ b.title }</OpenInfoBoxTitle>
                           }
-                          <b.comp theme={ this.props.theme } layer={ b.layer }/>
+                          <b.comp layer={ b.layer }/>
                         </>
                     }
                     <ToggleButton className={ this.getToggleButton(b.id) }

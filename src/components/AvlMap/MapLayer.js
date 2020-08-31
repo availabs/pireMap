@@ -24,7 +24,6 @@ const DEFAULT_OPTIONS = {
 	_isVisible: true,
 
   onHover: false,
-  hoveredFeatureIds: new Set(),
 
 	showAttributesModal: true,
 
@@ -38,15 +37,22 @@ class MapLayer {
 		const options = { ...DEFAULT_OPTIONS, ..._options };
 
 		this.component = null;
+		this.map = null;
+
+		this.showPopover = false;
+		this.latestPopoverId = 0;
 
 		this.name = name;
 
     for (const key in options) {
       this[key] = options[key];
     }
+		this.LoadingIndicator = () => {};
 
     this.boundFunctions = {};
     this.hoverSourceData = {};
+		this.hoveredFeatureIds = new Set();
+		this.pinnedFeatureIds = new Set();
 
 		this._mousemove = this._mousemove.bind(this);
 		this._mouseleave = this._mouseleave.bind(this);
@@ -60,9 +66,16 @@ class MapLayer {
     this.onHoverLeave = this.onHoverLeave.bind(this);
 	}
 
+	registerLoadingIndicator(func) {
+		this.LoadingIndicator = func;
+	}
+	unregisterLoadingIndicator() {
+		this.LoadingIndicator = () => {};
+	}
+
   initComponent(component) {
     this.component = component;
-    this.updatePopover = component.updatePopover.bind(component);
+    // this.updatePopover = component.updatePopover.bind(component);
 		if (this.showAttributesModal !== false) {
 			const modals = this.modals || {};
 			this.modals = {
@@ -78,12 +91,15 @@ class MapLayer {
 
 			if (!get(this, 'component.props.sidebar', false) ||
 					!get(this, 'component.props.sidebarPages', []).includes("layers")) {
-				this.mapActions = {
+				this.mapActions =
+					get(this, 'component.props.hideAttributes', false) ?
+					{...this.mapActions} :
+						{
 					...this.mapActions,
 					"avl-attributes": {
-						Icon: ({ layer }) => <span className={ `fa fa-lg fa-eye` }/>,
+						Icon: ({layer}) => <span className={`fa fa-lg fa-eye`}/>,
 						tooltip: "Toggle Attributes",
-						action: function() {
+						action: function () {
 							this.doAction(["toggleModal", "avl-attributes"]);
 						}
 					}
@@ -91,14 +107,19 @@ class MapLayer {
 			}
 			else {
 				const actions = this.actions || [];
-				this.actions = [
-					...actions.filter(({ tooltip }) => tooltip !== "Toggle Attributes"),
-			    {
-			      Icon: () => <span className={ `fa fa-lg fa-eye` }/>,
-			      action: ["toggleModal", "avl-attributes"],
-			      tooltip: "Toggle Attributes"
-			    }
-				]
+				this.actions =
+					get(this, 'component.props.hideAttributes', false) ?
+						[
+							...actions.filter(({ tooltip }) => tooltip !== "Toggle Attributes"),
+						] :
+						[
+							...actions.filter(({ tooltip }) => tooltip !== "Toggle Attributes"),
+							{
+								Icon: () => <span className={ `fa fa-lg fa-eye` }/>,
+								action: ["toggleModal", "avl-attributes"],
+								tooltip: "Toggle Attributes"
+							}
+						]
 			}
 		}
   }
@@ -106,7 +127,7 @@ class MapLayer {
     this.map = map;
 	}
 
-	onAdd(map) {
+	onAdd(map, props) {
 
 	}
 	_onAdd(map) {
@@ -126,11 +147,13 @@ class MapLayer {
 			this.addOnZoom(map);
 		}
 		this.layers.forEach(layer => {
-			map.setLayoutProperty(layer.id, 'visibility', this._isVisible ? "visible" : "none");
+			const layerVisibility = map.getLayoutProperty(layer.id, 'visibility'),
+				isVisible = (layerVisibility !== "none") && this._isVisible;
+			map.setLayoutProperty(layer.id, 'visibility', isVisible ? "visible" : "none");
 		})
 	}
 	onRemove(map) {
-		
+
 	}
 	_onRemove(map) {
 		if (this.onZoom) {
@@ -151,7 +174,9 @@ class MapLayer {
 	}
 
 	receiveProps(oldProps, newProps) {
-
+		for (const key in newProps) {
+			this[key] = newProps[key];
+		}
 	}
 	onPropsChange(oldProps, newProps) {
     this.doAction(["fetchLayerData"]);
@@ -240,7 +265,7 @@ class MapLayer {
     })
   }
   onHoverMove(e, layer, map) {
-    const { dataFunc, minZoom } = this.onHover;
+    const { dataFunc, minZoom, filterFunc } = this.onHover;
 
 		const zoom = map.getZoom();
 		if (minZoom && (minZoom > zoom)) {
@@ -251,15 +276,36 @@ class MapLayer {
       dataFunc.call(this, e.features, e.point, e.lngLat, layer);
 
     const data = this.hoverSourceData[layer];
-    if (data) {
-      this.onHoverLeave(e, layer, map);
+		if (!data || !e.features.length) return;
 
-			const { id } = e.features[0];
+    this.onHoverLeave(e, layer, map);
 
+		const hover = id => {
 			(id !== undefined) && (map.getCanvas().style.cursor = 'pointer');
-      (id !== undefined) && this.hoveredFeatureIds.add(`${ layer }.${ id }`);
-      (id !== undefined) && map.setFeatureState({ id, ...data }, { hover: true });
-    }
+			(id !== undefined) && this.hoveredFeatureIds.add(`${ layer }.${ id }`);
+			(id !== undefined) && map.setFeatureState({ id, ...data }, { hover: true });
+		}
+		const hoverFeature = () => {
+			const { id } = e.features[0];
+			hover(id);
+		}
+
+		if (typeof filterFunc === "function") {
+			const filter = filterFunc.call(this, e.features, e.point, e.lngLat, layer),
+				{ source, sourceLayer } = data;
+			if (filter) {
+				map.querySourceFeatures(source, { sourceLayer, filter })
+					.forEach(({ id }) => {
+						hover(id);
+					})
+			}
+			else {
+				hoverFeature();
+			}
+		}
+		else {
+			hoverFeature();
+		}
   }
   onHoverLeave(e, layer, map) {
 		this.hoveredFeatureIds.forEach(key => {
@@ -275,17 +321,19 @@ class MapLayer {
 
   doAction([action, ...args]) {
     if (this.component && this.component[action]) {
-      this.component[action](this.name, ...args)
+      return this.component[action](this.name, ...args);
     }
   }
   forceUpdate() {
     this.component && this.component.forceUpdate();
   }
 
-	toggleVisibility(map) {
+	toggleVisibility() {
+
+		//console.log('in map layer toggle visibility',map,this.layers)
 		this._isVisible = !this._isVisible;
 		this.layers.forEach(layer => {
-			map.setLayoutProperty(layer.id, 'visibility', this._isVisible ? "visible" : "none");
+			this.map.setLayoutProperty(layer.id, 'visibility', this._isVisible ? "visible" : "none");
 		})
 	}
 
@@ -303,8 +351,8 @@ class MapLayer {
   }
 	receiveDataOld(...args) {
 		if (this.receiveData) {
-			console.warn("<AvlMap> You are using the old fetchData / receiveData API. Use the new featchData / render API!");
-			this.receiveData.call(this, ...args);
+			console.warn("<AvlMap::MapLayer> You are using the old fetchData / receiveData API. Use the new featchData / render API!");
+			this.receiveData(...args);
 		}
 	}
 
@@ -352,23 +400,43 @@ class MapLayer {
 
 	addPopover(map) {
 		this.popover.layers.forEach(layer => {
-			map.on("mousemove", layer, this._mousemove);
+
+			let key = `${ layer }-mousemove`,
+				func = e => this._mousemove(e, layer);
+			this.boundFunctions[key] = func;
+			map.on("mousemove", layer, func);
+
 			map.on("mouseleave", layer, this._mouseleave);
+
       if (!this.popover.noSticky && !this.onClick) {
-        map.on("click", layer, this._popoverClick);
+				key = `${ layer }-popover-click`;
+				func = e => this._popoverClick(e, layer);
+				this.boundFunctions[key] = func;
+        map.on("click", layer, func);
       }
 		})
 	}
 	removePopover(map) {
 		this.popover.layers.forEach(layer => {
-			map.off("mousemove", layer, this._mousemove);
+
+			let key = `${ layer }-mousemove`,
+				func = this.boundFunctions[key];
+			delete this.boundFunctions[key];
+			map.off("mousemove", layer, func);
+
 			map.off("mouseleave", layer, this._mouseleave);
+
       if (!this.popover.noSticky && !this.onClick) {
-        map.off("click", layer, this._popoverClick);
+				key = `${ layer }-popover-click`;
+				func = this.boundFunctions[key];
+				delete this.boundFunctions[key];
+        map.off("click", layer, func);
       }
 		})
 	}
-	_mousemove(e) {
+	_mousemove(e, layer) {
+		this.showPopover = true;
+
 		const { map, popover } = this.component.state,
 			zoom = map.getZoom(),
 			{ minZoom, dataFunc } = this.popover;
@@ -376,46 +444,89 @@ class MapLayer {
 		if (minZoom && (minZoom > zoom)) return;
 
     if (e.features && e.features.length) {
-			const data = dataFunc.call(this, e.features[0], e.features) || [];
 
-			map.getCanvas().style.cursor = data.length ? 'pointer' : '';
+			const popoverId = ++this.latestPopoverId;
 
-	    if (popover.pinned) return;
+			Promise.resolve(dataFunc.call(this, e.features[0], e.features, layer, map, e) || [])
+				.then(data => {
+					if (!this.showPopover) return;
+					if (popoverId < this.latestPopoverId) return;
 
-      this.updatePopover({
-      	pos: [e.point.x, e.point.y],
-      	data
-      })
+					map.getCanvas().style.cursor = data.length ? 'pointer' : '';
+
+			    if (popover.pinned) return;
+
+					this.doAction(["updatePopover", {
+		      	pos: [e.point.x, e.point.y],
+						layer: this,
+		      	data
+		      }])
+				})
     }
 	}
-	_mouseleave(e) {
+	_mouseleave(e, layer) {
+		this.showPopover = false;
+
 		const { map, popover } = this.component.state;
 
     map.getCanvas().style.cursor = '';
 
     if (popover.pinned) return;
 
-    this.updatePopover({
+		this.doAction(["updatePopover", {
+				layer: null,
         data: []
-    })
+    }])
 	}
-	_popoverClick(e) {
+	_clearPinnedState() {
+		if (!this.map) return;
+
+		this.pinnedFeatureIds.forEach(layerId => {
+			const [layer, id] = layerId.split("."),
+				layerData = this.layers.reduce((a, c) =>
+					c.id === layer ? ({ source: c.source, sourceLayer: c['source-layer'] }) : a
+				, null)
+			layerData && this.map.setFeatureState({ id, ...layerData }, { pinned: false });
+		})
+		this.pinnedFeatureIds.clear();
+	}
+	_popoverClick(e, layer) {
 		const { map, popover } = this.component.state,
     	{ pinned } = popover;
 
     if (e.features.length) {
-    	const data = this.popover.dataFunc.call(this, e.features[0], e.features);
+    	const data = this.popover.dataFunc.call(this, e.features[0], e.features, layer);
     	if (data.length) {
+				if (typeof this.popover.onPinned === "function") {
+					this.popover.onPinned.call(this, e.features, e.lngLat, e.point);
+				}
+
+				if (this.popover.setPinnedState) {
+					this._clearPinnedState();
+
+					e.features.forEach(({ id, layer }) => {
+						const layerData = this.layers.reduce((a, c) =>
+							c.id === layer.id ? ({ source: c.source, sourceLayer: c['source-layer'] }) : a
+						, null)
+						if ((id !== undefined) && layerData) {
+				      this.pinnedFeatureIds.add(`${ layer.id }.${ id }`);
+				      map.setFeatureState({ id, ...layerData }, { pinned: true });
+						}
+					})
+				}
+
     		if (pinned) {
-    			this.updatePopover({
+					this.doAction(["updatePopover", {
     				pos: [e.point.x, e.point.y],
-    				data
-    			})
+    				data,
+						layer: this
+    			}])
     		}
     		else {
-    			this.updatePopover({
-    				pinned: true
-    			})
+					this.doAction(["updatePopover", {
+    				pinned: true,
+						layer: this
+    			}])
     		}
     	}
     	// else {
