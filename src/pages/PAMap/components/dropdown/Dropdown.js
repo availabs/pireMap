@@ -40,7 +40,7 @@ class Dropdown extends React.Component {
         <label style={{width: '100%'}}>
           <div style={{paddingBottom: 10}}>
             <h4 style={{color: '#efefef'}}>Tree Ring Viewer</h4>
-            <p style={{color: '#cce9f2', lineHeight: '1.2em', fontSize: '1.2em'}}> &nbsp;&nbsp;&nbsp;This visualization was made possible through the published work of Tejedor, E., R. Serrano-Notivoli, M. de Luis, M. Saz, C. Hartl, S. St. George, U. Büntgen, A. Liebhold, M. Vuille & J. Esper, 2020: A global perspective on the climate-driven growth synchrony of neighboring trees. Global Ecol. Biogeogr., 29(7), 1114-1125, doi:10.1111/geb.13090. <a href="https://onlinelibrary.wiley.com/doi/abs/10.1111/geb.13090" target="_blank">https://onlinelibrary.wiley.com/doi/abs/10.1111/geb.13090</a>.</p> 
+            <p style={{color: '#cce9f2', lineHeight: '1.2em', fontSize: '1.2em'}}> &nbsp;&nbsp;&nbsp;</p> 
           </div>
 
           Filter by Species:<br/>
