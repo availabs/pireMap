@@ -108,7 +108,7 @@ var six = function (bounds, scheme, reverse = false) {
       .map((d, i) => {
     return [d, colors[i]]
   })
-  segments = [[-9,[204,204,204]],...segments]
+  segments = [[-9,[20,20,20]],...segments]
   var totalBounds = [bounds[0], bounds[bounds.length - 1]]
   return palette.buildScaleFromSegments(totalBounds, segments, resolution)
 }
