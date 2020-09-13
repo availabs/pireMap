@@ -1,10 +1,10 @@
 // import { globeClick } from 'store/modules/gridData'
 import { connect } from 'react-redux'
+import globe from './globe'
 import './globe.scss'
 
 var React = require('react'),
-  d3 = require('d3v3'),
-  globe = require('./globe')
+  d3 = require('d3v3')
 
 class GlobeDemo extends React.Component {
 

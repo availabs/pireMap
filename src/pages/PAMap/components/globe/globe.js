@@ -1,6 +1,7 @@
+import six from './palette/wind'
 const colorbrewer = require("colorbrewer")
 //console.log("COLORS:", colorbrewer)
-
+// var six = require('./palette/wind.js')
 var d3 = require('d3v3')
 var topojson = require('topojson')
 var _ = require('underscore')
@@ -458,7 +459,7 @@ globe.getScaleSix = (mapData, options) => {
   // return Object.assign(require('./palette/wind.js')(cheatingbounds, "BrBG");
   // return Object.assign(require('./palette/wind.js')(cheatingbounds, "RdBu", 150, true));
   // return Object.assign(require('./palette/wind.js')(cheatingbounds, "RdYlBu", 150, true));
-  return Object.assign(require('./palette/wind.js')(bounds, colors, true));
+  return six(bounds, colors, true);
 }
 
 globe.drawGeoJson = function (mapData, options) {
@@ -551,7 +552,7 @@ globe.setScale = function (scale) {
 var getGlobe = function () {
   return globe
 }
-module.exports = new getGlobe()
+export default new getGlobe()
 
 
 // ------------------- Canvas Util Functions ------------------------------------------------------------

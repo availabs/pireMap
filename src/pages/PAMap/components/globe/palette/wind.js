@@ -113,4 +113,4 @@ var six = function (bounds, scheme, reverse = false) {
   return palette.buildScaleFromSegments(totalBounds, segments, resolution)
 }
 
-module.exports = six
+export default six
