@@ -265,7 +265,7 @@ class Home extends React.Component {
       tickValues = [250, 500, 750, 1000, 1250, 1500, 1750]
         .filter(y => lineData.length >= y),
       _format = d3format(",d"),
-      format = v => `${ _format(v) } AD`,
+      format = v => `${ _format(v) } CE`,
       float = d3format(".2f");
 
     const [min, max] =  this.state.displayMode === 'pdsi' ? [-.75, .75]  : d3array.extent(lineData, d => d.y);
@@ -386,7 +386,7 @@ variables over the Common Era. Sci. Data, 5, 1–15. doi:10.1038/sdata.2018.86.
           <div style={ { padding: "15px 20px" } }>
             <div>Current Year:<br/> 
             <span style={{fontSize: '3em'}}>
-            <input style={{backgroundColor: 'transparent', color:'#efefef', border: 'none', width: 150}} type='number' value= { year } onChange={ (v) => this.setState({year:v.target.value}) } /> AD</span></div>
+            <input style={{backgroundColor: 'transparent', color:'#efefef', border: 'none', width: 150}} type='number' value= { year } onChange={ (v) => this.setState({year:v.target.value}) } />CE</span></div>
             <div>Mean {this.state.displayMode === 'pdsi' ? 'PDSI' :  'Temperatures'}: { float(d3array.mean(allData[year] || [])) }{ '°' }C</div>
             { !get(this.state, ["mapClick"], null) ? null :
               <>
@@ -398,7 +398,7 @@ variables over the Common Era. Sci. Data, 5, 1–15. doi:10.1038/sdata.2018.86.
                 </div>
               </>
             }
-            <div style={ { borderBottom: "2px solid currentColor", margin: "5px 0px",flex:"auto" } }/>
+            <div style={ { borderBottom: "2px solid currentColor", margin: "5px 0px"} }/>
             {/*<Dropdown disabled={ loading }
               onSelect={ v => this.setDisplayMode(v) }
               value={ displayMode }
@@ -409,8 +409,9 @@ variables over the Common Era. Sci. Data, 5, 1–15. doi:10.1038/sdata.2018.86.
               ] }/>*/}
               {this.state.options.map(option =>{
                   return (
-                      <div style={{padding:"1px"}}>
+                      <div style={{padding:"1px", alignItems:"vertical"}}>
                           <input id='displayMode'
+                                 disabled={ loading }
                                  onChange={this.setDisplayMode.bind(this,option.value)}
                                  type="radio"
                                  checked={displayMode === option.value}/>
