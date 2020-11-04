@@ -381,7 +381,7 @@ variables over the Common Era. Sci. Data, 5, 1–15. doi:10.1038/sdata.2018.86.
           <div style={ { padding: "15px 20px" } }>
             <div>Current Year:<br/> 
             <span style={{fontSize: '3em'}}>
-            <input style={{backgroundColor: 'transparent', color:'#efefef', border: 'none', width: 100}} type='number' value= { year } onChange={ (v) => this.setState({year:v.target.value}) } /> AD</span></div>
+            <input style={{backgroundColor: 'transparent', color:'#efefef', border: 'none', width: 150}} type='number' value= { year } onChange={ (v) => this.setState({year:v.target.value}) } /> AD</span></div>
             <div>Mean {this.state.displayMode === 'pdsi' ? 'PDSI' :  'Temperatures'}: { float(d3array.mean(allData[year] || [])) }{ '°' }C</div>
             { !get(this.state, ["mapClick"], null) ? null :
               <>
@@ -404,7 +404,7 @@ variables over the Common Era. Sci. Data, 5, 1–15. doi:10.1038/sdata.2018.86.
               ] }/>
             { displayMode !== "global-anomalies" ? null :
               <React.Fragment>
-                <div style={ { marginTop: "5px" } }>
+                <div style={ { marginTop: "5px"} }>
                   Base Anomaly Range
                 </div>
                 <InputContainer>
