@@ -245,7 +245,7 @@ class Home extends React.Component {
       case "global-temps":
         return [-25, -15, -10, -6, -3, 0, 10, 20, 26, 27, 28];
       case "global-anomalies":
-        return [-1, -0.5, -0.25, -0.1, -0.5, 0, 0.1, 0.25, 0.5, 1, 1.5];
+        return [-1, -0.5, -0.25, -0.1, -0.05, 0, 0.1, 0.25, 0.5, 1, 1.5];
     }
    
   }
@@ -289,7 +289,7 @@ class Home extends React.Component {
             colorbrewer["RdYlBu"][11].slice().reverse(),
       _lFormat = displayMode === "global-anomalies" ? d3format(".2f") : (v => v),
       lFormat = displayMode === "pdsi" ? d3format(".2f") : (v => `${ _lFormat(v) }°C`)
-
+    //console.log('scale',scaleDomain)
     return (
       <div style={ {
         width: "100vw",
