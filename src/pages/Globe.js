@@ -56,7 +56,12 @@ class Home extends React.Component {
     displayMode: "global-temps",
     anomalyRange: [...RANGE],
     arUpdate: [...RANGE],
-    anomalyRangeMeans: []
+    anomalyRangeMeans: [],
+    options: [
+              { name: "Global Temperatures", value: "global-temps" },
+             { name: "Global Anomalies", value: "global-anomalies" },
+             { name: "Palmer Drought Severity Index (PDSI)", value: "pdsi" }
+             ]
   }
 
   setState(...args) {
@@ -393,15 +398,26 @@ variables over the Common Era. Sci. Data, 5, 1–15. doi:10.1038/sdata.2018.86.
                 </div>
               </>
             }
-            <div style={ { borderBottom: "2px solid currentColor", margin: "5px 0px" } }/>
-            <Dropdown disabled={ loading }
+            <div style={ { borderBottom: "2px solid currentColor", margin: "5px 0px",flex:"auto" } }/>
+            {/*<Dropdown disabled={ loading }
               onSelect={ v => this.setDisplayMode(v) }
               value={ displayMode }
               options={ [
                 { name: "Global Temperatures", value: "global-temps" },
                 { name: "Global Anomalies", value: "global-anomalies" },
                 { name: "Palmer Drought Severity Index (PDSI)", value: "pdsi" }
-              ] }/>
+              ] }/>*/}
+              {this.state.options.map(option =>{
+                  return (
+                      <div style={{padding:"1px"}}>
+                          <input id='displayMode'
+                                 onChange={this.setDisplayMode.bind(this,option.value)}
+                                 type="radio"
+                                 checked={displayMode === option.value}/>
+                          <label htmlFor={option.name} style={{marginLeft:"3px"}}>{option.name}</label>
+                      </div>
+                  )
+              })}
             { displayMode !== "global-anomalies" ? null :
               <React.Fragment>
                 <div style={ { marginTop: "5px"} }>
