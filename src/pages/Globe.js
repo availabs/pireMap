@@ -19,7 +19,8 @@ import styled from "styled-components"
 import * as d3array from "d3-array"
 import { format as d3format } from "d3-format"
 import d3 from "d3v3"
-
+import SideBar from "./Components/Sidebar";
+import Sidebar from "../components/AvlMap/components/sidebar";
 //const tempData = require('pages/PAMap/components/globe/data.json')
 // const tempData = require('pages/PAMap/components/globe/dynamic_data.js')
 //
@@ -58,6 +59,8 @@ class Home extends React.Component {
     anomalyRange: [...RANGE],
     arUpdate: [...RANGE],
     anomalyRangeMeans: [],
+      isOpen: true,
+      transitioning: false,
     options: [
               { name: "Global Temperatures", value: "global-temps" },
              { name: "Global Anomalies", value: "global-anomalies" },
@@ -237,6 +240,13 @@ class Home extends React.Component {
   onGlobeClick(coords, temp, index) {
     this.setState({ mapClick: { coords, temp, index } });
   }
+  onTransitionStart() {
+        this.setState({ transitioning: true });
+    }
+  onOpenOrClose(isOpen) {
+        this.setState({ isOpen, transitioning: false });
+    }
+
 
   getScaleDomain(data) {
     switch (this.state.displayMode) {
@@ -356,27 +366,36 @@ class Home extends React.Component {
                 }
               </div>
             </LegendContainer>
-            <div style={{padding: 20}}>
+              <SideBar
+                  isOpen={ this.state.isOpen }
+                  transitioning={ this.state.transitioning }
+                  onOpenOrClose={ this.onOpenOrClose.bind(this) }
+                  onTransitionStart={ this.onTransitionStart.bind(this) }
+                  header={'PHYDA'}
+                  width={500}
+              />
+            {/*<div style={{padding: 20}}>
               <h4 style={{color: '#efefef'}}> PHYDA </h4>
-              <p className='scroll' style={{width: 600, height: 300, overflowY: 'scroll'}}> This Paleo Hydrodynamics Data Assimilation product (PHYDA) visualization tool maps
-2,000 years of reconstructed temperature and hydroclimate onto a global interface. The dataset
-underlying this visualization is based on a global climate model with assimilated proxy data from
-natural archives, such as corals, lake sediments, ice cores, speleothems and tree rings. Using
-annually resolved global reconstructions of near-surface air temperature and drought (PDSI), this
-innovative transformation optimizes exploration of an expansive database into an approachable
-web-based visualization platform for streamlined presentation and collaboration.
-<br /><br />
-The user can rotate the globe, zoom into regions of interest and click on any location of the globe
-to download a time series of the variable of interest.<br /><br />
-When downloading data, please be aware that these values represent estimates of past climate
-and include significant uncertainties. These uncertainties increase back in time, as fewer proxy
-data are available, and they are also larger in regions where proxy data is generally limited, such
-as in the tropics and the southern hemisphere.<br /><br />
-This visualization was made possible through the published work of Steiger, N. J., J.E. Smerdon,
-E.R. Cook &amp; B.I. Cook, 2018: A reconstruction of global hydroclimate and dynamical
-variables over the Common Era. Sci. Data, 5, 1–15. doi:10.1038/sdata.2018.86.
-<a href="https://www.nature.com/articles/sdata201886" target="_blank">https://www.nature.com/articles/sdata201886</a>.</p>
-            </div>
+              <p className='scroll' style={{width: 500, height: 300, overflowY: 'scroll'}}>
+                  This Paleo Hydrodynamics Data Assimilation product (PHYDA) visualization tool maps
+                2,000 years of reconstructed temperature and hydroclimate onto a global interface. The dataset
+                underlying this visualization is based on a global climate model with assimilated proxy data from
+                natural archives, such as corals, lake sediments, ice cores, speleothems and tree rings. Using
+                annually resolved global reconstructions of near-surface air temperature and drought (PDSI), this
+                innovative transformation optimizes exploration of an expansive database into an approachable
+                web-based visualization platform for streamlined presentation and collaboration.
+                <br /><br />
+                The user can rotate the globe, zoom into regions of interest and click on any location of the globe
+                to download a time series of the variable of interest.<br /><br />
+                When downloading data, please be aware that these values represent estimates of past climate
+                and include significant uncertainties. These uncertainties increase back in time, as fewer proxy
+                data are available, and they are also larger in regions where proxy data is generally limited, such
+                as in the tropics and the southern hemisphere.<br /><br />
+                This visualization was made possible through the published work of Steiger, N. J., J.E. Smerdon,
+                E.R. Cook &amp; B.I. Cook, 2018: A reconstruction of global hydroclimate and dynamical
+                variables over the Common Era. Sci. Data, 5, 1–15. doi:10.1038/sdata.2018.86.
+                <a href="https://www.nature.com/articles/sdata201886" target="_blank">https://www.nature.com/articles/sdata201886</a>.</p>
+            </div>*/}
           </div>
 
         <div style={ {
