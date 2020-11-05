@@ -7,6 +7,7 @@ import _ from 'lodash'
 import Charts from "pages/PAMap/components/Charts.js";
 import Globe from 'pages/PAMap/components/globe/globe.react'
 import dynamicData from 'pages/PAMap/components/globe/dynamicData'
+import LoadingPage from "../components/loading/loadingPage";
 
 import { ResponsiveLine as NivoLine } from "@nivo/line"
 
@@ -248,7 +249,7 @@ class Home extends React.Component {
         // return [-0.63,-0.47,-0.34,-0.24,-0.17,-0.10,-0.04,0.04,0.15,0.29,0.57]
             return scale
       case "global-temps":
-        return [-25, -15, -10, -6, -3, 0, 10, 20, 26, 27, 28];
+        return [-55, -15, -10, -6, -3, 0, 10, 20, 26, 27, 28];
       case "global-anomalies":
         return [-1, -0.5, -0.25, -0.1, -0.05, 0, 0.1, 0.25, 0.5, 1, 1.5];
     }
@@ -290,20 +291,23 @@ class Home extends React.Component {
     const
       globeData = this.getGlobeData(),
       scaleDomain = this.getScaleDomain(globeData).filter(d => !isNaN(d)),
-        colors = displayMode === "pdsi" ? colorbrewer['BrBG'][11].slice().reverse() :
+        colors = displayMode === "pdsi" ? colorbrewer['BrBG'][11].slice():
             colorbrewer["RdYlBu"][11].slice().reverse(),
       _lFormat = displayMode === "global-anomalies" ? d3format(".2f") : (v => v),
       lFormat = displayMode === "pdsi" ? d3format(".2f") : (v => `${ _lFormat(v) }°C`)
-    //console.log('scale',scaleDomain)
     return (
       <div style={ {
         width: "100vw",
         height: "100vh",
         backgroundColor: '#2e2e2e',
         position: "relative",
-        marginTop: "-51px"
+        marginTop: "-51px",
+          zIndex:9999
       } }>
-        <Globe 
+          <div id={"loading"} style={{zIndex: -1}}>
+              {loading && this.state.displayMode === 'pdsi' ? <LoadingPage message={`Loading...`}/> : null}
+          </div>
+        <Globe
           useQuantiles={ displayMode === "global-anomalies" }
           onGlobeClick={ (...args) => this.onGlobeClick(...args) }
           onPointRemove={ () => this.clearMapClick() }
@@ -325,7 +329,6 @@ class Home extends React.Component {
           displayMode={this.state.displayMode}
           anomalyRange={this.state.anomalyRange}
         />
-
           <div style={ {
             backgroundColor: "rgba(0, 0, 0, 0.05)",
             position: "absolute",
@@ -343,11 +346,13 @@ class Home extends React.Component {
                 }
               </div>
               <div>
-                { scaleDomain
-                    .filter(d => d !== -9)
-                    .map(d =>
-                    <LegendItem key={ d }>{ lFormat(d) }</LegendItem>
-                  )
+                {
+                    scaleDomain
+                        .filter(d => d !== -9)
+                        .map(d =>
+                            <LegendItem key={ d }>{ lFormat(d) }</LegendItem>
+                        )
+
                 }
               </div>
             </LegendContainer>
@@ -493,7 +498,7 @@ variables over the Common Era. Sci. Data, 5, 1–15. doi:10.1038/sdata.2018.86.
                 },
               }}
               margin={ {
-                bottom: 30,
+                bottom: 50,
                 right: 20,
                 left: 50,
                 top: 20
@@ -514,8 +519,12 @@ variables over the Common Era. Sci. Data, 5, 1–15. doi:10.1038/sdata.2018.86.
                 tickValues: 4
               } }
               axisBottom={ {
-                tickValues,
-                format
+                  orient: 'bottom',
+                  tickSize: 1,
+                  tickPadding: 3,
+                  tickRotation: 69,
+                  legendPosition: 'middle',
+                  format
               } }
               yScale={ {
                 type: "linear",
@@ -561,6 +570,7 @@ variables over the Common Era. Sci. Data, 5, 1–15. doi:10.1038/sdata.2018.86.
               />
             </div>
         </div>
+
       </div>
     );
   }
