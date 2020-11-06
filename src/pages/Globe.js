@@ -26,8 +26,8 @@ import Sidebar from "../components/AvlMap/components/sidebar";
 //
 // console.log('array length', tempData.data.length)
 
-//const MAX_YEAR = 2000,
-const MAX_YEAR = 100,
+const MAX_YEAR = 2000,
+//const MAX_YEAR = 100,
   START_DATA = []
 for (let i = 0; i < MAX_YEAR; ++i) {
   START_DATA.push({ x: i + 1, y: null });
@@ -273,12 +273,14 @@ class Home extends React.Component {
         mapClick, loading, displayMode
       } = this.state,
       lineData = this.getLineData(),
-      tickValues = [250, 500, 750, 1000, 1250, 1500, 1750]
+      tickValues = []
         .filter(y => lineData.length >= y),
       _format = d3format(",d"),
       format = v => `${ _format(v) } CE`,
       float = d3format(".2f");
-
+    for (let i=100;i<=MAX_YEAR;i+=100){
+        tickValues.push(i)
+      }
     const [min, max] =  this.state.displayMode === 'pdsi' ? [-.75, .75]  : d3array.extent(lineData, d => d.y);
 
     let tMin = min, tMax = max;
@@ -517,8 +519,8 @@ class Home extends React.Component {
                 },
               }}
               margin={ {
-                bottom: 50,
-                right: 20,
+                bottom: 60,
+                right: 30,
                 left: 50,
                 top: 20
               } }
@@ -539,11 +541,12 @@ class Home extends React.Component {
               } }
               axisBottom={ {
                   orient: 'bottom',
-                  tickSize: 1,
-                  tickPadding: 3,
-                  tickRotation: 69,
+                  tickSize:  0.2,//1,
+                  tickPadding: 5,//3,
+                  tickRotation: 70,
                   legendPosition: 'middle',
-                  format
+                  format,
+                  tickValues
               } }
               yScale={ {
                 type: "linear",
