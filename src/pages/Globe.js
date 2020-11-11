@@ -278,9 +278,7 @@ class Home extends React.Component {
       _format = d3format(",d"),
       format = v => `${ _format(v) } CE`,
       float = d3format(".2f");
-    for (let i=100;i<=MAX_YEAR;i+=100){
-        tickValues.push(i)
-      }
+
     const [min, max] =  this.state.displayMode === 'pdsi' ? [-.75, .75]  : d3array.extent(lineData, d => d.y);
 
     let tMin = min, tMax = max;
@@ -299,6 +297,17 @@ class Home extends React.Component {
         }
         return a;
       }, []);
+      for (let i=100;i<=MAX_YEAR;i+=100){
+          if(this.state.displayMode === 'pdsi'){
+              if(indexData.length > 0){
+                  tickValues.push(i)
+              }
+          }else{
+              tickValues.push(i)
+          }
+
+      }
+
 
     const
       globeData = this.getGlobeData(),
