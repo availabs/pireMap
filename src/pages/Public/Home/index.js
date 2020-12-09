@@ -21,7 +21,7 @@ class Public extends React.Component {
                 color: '#efefef',
                 // display: 'flex', alignItems: 'center', justifyContent: 'center'
               }}>
-                <div style={{display: 'flex', padding: '25px' }}>
+                <a href="https://www.pirecreate.com/" target="_blank" style={{display: 'flex', padding: '25px' }}>
                     <div style={{height: 250, width: '75%', margin: 'auto' }}>
                         <div className='row' style={{height:'100%'}}>
                          <div className='col-12 col-md-12' style={{
@@ -34,7 +34,7 @@ class Public extends React.Component {
                          </div>
                         </div>
                      </div>
-                </div>
+                </a>
                 <div style={{display: 'flex', padding: '25px' }}>
                      <div style={{width: '75%', margin: 'auto' }}>
                         <div className='container' style={{height:'100%'}}>
