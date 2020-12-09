@@ -21,7 +21,7 @@ class Public extends React.Component {
                 color: '#efefef',
                 // display: 'flex', alignItems: 'center', justifyContent: 'center'
               }}>
-                <Link to='/' style={{display: 'flex', padding: '25px' }}>
+                <div style={{display: 'flex', padding: '25px' }}>
                     <div style={{height: 250, width: '75%', margin: 'auto' }}>
                         <div className='row' style={{height:'100%'}}>
                          <div className='col-12 col-md-12' style={{
@@ -34,8 +34,8 @@ class Public extends React.Component {
                          </div>
                         </div>
                      </div>
-                </Link>
-                <Link to='/' style={{display: 'flex', padding: '25px' }}>
+                </div>
+                <div style={{display: 'flex', padding: '25px' }}>
                      <div style={{width: '75%', margin: 'auto' }}>
                         <div className='container' style={{height:'100%'}}>
                             <div className='row' style={{height:'100%'}}>
@@ -70,7 +70,7 @@ class Public extends React.Component {
                             </div>
                         </div>
                     </div>
-                </Link>
+                </div>
                 <Link to='/treeringviewer' style={{display: 'flex', alignItems: 'center', justifyContent: 'center', flexDirection: 'column', padding: '25px' }}>
                     <div style={{height: 250, width: '75%', background: 'url(/img/treering.png)', backgroundPosition: 'center', margin: 'auto' }}>
                         <div className='container' style={{height:'100%'}}>
