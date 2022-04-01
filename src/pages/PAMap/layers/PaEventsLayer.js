@@ -123,14 +123,18 @@ const PaLayer = (options = {}) =>
 
            //console.log("mouseover", topFeature.properties, topFeature.properties.xmlId, topFeature.properties.authors,  topFeature.properties.species );
 
-            let studyUrl = `https://www.ncdc.noaa.gov/paleo-search/study/search.json?xmlId=${topFeature.properties.xmlId}`;  // to get json metadata
+            let studyUrl = `https://www.ncei.noaa.gov/access/paleo-search/study/search.json?xmlId=${topFeature.properties.xmlId}`;  // to get json metadata
+            // let studyUrl = `https://www.ncei.noaa.gov/access/paleo-search/study/search.json?NOAAStudyId=${topFeature.properties.xmlId}`;  // to get json metadata
+            // let studyUrl = `https://www.ncei.noaa.gov/access/paleo-search/study/search.json?NOAAStudyId=13156`;  // to get json metadata
+
+            // https://www.ncei.noaa.gov/access/paleo-search/study/search.json?NOAAStudyId=13156
             const promise = fetch(studyUrl)
               .then(res => res.json())
               .then(studyData => {
                 //console.log("setting study data", studyData);
 
                 this.studyData[topFeature.properties.xmlId] = studyData.study[0];
-               
+               console.log (studyData)
                 this.meta = {
                   'studyName':studyData.study[0].studyName,
                   'studyId':studyData.study[0].NOAAStudyId,

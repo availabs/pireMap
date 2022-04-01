@@ -28,7 +28,7 @@ function parseLine(line) {
 
 
 function siteDataLoader(xmlid, cb) {
-	let studyUrl = `https://www.ncdc.noaa.gov/paleo-search/study/search.json?xmlId=${xmlid}`;
+	let studyUrl = `https://www.ncei.noaa.gov/access/paleo-search/study/search.json?xmlId=${xmlid}`;
 
 	console.log("studyUrl", studyUrl);
 
